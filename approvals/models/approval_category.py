@@ -49,6 +49,7 @@ class ApprovalCategory(models.Model):
     request_to_validate_count = fields.Integer("Number of requests to validate",
                                                compute="_compute_request_to_validate_count")
 
+    @api.multi
     def _compute_request_to_validate_count(self):
         domain = [('request_status', '=', 'pending'), ('approver_ids.user_id', '=', self.env.user.id)]
         requests_data = self.env['approval.request'].read_group(domain, ['category_id'], ['category_id'])
@@ -56,6 +57,7 @@ class ApprovalCategory(models.Model):
         for category in self:
             category.request_to_validate_count = requests_mapped_data.get(category.id, 0)
 
+    @api.model
     def create_request(self):
         self.ensure_one()
         return {
