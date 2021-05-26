@@ -1,0 +1,422 @@
+<odoo>
+    <data>
+
+
+        <record id="view_hr_department_form_inherited" model="ir.ui.view">
+            <field name="name">hr.department.form.inherited</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="type"/>
+                    <field name="code" readonly="1"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_hr_job_form_inherited" model="ir.ui.view">
+            <field name="name">hr.job.form.inherited</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <button name="action_get_attachment_tree_view" position="before">
+                    <button name="action_open_contracts"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            context="{'active_test': False}"
+                            attrs="{'invisible': [('contract_count', '=', 0)]}">
+                        <field name="contract_count" widget="statinfo" string="Contracts"/>
+                    </button>
+                    <button name="action_open_offers"
+                            class="oe_stat_button"
+                            icon="fa-paste"
+                            type="object"
+                            context="{'active_test': False}"
+                            attrs="{'invisible': [('offer_count', '=', 0)]}">
+                        <field name="offer_count" widget="statinfo" string="Offers"/>
+                    </button>
+                </button>
+                <field name="department_id" position="replace">
+                    <field name="group" context="{'default_type': 'BU'}"/>
+                    <field name="department_id" context="{'default_type': 'BD','default_parent_id':group}"/>
+                    <field name="section" context="{'default_type': 'BS','default_parent_id':department_id}"/>
+                    <field name="subsection" context="{'default_type': 'SS','default_parent_id':section}"/>
+                    <field name="job_grade"/>
+                    <field name="job_title"/>
+                    <field name="position_status"/>
+                    <field name="isco_code"/>
+                    <field name="cost_center"/>
+                </field>
+                <field name="no_of_recruitment" position="after">
+                    <field name="create_date"/>
+                    <field name="default_manager"/>
+                    <field name="panel_ids" widget="many2many_tags"/>
+                </field>
+                <sheet position="inside">
+                    <group string="Compensations" name="compensations">
+                        <field nolabel="1" name="related_compensations">
+                            <tree editable="bottom">
+                                <field name="is_payroll"/>
+                                <field name="state"/>
+                                <field name="name"/>
+                                <field name="component_description"
+                                       attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                <field name="value" attrs="{'readonly':[('is_payroll','=',True)]}"/>
+                                <field name="amount" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                <field name="currency" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                <field name="amount_type" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                <field name="frequency"/>
+                                <field name="period"/>
+                                <field name="compensation_id" readonly="1" force_save="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="job_grade_form">
+            <field name="name">Job Grade Form</field>
+            <field name="model">job.grade</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="level"/>
+                            <field name="notice_period"/>
+                            <field name="probation_period"/>
+                        </group>
+                        <group string="Compensations" name="compensations">
+                            <field nolabel="1" name="related_compensations">
+                                <tree editable="bottom">
+                                    <field name="is_payroll"/>
+                                    <field name="state"/>
+                                    <field name="name"/>
+                                    <field name="component_description"
+                                           attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="value" attrs="{'readonly':[('is_payroll','=',True)]}"/>
+                                    <field name="min_amount" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="mid_amount" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="max_amount" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="currency" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="amount_type" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                    <field name="frequency"/>
+                                    <field name="period"/>
+<!--                                    <field name="compensation_id" readonly="1" force_save="1"/>-->
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+<!--        <record id="res_users_view_form_profile2" model="ir.ui.view">-->
+<!--            <field name="name">res.users.preferences.form.inherit2</field>-->
+<!--            <field name="model">res.users</field>-->
+<!--            <field name="inherit_id" ref="hr.res_users_view_form_simple_modif"/>-->
+<!--            <field name="priority" eval="1000"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='mobile_phone']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='work_phone']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='work_email']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='work_location']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+        <!--        Compensations Parent Menu-->
+        <menuitem name="Compensations" id="hr_compensation_menu"
+                  parent="hr.menu_human_resources_configuration" sequence="5"/>
+        <!--Grade Compensations-->
+        <record model="ir.ui.view" id="grade_hr_compensation_filter">
+            <field name="name">Grade Compensation Filter</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Grade" name="group_by_related_job_grade" domain=""
+                                context="{'group_by':'related_job_grade'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="grade_compensation_tree_view">
+            <field name="name">grade.compensation.tree.custom</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <tree string="Grade Compensation">
+                    <field name="related_job_grade"/>
+                    <field name="is_payroll"/>
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="component_description"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="value"/>
+                    <field name="min_amount"/>
+                    <field name="mid_amount"/>
+                    <field name="max_amount"/>
+                    <field name="currency"/>
+                    <field name="amount_type"/>
+                    <field name="frequency"/>
+                    <field name="period"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="grade_hr_compensation_form">
+            <field name="name">Grade HR Compensation Form</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title" name='related_job_grade'>
+                            <label for="related_job_grade" class="oe_edit_only"></label>
+                            <h1><field name="related_job_grade"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="state"/>
+                                <field name="is_payroll"/>
+                                <field name="amount_type" attrs="{'invisible':[('is_payroll','!=',True)],'required':[('is_payroll','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="value" attrs="{'invisible':[('is_payroll','=',True)]}"/>
+                                <field name="min_amount" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                                <field name="mid_amount" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                                <field name="max_amount" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                                <field name="currency" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="frequency"/>
+                                <field name="period"/>
+                            </group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="grade_hr_compensation_action_window">
+            <field name="name">Grade Compensations</field>
+            <field name="res_model">hr.compensation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('related_job_grade', '!=', False)]</field>
+            <field name="context">{'search_default_group_by_related_job_grade': 1}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('grade_compensation_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('grade_hr_compensation_form')})]"/>
+            <field name="search_view_id" ref="grade_hr_compensation_filter"/>
+        </record>
+        <menuitem name="Grade Compensations" id="hr_core.grade_hr_compensation_menu"
+                  parent="hr_core.hr_compensation_menu"
+                  action="hr_core.grade_hr_compensation_action_window"/>
+
+        <!--JOB Compensations-->
+        <record model="ir.ui.view" id="job_hr_compensation_filter">
+            <field name="name">Grade Compensation Filter</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Grade" name="group_by_related_job_position" domain=""
+                                context="{'group_by':'related_job_position'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="job_compensation_tree_view">
+            <field name="name">job.compensation.tree.custom</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <tree string="Job Compensation">
+                    <field name="related_job_position"/>
+                    <field name="is_payroll"/>
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="component_description"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="value"/>
+                    <field name="amount"/>
+                    <field name="currency"/>
+                    <field name="amount_type"/>
+                    <field name="frequency"/>
+                    <field name="period"/>
+                    <field name="compensation_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="job_hr_compensation_form">
+            <field name="name">Grade HR Compensation Form</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title" name='related_job_position'>
+                            <label for="related_job_position" class="oe_edit_only"></label>
+                            <h1><field name="related_job_position"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="compensation_id" readonly="1" attrs="{'invisible':[('compensation_id','=',False)]}"/>
+                                <field name="name"/>
+                                <field name="state"/>
+                                <field name="is_payroll"/>
+                                <field name="amount_type" attrs="{'invisible':[('is_payroll','!=',True)],'required':[('is_payroll','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="value" attrs="{'invisible':[('is_payroll','=',True)]}"/>
+                                <field name="amount" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                                <field name="currency" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="frequency"/>
+                                <field name="period"/>
+                            </group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="job_hr_compensation_action_window">
+            <field name="name">Job Compensations</field>
+            <field name="res_model">hr.compensation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('related_job_position', '!=', False)]</field>
+            <field name="context">{'search_default_group_by_related_job_position': 1}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('job_compensation_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('job_hr_compensation_form')})]"/>
+            <field name="search_view_id" ref="job_hr_compensation_filter"/>
+        </record>
+        <menuitem name="Job Compensations" id="hr_core.job_hr_compensation_menu"
+                  parent="hr_core.hr_compensation_menu"
+                  action="hr_core.job_hr_compensation_action_window"/>
+
+        <!--Compensations Component-->
+        <record model="ir.ui.view" id="hr_compensation_pay_components_tree">
+            <field name="name">Hr Compensation Pay Components</field>
+            <field name="model">hr.compensation.pay.component</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="component_type"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_compensation_pay_components_form">
+            <field name="name">Hr Compensation Pay Components Form</field>
+            <field name="model">hr.compensation.pay.component</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <field name="component_type"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_compensation_pay_components_filter">
+            <field name="name">Hr Compensation Pay Components Filter</field>
+            <field name="model">hr.compensation.pay.component</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_compensation_component_action_window">
+            <field name="name">Compensations Component</field>
+            <field name="res_model">hr.compensation.pay.component</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Compensations Component" id="hr_core.hr_compensation_component_menu"
+                  parent="hr_core.hr_compensation_menu"
+                  action="hr_core.hr_compensation_component_action_window"/>
+
+        <!--Cost Center-->
+        <record model="ir.ui.view" id="cost_center_tree">
+            <field name="name">Cost Center</field>
+            <field name="model">hr.cost.center</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_hr_cost_center" model="ir.actions.act_window">
+            <field name="name">Cost Center</field>
+            <field name="res_model">hr.cost.center</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Cost Center" id="hr_core.hr_cost_center_menu"
+                  parent="hr.menu_human_resources_configuration"
+                  action="hr_core.action_hr_cost_center"/>
+
+        <!--ISCO Code-->
+        <record model="ir.actions.act_window" id="hr_isco_code_action_window">
+            <field name="name">ISCO Code</field>
+            <field name="res_model">hr.isco.code</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="ISCO Code" id="hr_core.hr_isco_code_menu" parent="hr.menu_human_resources_configuration"
+                  action="hr_core.hr_isco_code_action_window"/>
+
+        <!--Job Title-->
+        <record model="ir.actions.act_window" id="job_title_action_window">
+            <field name="name">Job Title</field>
+            <field name="res_model">job.title</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Job title" id="hr_core.job_title_menu" parent="hr.menu_human_resources_configuration"
+                  action="hr_core.job_title_action_window"/>
+
+        <!--Job Grades-->
+        <record model="ir.actions.act_window" id="job_grade_action_window">
+            <field name="name">Job Grades</field>
+            <field name="res_model">job.grade</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Job Grades" id="hr_core.job_grade_menu" parent="hr.menu_human_resources_configuration"
+                  action="hr_core.job_grade_action_window"/>
+
+    </data>
+</odoo>

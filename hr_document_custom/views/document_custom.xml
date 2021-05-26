@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <data>
+        <record id="custom_documents_view" model="ir.ui.view">
+            <field name="name">custom.documents.view</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="documents.documents_view_form"/>
+            <field name="arch" type="xml">
+
+
+<!--                 <xpath expr="//header" position="attributes">
+                    <attribute name="groups">base.user_admin</attribute>
+                </xpath> -->
+
+               <!--  <xpath expr="//button[@name='create_share']" position="after">
+                    <button type="object" name="preview_document" string="Preview"/>
+                    <button string="Approve" class="btn btn-primary" type="object" name="state_approve"
+                            attrs="{'invisible': [('state','=', 'approved')]}" group="hr.group_hr_user"/>
+                    <button string="Reject" class="btn btn-primary" type="object" name="log_and_reject"
+                            attrs="{'invisible': [('state','=', 'reject')]}" group="hr.group_hr_user"/>
+                    <button string="Set Pending" class="btn btn-primary" type="object" name="state_pending"
+                            attrs="{'invisible': [('state','=', 'pending')]}" group="hr.group_hr_user"/>
+                    <field name="state" widget="statusbar"/>
+                </xpath> -->
+
+
+
+<!--                 <xpath expr="//field[@name='datas']" position="before">
+                    <field name="document_number" string="Document Number" invisible="1"/>
+                    <field name="reject_reason" readonly="1" force_save="1"/>
+
+                </xpath> -->
+
+                <xpath expr="//field[@name='folder_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True}</attribute>
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='owner_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True}</attribute>
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='create_uid']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+   <!--              <xpath expr="//field[@name='datas']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state','!=','reject')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state','!=','reject')]}</attribute>
+                </xpath> -->
+
+<!-- 
+                <xpath expr="//field[@name='document_number']" position="after">
+                    <field name="related_employee" options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                           readonly="1" force_save="1"/>
+                    <field name="company_employee_id"/>
+                    <field name="document_type_id" options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                           readonly="1" force_save="1"/>
+                    <field name="status" string="Status" readonly="1" force_save="1"/>
+                </xpath> -->
+
+<!--                 <xpath expr="//field[@name='type']" position="before">
+ -->
+                  <!--   <field name="issue_date" attrs="{'required':[('document_type_name','!=','Proof Of Relation')], 'readonly':[('state','!=','reject')]}"/> -->
+                    <!-- <field name="expiry_date"
+                           attrs="{'invisible':[('document_type_name','in',('Proof Of Relation','Family Book'))], 'readonly':[('state','!=','reject')]}"/> -->
+                    <!-- <field name="desc" invisible="1"/> -->
+                    <!-- <field name="document_type_name" invisible="1"/> -->
+<!--                     <field name="state" invisible="1"/>
+ -->                    <!--                        <field name="start_date"-->
+                    <!--                               attrs="{'invisible':[('document_type_name','not in',('Visa'))]}"/>-->
+                    <!-- <field name="passport_no"
+                           attrs="{'invisible':[('document_type_name','!=','Passport')],'required':[('document_type_name','==','Passport')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="passport_unified_no"
+                           attrs="{'invisible':[('document_type_name','!=','Passport')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_job_title"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')],'required':[('document_type_name','==','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_job_title_arabic"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_sponsor"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')],'required':[('document_type_name','==','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_place_issue"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')],'required':[('document_type_name','==','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_file_no"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')],'required':[('document_type_name','==','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="visa_unified_no"
+                           attrs="{'invisible':[('document_type_name','!=','Visa')],'required':[('document_type_name','==','Visa')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="emirates_id" placeholder="###-####-#######-#"
+                           attrs="{'invisible':[('document_type_name','!=','Emirates ID')], 'readonly':[('state','!=','reject')]}"
+                           options="{'no_create': True, 'no_open': True,'no_edit': True}"/> -->
+                    <!--                        <field name="first_name"-->
+                    <!--                               attrs="{'invisible':[('document_type_name','!=','Proof Of Relation')]}"/>-->
+                    <!--                        <field name="last_name"-->
+                    <!--                               attrs="{'invisible':[('document_type_name','!=','Proof Of Relation')]}"/>-->
+                    <!--                        <field name="dependent_relationship"-->
+                    <!--                               attrs="{'invisible':[('document_type_name','!=','Proof Of Relation')]}"/>-->
+<!--                     <field name="passport_country_issue"
+                           attrs="{'invisible':[('document_type_name','!=','Passport')],'required':[('document_type_name','==','Passport')], 'readonly':[('state','!=','reject')]}"
+                           options="{'no_create': True, 'no_open': True,'no_edit': True}"/>
+                    <field name="passport_place_issue"
+                           attrs="{'invisible':[('document_type_name','!=','Passport')],'required':[('document_type_name','==','Passport')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="family_book"
+                           attrs="{'invisible':[('document_type_name','!=','Family Book')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="town_no"
+                           attrs="{'invisible':[('document_type_name','!=','Family Book')], 'readonly':[('state','!=','reject')]}"/>
+                    <field name="relation_type"
+                           attrs="{'invisible':[('document_type_name','!=','Proof Of Relation')], 'readonly':[('state','!=','reject')]}"/> -->
+                <!-- </xpath> -->
+            </field>
+        </record>
+
+           <!--  <record id="documents_custom_tree" model="ir.ui.view">
+                <field name="name">documents.custom.tree</field>
+                <field name="model">ir.attachment</field>
+                <field name="inherit_id" ref="documents.documents_view_list"/>
+                <field name="priority">16</field>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='res_model']" position="after">
+                        <field name="related_employee"/>
+                        <field name="company_employee_id"/>
+                        <field name="relation_type"/>
+                        <field name="issue_date"/>
+                        <field name="expiry_date"/>
+                        <field name="state"/>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position="replace">
+                        <field name="document_number" string="Document Number"/>
+                        <field name="name" string="Document Name" optional="show"/>
+                    </xpath>
+                    <xpath expr="//field[@name='res_model']" position="before">
+                        <field name="document_type_id"/>
+                        
+                    </xpath>
+                    <xpath expr="//field[@name='create_date']" position="replace">
+                        <field name="create_date" widget="date" optional="hide"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='create_date']" position="before">
+                        <field name="state"/>
+                        <field name="type" invisible="1"/>
+                        <button name="state_approve" icon="fa-check" class="btn-alert" type="object"
+                                attrs="{'invisible': [('state','=', 'approved')]}" groups="base.user_admin"/>
+                        <button name="access_content" class="btn-link" icon="fa-download" type="object"
+                                attrs="{'invisible':[('type','!=','binary')]}"/>
+                        <button name="preview_document" class="btn-link" icon="fa-eye" type="object"
+                                attrs="{'invisible':[('type','!=','binary')]}"/>
+                    </xpath>
+
+                </field>
+            </record>
+ -->
+        <record model="ir.ui.view" id="documents_custom_kanban">
+            <field name="name">documents.custom.kanban</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="documents.documents_view_kanban"/>
+            <field name="priority">16</field>
+            <field name="type">kanban</field>
+
+            <field name="arch" type="xml">
+<!-- 
+                <xpath expr="//kanban//field[@name='id']" position="after">
+                    <field name="document_number"/>
+                </xpath> -->
+
+                <xpath expr="//kanban//templates//field[@name='name']" position="replace">
+                   <!--  <field name="document_number" class="o_text_overflow"/> -->
+                    <br/>
+                    <field name="name" required="True" class="o_text_overflow"/>
+                    <!--                    <br/>-->
+                    <!--                    <button name="preview_document"-->
+                    <!--                            string="&lt;span class='glyphicon glyphicon-eye-open'&gt;&lt;/span&gt;"-->
+                    <!--                            type="object" attrs="{'invisible':[('type','!=','binary')]}"/>-->
+                </xpath>
+                <xpath expr="//kanban//templates//div[hasclass('o_kanban_record_title')]" position="after">
+                    <div>
+                        <button name="preview_document"
+                                type="object"
+                                attrs="{'invisible':[('type','!=','binary')]}"
+                                class="btn btn-secondary"
+                                string="Preview">
+                        </button>
+
+                    </div>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+<!--         <record model="ir.ui.view" id="documents_custom_search_panel">
+            <field name="name">documents.custom.search_panel</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="documents.documents_view_search"/>
+            <field name="priority">16</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+
+                <xpath expr="//search//field[@name='partner_id']" position="replace">
+                </xpath>
+
+                <xpath expr="//search//field[@name='name']" position="replace">
+                    <field name="document_number" string="Document Number"/>
+                    <field name="name" string="Document Name"/>
+                    <field name="document_type_id"/>
+                    <field name="partner_id" string="Contact"/>
+                </xpath>
+                <xpath expr="//search//filter[@name='owner']" position="before">
+                    <filter name="document_type_group" string="Document Type" domain="[]"
+                            context="{'group_by':'document_type_id'}"/>
+                    <filter name="status_group" string="Status"
+                            context="{'group_by':'status'}"/>
+                </xpath>
+                <xpath expr="//search//searchpanel//field[@name='res_model']" position="replace">
+
+                </xpath>
+                                <xpath expr="//search//searchpanel//field[@name='tag_ids']" position="before">
+                                    <field name="document_type_id"/>
+                                    <field name="status"/>
+                                </xpath>
+
+            </field>
+        </record> -->
+
+
+    </data>
+</odoo>

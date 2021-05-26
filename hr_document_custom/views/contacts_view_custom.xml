@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <data>
+<!--        <record id="custom_contacts_view" model="ir.ui.view">-->
+<!--            <field name="name">custom.contacts.view</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <group position="before">-->
+<!--                    <group>-->
+<!--                        <field name="missing_documents" options="{'color_field': 'color', 'no_create_edit': True}"-->
+<!--                               widget="many2many_tags"/>-->
+<!--                    </group>-->
+<!--                </group>-->
+
+<!--                <xpath expr="//field[@name='function']" position="before">-->
+<!--                    <field name="related_employee" readonly="1"/>-->
+<!--                    <field name="nationality"/>-->
+<!--                    <field name="country_id"/>-->
+<!--                    <field name="gender"/>-->
+<!--                    <field name="contact_relation_type_id"/>-->
+<!--                    <field name="date" string="Date of Birth"/>-->
+<!--                </xpath>-->
+
+<!--                <xpath expr="//field[@name='website']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='street']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='street2']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='city']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='state_id']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='zip']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='country_id']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//label[@name='address_name']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+
+
+<!--                <xpath expr="//notebook/page[1]" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//notebook/page[2]" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//notebook/page[3]" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+
+
+<!--                <xpath expr="//notebook" position="inside">-->
+<!--                    <page name="document_page" string="Documents">-->
+<!--                        <field name="id" invisible="1"/>-->
+<!--                        <button name="%(create_contact_document_view_action)d"-->
+<!--                                string="Create Document"-->
+<!--                                type="action" class="oe_highlight"-->
+<!--                                context="{-->
+<!--                                'default_contact_id':id,-->
+<!--                                'default_related_employee':related_employee,-->
+<!--                                'upload_contact':True-->
+<!--                                }"/>-->
+<!--                        <field name="document_o2m"/>-->
+<!--                    </page>-->
+<!--                </xpath>-->
+
+
+<!--            </field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

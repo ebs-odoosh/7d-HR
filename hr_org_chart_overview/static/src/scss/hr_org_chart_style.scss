@@ -1,0 +1,1134 @@
+.custom_control_panel .o_control_panel {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.image img {
+    max-height: 120px;
+    max-width: 120px;
+    border-radius: 50%;
+}
+
+.orgchart {
+    margin-top: 80px;
+    background: #f9f9f9 !important;
+
+    .node .title {
+        font-size: 1rem;
+        min-width: 200px;
+    }
+    .node .content {
+        font-size: 1rem;
+    }
+}
+
+.o-filter-button {
+    margin-right: 10px;
+}
+
+.orgchart td.left,
+.orgchart td.right,
+.orgchart td.top {
+    border-color: #aaa !important;
+}
+
+.orgchart td > .down {
+    background-color: #aaa !important;
+}
+
+.orgchart .level-0 .title {
+    background-color: #006699 !important;
+}
+
+.orgchart .level-0 .content {
+    border-color: #006699 !important;
+}
+
+.orgchart .level-0 .image img {
+    border: solid 1px #006699;
+}
+
+.orgchart .level-1 .title {
+    background-color: #009933 !important;
+}
+
+.orgchart .level-1 .content {
+    border-color: #009933 !important;
+}
+
+.orgchart .level-1 .image img {
+    border: solid 1px #009933;
+}
+
+.orgchart .level-2 .title {
+    background-color: #993366 !important;
+}
+
+.orgchart .level-2 .content {
+    border-color: #993366 !important;
+}
+
+.orgchart .level-2 .image img {
+    border: solid 1px #993366;
+}
+
+.orgchart .level-3 .title {
+    background-color: #996633 !important;
+}
+
+.orgchart .level-3 .content {
+    border-color: #996633 !important;
+}
+
+.orgchart .level-3 .image img {
+    border: solid 1px #996633;
+}
+
+.orgchart .level-4 .title {
+    background-color: #cc0066 !important;
+}
+
+.orgchart .level-4 .content {
+    border-color: #cc0066 !important;
+}
+
+.orgchart .level-4 .image img {
+    border: solid 1px #cc0066;
+}
+
+//added for company
+
+.orgchart .color_class1 .title {
+    background-color: #008080 !important;
+     color:#FFFFFF !important;
+}
+
+.orgchart .color_class1 .content {
+    border-color: #008080 !important;
+}
+
+.orgchart .color_class1 .image img {
+    border: solid 1px #008080;
+}
+
+
+.orgchart .color_class2 .title {
+    background-color: #858081 !important;
+    color:#FFFFFF !important;
+
+}
+
+.orgchart .color_class2 .content {
+    border-color: #858081 !important;
+}
+
+.orgchart .color_class2 .image img {
+    border: solid 1px #858081;
+}
+
+
+.orgchart .color_class3 .title {
+    background-color: #B8021E !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class3 .content {
+    border-color: #B8021E !important;
+}
+
+.orgchart .color_class3 .image img {
+    border: solid 1px #B8021E;
+}
+
+
+.orgchart .color_class4 .title {
+    background-color: #7030A0 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class4 .content {
+    border-color: #7030A0 !important;
+}
+
+.orgchart .color_class4 .image img {
+    border: solid 1px #7030A0;
+}
+
+
+.orgchart .color_class5 .title {
+    background-color: #007735 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class5 .content {
+    border-color: #007735 !important;
+}
+
+.orgchart .color_class5 .image img {
+    border: solid 1px #007735;
+}
+
+
+.orgchart .color_class6 .title {
+    background-color: #FFFFFF !important;
+    color:#FF0000 !important;
+}
+
+.orgchart .color_class6 .content {
+    border-color: #FFFFFF !important;
+}
+
+.orgchart .color_class6 .image img {
+    border: solid 1px #FFFFFF;
+}
+
+// Added by Bhavesh Jadav TechUltra Solutions 01/09/2020
+
+.orgchart .color_class7 .title {
+    background-color: #FFFFF0 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class7 .content {
+    border-color: #FFFFF0 !important;
+}
+
+.orgchart .color_class7 .image img {
+    border: solid 1px #FFFFF0;
+}
+
+.orgchart .color_class8 .title {
+    background-color: #FFFF00 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class8 .content {
+    border-color: #FFFF00 !important;
+}
+
+.orgchart .color_class8 .image img {
+    border: solid 1px #FFFF00;
+}
+
+.orgchart .color_class9 .title {
+    background-color: #FFE5B4 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class9 .content {
+    border-color: #FFE5B4 !important;
+}
+
+.orgchart .color_class9 .image img {
+    border: solid 1px #FFE5B4;
+}
+
+.orgchart .color_class10 .title {
+    background-color: #FFD700 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class10 .content {
+    border-color: #FFD700 !important;
+}
+
+.orgchart .color_class10 .image img {
+    border: solid 1px #FFD700;
+}
+
+.orgchart .color_class11 .title {
+    background-color: #FFBF00 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class11 .content {
+    border-color: #FFBF00 !important;
+}
+
+.orgchart .color_class11 .image img {
+    border: solid 1px #FFBF00;
+}
+
+.orgchart .color_class12 .title {
+    background-color: #FF7F50 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class12 .content {
+    border-color: #FF7F50 !important;
+}
+
+.orgchart .color_class12 .image img {
+    border: solid 1px #FF7F50;
+}
+
+
+.orgchart .color_class13 .title {
+    background-color: #FF6600 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class13 .content {
+    border-color: #FF6600 !important;
+}
+
+.orgchart .color_class13 .image img {
+    border: solid 1px #FF6600;
+}
+
+.orgchart .color_class14 .title {
+    background-color: #FF4500 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class14 .content {
+    border-color: #FF4500 !important;
+}
+
+.orgchart .color_class14 .image img {
+    border: solid 1px #FF4500;
+}
+
+
+.orgchart .color_class15 .title {
+    background-color: #FF2400 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class15 .content {
+    border-color: #FF2400 !important;
+}
+
+.orgchart .color_class15 .image img {
+    border: solid 1px #FF2400;
+}
+
+.orgchart .color_class16 .title {
+    background-color: #FF00FF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class16 .content {
+    border-color: #FF00FF !important;
+}
+
+.orgchart .color_class16 .image img {
+    border: solid 1px #FF00FF;
+}
+
+.orgchart .color_class17 .title {
+    background-color: #FF00AF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class17 .content {
+    border-color: #FF00AF !important;
+}
+
+.orgchart .color_class17 .image img {
+    border: solid 1px #FF00AF;
+}
+
+
+.orgchart .color_class18 .title {
+    background-color: #FF007F !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class18 .content {
+    border-color: #FF007F !important;
+}
+
+.orgchart .color_class18 .image img {
+    border: solid 1px #FF007F;
+}
+
+.orgchart .color_class19 .title {
+    background-color: #FF0000 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class19 .content {
+    border-color: #FF0000 !important;
+}
+
+.orgchart .color_class19 .image img {
+    border: solid 1px #FF0000;
+}
+
+
+.orgchart .color_class20 .title {
+    background-color: #FD6C9E !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class20 .content {
+    border-color: #FD6C9E !important;
+}
+
+.orgchart .color_class20 .image img {
+    border: solid 1px #FD6C9E;
+}
+
+.orgchart .color_class21 .title {
+    background-color: #FBCEB1 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class21 .content {
+    border-color: #FBCEB1 !important;
+}
+
+.orgchart .color_class21 .image img {
+    border: solid 1px #FBCEB1;
+}
+
+.orgchart .color_class22 .title {
+    background-color: #FA8072 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class22 .content {
+    border-color: #FA8072 !important;
+}
+
+.orgchart .color_class22 .image img {
+    border: solid 1px #FA8072;
+}
+.orgchart .color_class23 .title {
+    background-color: #F7E7CE !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class23 .content {
+    border-color: #F7E7CE !important;
+}
+
+.orgchart .color_class23 .image img {
+    border: solid 1px #F7E7CE;
+}
+
+.orgchart .color_class24 .title {
+    background-color: #F5F5DC !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class24 .content {
+    border-color: #F5F5DC !important;
+}
+
+.orgchart .color_class24 .image img {
+    border: solid 1px #F5F5DC;
+}
+
+
+.orgchart .color_class25 .title {
+    background-color: #E0B0FF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class25 .content {
+    border-color: #E0B0FF !important;
+}
+
+.orgchart .color_class25 .image img {
+    border: solid 1px #E0B0FF;
+}
+
+.orgchart .color_class26 .title {
+    background-color: #E0115F !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class26 .content {
+    border-color: #E0115F !important;
+}
+
+.orgchart .color_class26 .image img {
+    border: solid 1px #E0115F;
+}
+
+
+.orgchart .color_class27 .title {
+    background-color: #DE5D83 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class27 .content {
+    border-color: #DE5D83 !important;
+}
+
+.orgchart .color_class27 .image img {
+    border: solid 1px #DE5D83;
+}
+
+.orgchart .color_class28 .title {
+    background-color: #DE3163 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class28 .content {
+    border-color: #DE3163 !important;
+}
+
+.orgchart .color_class28 .image img {
+    border: solid 1px #DE3163;
+}
+
+.orgchart .color_class29 .title {
+    background-color: #DC143C !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class29 .content {
+    border-color: #DC143C !important;
+}
+
+.orgchart .color_class29 .image img {
+    border: solid 1px #DC143C;
+}
+
+
+.orgchart .color_class30 .title {
+    background-color: #DA70D6 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class30 .content {
+    border-color: #DA70D6 !important;
+}
+
+.orgchart .color_class30 .image img {
+    border: solid 1px #DA70D6;
+}
+
+.orgchart .color_class31 .title {
+    background-color: #D2B48C !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class31 .content {
+    border-color: #D2B48C !important;
+}
+
+.orgchart .color_class31 .image img {
+    border: solid 1px #D2B48C;
+}
+
+
+.orgchart .color_class32 .title {
+    background-color: #D1E231 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class32 .content {
+    border-color: #D1E231 !important;
+}
+
+.orgchart .color_class32 .image img {
+    border: solid 1px #D1E231;
+}
+
+
+.orgchart .color_class33 .title {
+    background-color: #CD7F32 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class33 .content {
+    border-color: #CD7F32 !important;
+}
+
+.orgchart .color_class33 .image img {
+    border: solid 1px #CD7F32;
+}
+
+
+.orgchart .color_class34 .title {
+    background-color: #CCCCFF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class34 .content {
+    border-color: #CCCCFF !important;
+}
+
+.orgchart .color_class34 .image img {
+    border: solid 1px #CCCCFF;
+}
+
+.orgchart .color_class35 .title {
+    background-color: #CC8899 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class35 .content {
+    border-color: #CC8899 !important;
+}
+
+.orgchart .color_class35 .image img {
+    border: solid 1px #CC8899;
+}
+
+.orgchart .color_class36 .title {
+    background-color: #CB4154 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class36 .content {
+    border-color: #CB4154 !important;
+}
+
+.orgchart .color_class36 .image img {
+    border: solid 1px #CB4154;
+}
+
+.orgchart .color_class37 .title {
+    background-color: #C8A2C8 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class37 .content {
+    border-color: #C8A2C8 !important;
+}
+
+.orgchart .color_class37 .image img {
+    border: solid 1px #C8A2C8;
+}
+
+.orgchart .color_class38 .title {
+    background-color: #C71585 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class38 .content {
+    border-color: #C71585 !important;
+}
+
+.orgchart .color_class38 .image img {
+    border: solid 1px #C71585;
+}
+
+.orgchart .color_class39 .title {
+    background-color: #C0C0C0 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class39 .content {
+    border-color: #C0C0C0 !important;
+}
+
+.orgchart .color_class39 .image img {
+    border: solid 1px #C0C0C0;
+}
+
+.orgchart .color_class40 .title {
+    background-color: #BFFF00 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class40 .content {
+    border-color: #BFFF00 !important;
+}
+
+.orgchart .color_class40 .image img {
+    border: solid 1px #BFFF00;
+}
+
+.orgchart .color_class41 .title {
+    background-color: #B87333 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class41 .content {
+    border-color: #B87333 !important;
+}
+
+.orgchart .color_class41 .image img {
+    border: solid 1px #B87333;
+}
+.orgchart .color_class42 .title {
+    background-color: #B57EDC !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class42 .content {
+    border-color: #B57EDC !important;
+}
+
+.orgchart .color_class42 .image img {
+    border: solid 1px #B57EDC;
+}
+
+.orgchart .color_class43 .title {
+    background-color: #9966CC !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class43 .content {
+    border-color: #9966CC !important;
+}
+
+.orgchart .color_class43 .image img {
+    border: solid 1px #9966CC;
+}
+
+.orgchart .color_class44 .title {
+    background-color: #964B00 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class44 .content {
+    border-color: #964B00 !important;
+}
+
+.orgchart .color_class44 .image img {
+    border: solid 1px #964B00;
+}
+
+.orgchart .color_class45 .title {
+    background-color: #960018 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class45 .content {
+    border-color: #960018 !important;
+}
+
+.orgchart .color_class45 .image img {
+    border: solid 1px #960018;
+}
+
+.orgchart .color_class46 .title {
+    background-color: #92000A !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class46 .content {
+    border-color: #92000A !important;
+}
+
+.orgchart .color_class46 .image img {
+    border: solid 1px #92000A;
+}
+
+.orgchart .color_class47 .title {
+    background-color: #8E4585 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class47 .content {
+    border-color: #8E4585 !important;
+}
+
+.orgchart .color_class47 .image img {
+    border: solid 1px #8E4585;
+}
+
+.orgchart .color_class48 .title {
+    background-color: #89CFF0 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class48 .content {
+    border-color: #89CFF0 !important;
+}
+
+.orgchart .color_class48 .image img {
+    border: solid 1px #89CFF0;
+}
+
+.orgchart .color_class49 .title {
+    background-color: #808080 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class49 .content {
+    border-color: #808080 !important;
+}
+
+.orgchart .color_class49 .image img {
+    border: solid 1px #808080;
+}
+
+.orgchart .color_class50 .title {
+    background-color: #808000 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class50 .content {
+    border-color: #808000 !important;
+}
+
+.orgchart .color_class50 .image img {
+    border: solid 1px #808000;
+}
+
+.orgchart .color_class51 .title {
+    background-color: #800080 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class51 .content {
+    border-color: #800080 !important;
+}
+
+.orgchart .color_class51 .image img {
+    border: solid 1px #800080;
+}
+
+.orgchart .color_class52 .title {
+    background-color: #7FFFD4 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class52 .content {
+    border-color: #7FFFD4 !important;
+}
+
+.orgchart .color_class52 .image img {
+    border: solid 1px #7FFFD4;
+}
+
+.orgchart .color_class53 .title {
+    background-color: #7FFF00 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class53 .content {
+    border-color: #7FFF00 !important;
+}
+
+.orgchart .color_class53 .image img {
+    border: solid 1px #7FFF00;
+}
+
+.orgchart .color_class54 .title {
+    background-color: #7F00FF !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class54 .content {
+    border-color: #7F00FF !important;
+}
+
+.orgchart .color_class54 .image img {
+    border: solid 1px #7F00FF;
+}
+
+.orgchart .color_class55 .title {
+    background-color: #7DF9FF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class55 .content {
+    border-color: #7DF9FF !important;
+}
+
+.orgchart .color_class55 .image img {
+    border: solid 1px #7DF9FF;
+}
+
+.orgchart .color_class56 .title {
+    background-color: #7B3F00 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class56 .content {
+    border-color: #7B3F00 !important;
+}
+
+.orgchart .color_class56 .image img {
+    border: solid 1px #7B3F00;
+}
+
+.orgchart .color_class57 .title {
+    background-color: #708090 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class57 .content {
+    border-color: #708090 !important;
+}
+
+.orgchart .color_class57 .image img {
+    border: solid 1px #708090;
+}
+
+.orgchart .color_class58 .title {
+    background-color: #6F4E37 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class58 .content {
+    border-color: #6F4E37 !important;
+}
+
+.orgchart .color_class58 .image img {
+    border: solid 1px #6F4E37;
+}
+
+.orgchart .color_class59 .title {
+    background-color: #50C878 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class59 .content {
+    border-color: #50C878 !important;
+}
+
+.orgchart .color_class59 .image img {
+    border: solid 1px #50C878;
+}
+
+.orgchart .color_class60 .title {
+    background-color: #4B0082 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class60 .content {
+    border-color: #4B0082 !important;
+}
+
+.orgchart .color_class60 .image img {
+    border: solid 1px #4B0082;
+}
+
+.orgchart .color_class61 .title {
+    background-color: #483C32 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class61 .content {
+    border-color: #483C32 !important;
+}
+
+.orgchart .color_class61 .image img {
+    border: solid 1px #483C32;
+}
+
+.orgchart .color_class62 .title {
+    background-color: #40E0D0 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class62 .content {
+    border-color: #40E0D0 !important;
+}
+
+.orgchart .color_class62 .image img {
+    border: solid 1px #40E0D0;
+}
+
+.orgchart .color_class63 .title {
+    background-color: #40826D !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class63 .content {
+    border-color: #40826D !important;
+}
+
+.orgchart .color_class63 .image img {
+    border: solid 1px #40826D;
+}
+
+.orgchart .color_class64 .title {
+    background-color: #3F00FF !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class64 .content {
+    border-color: #3F00FF !important;
+}
+
+.orgchart .color_class64 .image img {
+    border: solid 1px #3F00FF;
+}
+
+.orgchart .color_class65 .title {
+    background-color: #29AB87 !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class65 .content {
+    border-color: #29AB87 !important;
+}
+
+.orgchart .color_class65 .image img {
+    border: solid 1px #29AB87;
+}
+
+.orgchart .color_class66 .title {
+    background-color: #1C39BB !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class66 .content {
+    border-color: #1C39BB !important;
+}
+
+.orgchart .color_class66 .image img {
+    border: solid 1px #1C39BB;
+}
+
+.orgchart .color_class67 .title {
+    background-color: #00FFFF !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class67 .content {
+    border-color: #00FFFF !important;
+}
+
+.orgchart .color_class67 .image img {
+    border: solid 1px #00FFFF;
+}
+
+.orgchart .color_class68 .title {
+    background-color: #00FF7F !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class68 .content {
+    border-color: #00FF7F !important;
+}
+
+.orgchart .color_class68 .image img {
+    border: solid 1px #00FF7F;
+}
+
+.orgchart .color_class69 .title {
+    background-color: #00A86B !important;
+    color:#000000 !important;
+}
+
+.orgchart .color_class69 .content {
+    border-color: #00A86B !important;
+}
+
+.orgchart .color_class69 .image img {
+    border: solid 1px #00A86B;
+}
+
+.orgchart .color_class70 .title {
+    background-color: #0095B6 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class70 .content {
+    border-color: #0095B6 !important;
+}
+
+.orgchart .color_class70 .image img {
+    border: solid 1px #0095B6;
+}
+
+.orgchart .color_class71 .title {
+    background-color: #008080 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class71 .content {
+    border-color: #008080 !important;
+}
+
+.orgchart .color_class71 .image img {
+    border: solid 1px #008080;
+}
+
+.orgchart .color_class72 .title {
+    background-color: #008000 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class72 .content {
+    border-color: #008000 !important;
+}
+
+.orgchart .color_class72 .image img {
+    border: solid 1px #008000;
+}
+
+.orgchart .color_class73 .title {
+    background-color: #007FFF !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class73 .content {
+    border-color: #007FFF !important;
+}
+
+.orgchart .color_class73 .image img {
+    border: solid 1px #007FFF;
+}
+
+.orgchart .color_class74 .title {
+    background-color: #007BA7 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class74 .content {
+    border-color: #007BA7 !important;
+}
+
+.orgchart .color_class74 .image img {
+    border: solid 1px #007BA7;
+}
+
+.orgchart .color_class75 .title {
+    background-color: #0047AB !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class75 .content {
+    border-color: #0047AB !important;
+}
+
+.orgchart .color_class75 .image img {
+    border: solid 1px #0047AB;
+}
+
+.orgchart .color_class76 .title {
+    background-color: #003153 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class76 .content {
+    border-color: #003153 !important;
+}
+
+.orgchart .color_class76 .image img {
+    border: solid 1px #003153;
+}
+
+.orgchart .color_class77 .title {
+    background-color: #000080 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class77 .content {
+    border-color: #000080 !important;
+}
+
+.orgchart .color_class77 .image img {
+    border: solid 1px #000080;
+}
+
+.orgchart .color_class78 .title {
+    background-color: #000000 !important;
+    color:#FFFFFF !important;
+}
+
+.orgchart .color_class78 .content {
+    border-color: #000000 !important;
+}
+
+.orgchart .color_class78 .image img {
+    border: solid 1px #000000;
+}
+
+.hidden {
+    display: none;
+}

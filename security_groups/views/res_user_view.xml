@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- Add by Bhavesh Jadav for hide delete button under the action for the all users -->
+        <record model="ir.ui.view" id="res_user_form_inherit">
+            <field name="name">Users Preferences</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

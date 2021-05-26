@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="contract_job_offer"
+                model="hr.contract"
+                string="Contract Job Offer"
+                report_type="qweb-pdf"
+                name="hr_contract_custom.job_offer_report"
+                file="hr_contract_custom.job_offer_report"
+                print_report_name="object.name"
+                attachment="(object.company_id.name)+' Job Offer - '+(object.job_id.job_title.name if object.job_id.job_title else '')+'.pdf'"
+
+        />
+
+        <template id="job_offer_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hr_contract_custom.report_job_offer_document"/>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="report_job_offer_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o"/>
+                <div class="page">
+                    <div class="text-center" id="title">
+                        <h2>
+                            <span>Job Offer</span>
+                            <!--                        <span t-if="o.name != '/'" t-field="o.name"/>-->
+                        </h2>
+                    </div>
+                    <div id="informations" class="row m32">
+                        <p>
+                            Dear Applicants
+                            <br/>
+                            <br/>
+                            The Company is delighted to offer you a position in our organization. Your compensation package
+                            offer
+                            is detailed below. We look forward to your favorable acceptance and eventual arrival at
+                            The Company.
+                            Please note that this offer is only valid for Ten (10) calendar days.
+                        </p>
+                    </div>
+                    <div class=" row clearfix m32">
+                        <table class="table table-bordered" style="table-layout: fixed;" name="desc_line_table">
+                            <tbody class="desc_tbody">
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Department</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.department_id.display_name"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered" style="table-layout: fixed;" name="desc_line_table">
+                            <tbody class="desc_tbody">
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Job Title</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.job_id.job_title.name"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered" style="table-layout: fixed;" name="desc_line_table">
+                            <tbody class="desc_tbody">
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Job Grade</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.job_id.job_grade.name"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered" style="table-layout: fixed;" name="desc_line_table">
+                            <tbody class="desc_tbody">
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Direct Manager</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.job_id.default_manager"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row clearfix m32 mt-3">
+                        <table class="table" style="table-layout: fixed;" name="comp_line_table">
+                            <tbody class="desc_tbody">
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Candidate Name</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.partner_name"/>
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        <span>Total Years of Experience</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.total_years_of_exp"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Nationality</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.nationality.name"/>
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        <span>Last Company</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.current_employer"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>Marital Status</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.marital_status"/>
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        <span>Last Qualification</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.type_id"/>
+                                        <t t-if="o.applicant_id.education_id.id!=False">
+                                            in <span t-field="o.applicant_id.education_id"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">
+                                        <span>No. of Children (if married)</span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="len(o.applicant_id.related_children)"/>
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        <span>Last Position</span>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.applicant_id.last_position"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=" row clearfix m32 mt-3">
+                        <div class="col-12">
+                            <h4>
+                                <span>Compensations</span>
+                                <!--                        <span t-if="o.name != '/'" t-field="o.name"/>-->
+                            </h4>
+                            <table class="table" style="table-layout: fixed;" name="comp_line_table">
+                                <tbody class="desc_tbody">
+                                    <t t-foreach="o._get_compensations()"
+                                       t-as="row">
+                                        <t t-if="row['bold']">
+                                            <tr class="font-weight-bold">
+                                                <!--                                            <t t-foreach="row"-->
+                                                <!--                                               t-as="line">-->
+<!--                                                <td name="compensation_line">-->
+<!--                                                    <span t-esc="row['name']"/>-->
+<!--                                                </td>-->
+                                                <td name="compensation_line_desc">
+                                                    <span t-esc="row['description']"/>
+                                                </td>
+                                                <td name="compensation_line_amount">
+                                                    <span t-esc="row['amount']"/>
+                                                    <span t-esc="row['percent_currency']"/>
+                                                </td>
+
+                                                <!--                                            </t>-->
+                                            </tr>
+                                        </t>
+                                        <t t-if="not row['bold']">
+                                            <tr>
+                                                <!--                                            <t t-foreach="row"-->
+                                                <!--                                               t-as="line">-->
+<!--                                                <td name="compensation_line">-->
+<!--                                                    <span t-esc="row['name']"/>-->
+<!--                                                </td>-->
+                                                <td name="compensation_line_desc">
+                                                    <span t-esc="row['description']"/>
+                                                </td>
+                                                <td name="compensation_line_amount">
+                                                    <span t-esc="row['amount']"/>
+                                                     <span t-esc="row['percent_currency']"/>
+                                                </td>
+
+                                                <!--                                            </t>-->
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class=" row clearfix m32 mt-3">
+                        <div class="col-12">
+                            <h4>
+                                <span>Benefits</span>
+                                <!--                        <span t-if="o.name != '/'" t-field="o.name"/>-->
+                            </h4>
+                            <table class="table" style="table-layout: fixed;" name="comp_line_table">
+                                <tbody class="desc_tbody">
+                                    <t t-foreach="o._get_benefits()"
+                                       t-as="row">
+                                        <tr class="">
+                                            <!--                                            <t t-foreach="row"-->
+                                            <!--                                               t-as="line">-->
+                                            <td name="compensation_line">
+                                                <span t-esc="row['name']"/>
+                                            </td>
+                                            <td name="compensation_line_amount">
+                                                <span t-esc="row['amount']"/>
+                                            </td>
+
+                                            <!--                                            </t>-->
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class=" row clearfix m32 mt-3">
+                        <div class="col-12">
+                            <h4>
+                                <span>Signatures</span>
+                            </h4>
+                            <table class="table" style="table-layout: fixed;" name="comp_line_table">
+                                <tbody class="desc_tbody">
+                                    <t t-foreach="o._get_signatures()"
+                                       t-as="row">
+                                        <tr class="">
+                                            <td name="compensation_line">
+                                                <span t-esc="row['name']"/>
+                                            </td>
+                                            <td name="compensation_line_amount">
+<!--                                                <img t-if="row['signature']!=False"-->
+<!--                                                     t-att-src="'data:image/png;base64,%s' % row['signature']"-->
+<!--                                                     style="max-height:65px;"/>-->
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td name="compensation_line">
+                                            Candidate
+                                        </td>
+                                        <td name="compensation_line_amount" style="color:#dee2e6">
+                                            <span>_______________________________</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

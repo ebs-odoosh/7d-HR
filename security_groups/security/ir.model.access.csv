@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_contract_employee,access_contract employee,hr_contract.model_hr_contract,group_hr_employee,1,0,0,0
+access_document,access_document employee,documents.model_documents_document,group_hr_employee,1,1,1,1
+access_partner,access_partner employee,base.model_res_partner,group_hr_employee,1,1,1,1
+hr_appraisal.access_hr_appraisal_user,hr.appraisal.user,hr_appraisal.model_hr_appraisal,hr_appraisal.group_hr_appraisal_user,1,1,0,0
+hr_appraisal.access_hr_appraisal_employee,hr.appraisal.employee,hr_appraisal.model_hr_appraisal,base.group_user,1,1,0,0
+access_hr_appraisal_admin,hr.appraisal.admin,hr_appraisal.model_hr_appraisal,base.user_admin,1,1,1,1
+access_employee_gs_team,hr.employee Gs Team,hr.model_hr_employee,group_hc_employee,1,1,1,1
+access_employee employee,access_employee employee,hr.model_hr_employee,group_hr_employee,1,1,0,0
+hr.access_hr_employee_user,hr.employee user,hr.model_hr_employee,hr.group_hr_user,1,1,0,0
+access_employee_admin,hr.employee admin,hr.model_hr_employee,base.user_admin,1,1,1,1
+access_survey_employee,survey employee,survey.model_survey_survey,group_company_employee,1,0,0,0
+access_survey_quest_employee,survey_quest employee,survey.model_survey_question,group_company_employee,1,0,0,0
+access_survey_user_input_employee,survey_user_input employee,survey.model_survey_user_input,group_company_employee,1,1,1,0
+access_hr_applicant,hr_applicant employee,hr_recruitment.model_hr_applicant,group_company_employee,1,1,1,0
+access_hr_rec_stage,hr_rec_stage employee,hr_recruitment.model_hr_recruitment_stage,group_company_employee,1,1,1,0
+

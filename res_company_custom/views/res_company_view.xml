@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- inherited form view of the  res.company for the arabic information  -->
+    <record id="view_company_form_inherit_arabic" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.arabic</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='social_media']" position="after">
+                <group string="Arabic Information" name="arabic_information" groups="base.group_no_one">
+                    <field name="arabic_name"/>
+                    <label for="arabic_street" string="Address"/>
+                    <div class="o_address_format">
+                        <field name="arabic_street" placeholder="Street..." class="o_address_street"/>
+                        <field name="arabic_street2" placeholder="Street 2..." class="o_address_street"/>
+                        <field name="arabic_city_name" placeholder="City" class="o_address_city"/>
+                        <field name="arabic_state_name" class="o_address_state" placeholder="State"/>
+                    </div>
+                </group>
+                <group string="Report Information" name="report_information" groups="base.group_no_one">
+                    <group>
+                        <field name="header_logo" widget="image" class="oe_avatar"/>
+                        <field name="footer_logo" widget="image" class="oe_avatar"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

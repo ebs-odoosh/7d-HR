@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="color.class" id="color_class1">
+            <field name="name">Contractor - Persian Green</field>
+            <field name="color">#008080</field>
+        </record>
+        <record model="color.class" id="color_class2">
+            <field name="name">UAEN - Yellow</field>
+            <field name="color">#858081</field>
+        </record>
+        <record model="color.class" id="color_class3">
+            <field name="name">Expat - White</field>
+            <field name="color">#B8021E</field>
+        </record>
+        <record model="color.class" id="color_class4">
+            <field name="name">Sub-Contractor - Pale Blue</field>
+            <field name="color">#7030A0</field>
+        </record>
+        <record model="color.class" id="color_class5">
+            <field name="name">Vacant - Apricot</field>
+            <field name="color">#007735</field>
+        </record>
+        <record model="color.class" id="color_class6">
+            <field name="name">Departure/Leaver - Red</field>
+            <field name="color">#FF0000</field>
+        </record>
+        <!-- Added by Bhavesh Jadav TechUltra Solutions  01/09/2020-->
+        <record model="color.class" id="color_class7">
+            <field name="name">Ivory</field>
+            <field name="color">#FFFFF0</field>
+        </record>
+        <record model="color.class" id="color_class8">
+            <field name="name">Yellow</field>
+            <field name="color">#FFFF00</field>
+        </record>
+        <record model="color.class" id="color_class9">
+            <field name="name">Peach</field>
+            <field name="color">#FFE5B4</field>
+        </record>
+        <record model="color.class" id="color_class10">
+            <field name="name">Gold</field>
+            <field name="color">#FFD700</field>
+        </record>
+        <record model="color.class" id="color_class11">
+            <field name="name">Amber</field>
+            <field name="color">#FFBF00</field>
+        </record>
+        <record model="color.class" id="color_class12">
+            <field name="name">Coral</field>
+            <field name="color">#FF7F50</field>
+        </record>
+        <record model="color.class" id="color_class13">
+            <field name="name">Blaze Orange</field>
+            <field name="color">#FF6600</field>
+        </record>
+        <record model="color.class" id="color_class14">
+            <field name="name">Vermilion</field>
+            <field name="color">#FF4500</field>
+        </record>
+        <record model="color.class" id="color_class15">
+            <field name="name">Scarlet</field>
+            <field name="color">#FF2400</field>
+        </record>
+        <record model="color.class" id="color_class16">
+            <field name="name">Magenta / Fuchsia</field>
+            <field name="color">#FF00FF</field>
+        </record>
+        <record model="color.class" id="color_class17">
+            <field name="name">Hollywood Cerise</field>
+            <field name="color">#FF00AF</field>
+        </record>
+        <record model="color.class" id="color_class18">
+            <field name="name">Rose</field>
+            <field name="color">#FF007F</field>
+        </record>
+        <record model="color.class" id="color_class19">
+            <field name="name">Red</field>
+            <field name="color">#FF0000</field>
+        </record>
+        <record model="color.class" id="color_class20">
+            <field name="name">Hot Pink</field>
+            <field name="color">#FD6C9E</field>
+        </record>
+        <record model="color.class" id="color_class21">
+            <field name="name">Apricot Peach</field>
+            <field name="color">#FBCEB1</field>
+        </record>
+        <record model="color.class" id="color_class22">
+            <field name="name">Salmon</field>
+            <field name="color">#FA8072</field>
+        </record>
+        <record model="color.class" id="color_class23">
+            <field name="name">Sidecar</field>
+            <field name="color">#F7E7CE</field>
+        </record>
+        <record model="color.class" id="color_class24">
+            <field name="name">Beige</field>
+            <field name="color">#F5F5DC</field>
+        </record>
+        <record model="color.class" id="color_class25">
+            <field name="name">Mauve</field>
+            <field name="color">#E0B0FF</field>
+        </record>
+        <record model="color.class" id="color_class26">
+            <field name="name">Razzmatazz</field>
+            <field name="color">#E0115F</field>
+        </record>
+        <record model="color.class" id="color_class27">
+            <field name="name">Cranberry</field>
+            <field name="color">#DE5D83</field>
+        </record>
+        <record model="color.class" id="color_class28">
+            <field name="name">Cerise Red</field>
+            <field name="color">#DE3163</field>
+        </record>
+        <record model="color.class" id="color_class29">
+            <field name="name">Crimson</field>
+            <field name="color">#DC143C</field>
+        </record>
+        <record model="color.class" id="color_class30">
+            <field name="name">Orchid</field>
+            <field name="color">#DA70D6</field>
+        </record>
+        <record model="color.class" id="color_class31">
+            <field name="name">Tan</field>
+            <field name="color">#D2B48C</field>
+        </record>
+        <record model="color.class" id="color_class32">
+            <field name="name">Pear</field>
+            <field name="color">#D1E231</field>
+        </record>
+        <record model="color.class" id="color_class33">
+            <field name="name">Brandy Punch</field>
+            <field name="color">#CD7F32</field>
+        </record>
+        <record model="color.class" id="color_class34">
+            <field name="name">Periwinkle</field>
+            <field name="color">#CCCCFF</field>
+        </record>
+        <record model="color.class" id="color_class35">
+            <field name="name">Puce</field>
+            <field name="color">#CC8899</field>
+        </record>
+        <record model="color.class" id="color_class36">
+            <field name="name">Flush Mahogany</field>
+            <field name="color">#CB4154</field>
+        </record>
+        <record model="color.class" id="color_class37">
+            <field name="name">Lilac</field>
+            <field name="color">#C8A2C8</field>
+        </record>
+        <record model="color.class" id="color_class38">
+            <field name="name">Red Violet</field>
+            <field name="color">#C71585</field>
+        </record>
+        <record model="color.class" id="color_class39">
+            <field name="name">Silver</field>
+            <field name="color">#C0C0C0</field>
+        </record>
+        <record model="color.class" id="color_class40">
+            <field name="name">Lime</field>
+            <field name="color">#BFFF00</field>
+        </record>
+        <record model="color.class" id="color_class41">
+            <field name="name">Copper</field>
+            <field name="color">#B87333</field>
+        </record>
+        <record model="color.class" id="color_class42">
+            <field name="name">Lavender</field>
+            <field name="color">#B57EDC</field>
+        </record>
+        <record model="color.class" id="color_class43">
+            <field name="name">Amethyst</field>
+            <field name="color">#9966CC</field>
+        </record>
+        <record model="color.class" id="color_class44">
+            <field name="name">Brown</field>
+            <field name="color">#964B00</field>
+        </record>
+        <record model="color.class" id="color_class45">
+            <field name="name">Carmine</field>
+            <field name="color">#960018</field>
+        </record>
+        <record model="color.class" id="color_class46">
+            <field name="name">Sangria</field>
+            <field name="color">#92000A</field>
+        </record>
+        <record model="color.class" id="color_class47">
+            <field name="name">Cannon Pin</field>
+            <field name="color">#8E4585</field>
+        </record>
+        <record model="color.class" id="color_class48">
+            <field name="name">Jordy Blue</field>
+            <field name="color">#89CFF0</field>
+        </record>
+        <record model="color.class" id="color_class49">
+            <field name="name">Gray</field>
+            <field name="color">#808080</field>
+        </record>
+        <record model="color.class" id="color_class50">
+            <field name="name">Olive</field>
+            <field name="color">#808000</field>
+        </record>
+        <record model="color.class" id="color_class51">
+            <field name="name">Fresh Eggplant</field>
+            <field name="color">#800080</field>
+        </record>
+        <record model="color.class" id="color_class52">
+            <field name="name">Aquamarine</field>
+            <field name="color">#7FFFD4</field>
+        </record>
+        <record model="color.class" id="color_class53">
+            <field name="name">Chartreuse</field>
+            <field name="color">#7FFF00</field>
+        </record>
+        <record model="color.class" id="color_class54">
+            <field name="name">Electric Violet</field>
+            <field name="color">#7F00FF</field>
+        </record>
+        <record model="color.class" id="color_class55">
+            <field name="name">Anakiwa</field>
+            <field name="color">#7DF9FF</field>
+        </record>
+        <record model="color.class" id="color_class56">
+            <field name="name">Cinnamon</field>
+            <field name="color">#7B3F00</field>
+        </record>
+        <record model="color.class" id="color_class57">
+            <field name="name">Slate Gray</field>
+            <field name="color">#708090</field>
+        </record>
+        <record model="color.class" id="color_class58">
+            <field name="name">Shingle Fawn</field>
+            <field name="color">#6F4E37</field>
+        </record>
+        <record model="color.class" id="color_class59">
+            <field name="name">Emerald</field>
+            <field name="color">#50C878</field>
+        </record>
+        <record model="color.class" id="color_class60">
+            <field name="name">Pigment Indigo</field>
+            <field name="color">#4B0082</field>
+        </record>
+        <record model="color.class" id="color_class61">
+            <field name="name">Taupe</field>
+            <field name="color">#483C32</field>
+        </record>
+        <record model="color.class" id="color_class62">
+            <field name="name">Turquoise</field>
+            <field name="color">#40E0D0</field>
+        </record>
+        <record model="color.class" id="color_class63">
+            <field name="name">Viridian</field>
+            <field name="color">#40826D</field>
+        </record>
+        <record model="color.class" id="color_class64">
+            <field name="name">Blue</field>
+            <field name="color">#3F00FF</field>
+        </record>
+        <record model="color.class" id="color_class65">
+            <field name="name">Jungle Green</field>
+            <field name="color">#29AB87</field>
+        </record>
+        <record model="color.class" id="color_class66">
+            <field name="name">Persian Blue</field>
+            <field name="color">#1C39BB</field>
+        </record>
+        <record model="color.class" id="color_class67">
+            <field name="name">Cyan / Aqua</field>
+            <field name="color">#00FFFF</field>
+        </record>
+        <record model="color.class" id="color_class68">
+            <field name="name">Spring Green</field>
+            <field name="color">#00FF7F</field>
+        </record>
+        <record model="color.class" id="color_class69">
+            <field name="name">Jade</field>
+            <field name="color">#00A86B</field>
+        </record>
+        <record model="color.class" id="color_class70">
+            <field name="name">Bondi Blue</field>
+            <field name="color">#0095B6</field>
+        </record>
+        <record model="color.class" id="color_class71">
+            <field name="name">Teal</field>
+            <field name="color">#008080</field>
+        </record>
+        <record model="color.class" id="color_class72">
+            <field name="name">Japanese Laurel</field>
+            <field name="color">#008000</field>
+        </record>
+        <record model="color.class" id="color_class73">
+            <field name="name">Azure Radiance</field>
+            <field name="color">#007FFF</field>
+        </record>
+        <record model="color.class" id="color_class74">
+            <field name="name">Deep Cerulean</field>
+            <field name="color">#007BA7</field>
+        </record>
+        <record model="color.class" id="color_class75">
+            <field name="name">Cobalt</field>
+            <field name="color">#0047AB</field>
+        </record>
+        <record model="color.class" id="color_class76">
+            <field name="name">Prussian Blue</field>
+            <field name="color">#003153</field>
+        </record>
+        <record model="color.class" id="color_class77">
+            <field name="name">Navy Blue</field>
+            <field name="color">#000080</field>
+        </record>
+        <record model="color.class" id="color_class78">
+            <field name="name">Black</field>
+            <field name="color">#000000</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- rule for assigned user -->
+	<record model="ir.rule" id="complain_user_see_assigned">
+	    <field name="name">Complain Responsible Persons</field>
+	    <field name="model_id" ref="model_sh_complain"/>
+        <field name="global" eval="True"/>
+	    <field name="domain_force">['|',
+	    '&amp;',
+	    	('state','!=','new'),'|',('resp_persons.id','in',[user.id]),('created_by','=',user.id),
+	    '&amp;',('state','=','new'),('created_by','=',user.id)]</field>
+	</record>
+	<record model="ir.rule" id="emp_complain_comp_rule">
+	    <field name="name">Emp Complain multi-company</field>
+	    <field name="model_id" ref="model_sh_complain"/>
+        <field name="global" eval="True"/>
+	    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+	</record>
+</odoo>
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="employee_custom_search" model="ir.ui.view">
+            <field name="name">employee_custom.search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="company_employee_id"/>
+                    <field name="system_id"/>
+                </xpath>
+            </field>
+        </record>
+
+          <menuitem
+                id="menu_root_company_employee"
+                name="Employees"
+                groups="security_groups.group_company_employee"
+                sequence="75"
+                action="open_view_company_employees"/>
+        <menuitem
+                parent="menu_root_company_employee"
+                id="menu_org_chart_overview_report_employees"
+                action="hr_org_chart_overview.action_org_chart_overview"
+                sequence="10"
+        />
+        <menuitem name="Employees" id="employee_sub_menu"
+                  parent="menu_root_company_employee" sequence="0"/>
+
+        <record id="hr_employee_view_search_own" model="ir.ui.view">
+        <field name="name">hr.employee.search.inherit.own</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <filter name="own_employee" string="My Profile" domain="[('user_id', '=', uid)]"/>
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

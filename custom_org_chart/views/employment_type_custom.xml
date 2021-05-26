@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="employment_type_form_inherit" model="ir.ui.view">-->
+<!--            <field name="name">employment_type.form.custom</field>-->
+<!--            <field name="model">hr_employment_type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='type']" position="after">-->
+<!--                    <field name="oc_color" widget="color_picker"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record model="ir.ui.view" id="employment_type_tree">
+            <field name="name">employment_type.tree.custom</field>
+            <field name="model">hr_contract_custom.hr.employment.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="color"/>
+                    <field name="status"/>
+                    <field name="type"/>
+                    <field name="oc_color" widget="color_picker"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="employment_type_form">
+            <field name="name">employment_type.form.custom</field>
+            <field name="model">hr_contract_custom.hr.employment.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name"/>
+                    <field name="color"/>
+                    <field name="status"/>
+                    <field name="type"/>
+                    <field name="oc_color" widget="color_picker"/>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

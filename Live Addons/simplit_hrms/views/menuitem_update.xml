@@ -1,0 +1,14 @@
+<odoo>
+	<data>
+		<!-- <menuitem name="Employee Resignation" id="hr_resignation.employee_resignation" 
+			parent="hr.menu_hr_root"/>
+
+	    <menuitem name="Loans And Salary Advance" id="ohrms_loan.menu_hr_loans_and_advances"
+	    	parent="hr.menu_hr_root"/>
+
+	    <menuitem name="HR Reminder" id="hr_reminder.hr_reminder_menu"
+	    	parent="hr.menu_hr_root"/>
+	    	
+	    <menuitem name="Human Resource" id="hr.menu_hr_root"/> -->
+	</data>
+</odoo>

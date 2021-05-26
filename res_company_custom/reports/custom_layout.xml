@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- custom layout for the reports-->
+        <template id="external_layout_custom">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="res_company_custom.external_layout_standard_custom">
+                <t t-raw="0"/>
+            </t>
+
+        </template>
+
+
+        <template id="external_layout_standard_custom">
+            <!-- header part-->
+
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div>
+                    <img t-if="doc.company_id.header_logo"
+                         t-att-src="image_data_uri(doc.company_id.header_logo)"
+                         alt="Logo" width="1200" height="230"/>
+                </div>
+                <!--                <hr style="border: 1px solid #737373;"></hr>-->
+                <!--                <table style="border-top: 3px solid #ab0000;text-align: right; font-size: 10px;">-->
+                <!--                    <tr style="height:30px;color: #737373;">-->
+                <!--                        <th width="50%" style="vertical-align: bottom;padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.name"/>-->
+                <!--                        </th>-->
+                <!--                        <th width="50%" style="vertical-align: bottom;padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.arabic_name"/>-->
+                <!--                        </th>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.street"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.arabic_street"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.street2"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.arabic_street2"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.city"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.arabic_city_name"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.state_id.name"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.arabic_state_name"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <t t-esc="doc.company_id.country_id.name"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <t t-esc="doc.company_id.country_id.arabic_name"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr style="color: #737373;">-->
+                <!--                        <td style="padding: .1em 1em;">-->
+                <!--                            <span>P:</span>-->
+                <!--                            <t t-esc="doc.company_id.phone"/>-->
+                <!--                        </td>-->
+                <!--                        <td style="padding: .1em 1em;direction: rtl;">-->
+                <!--                            <span>ص:</span>-->
+                <!--                            <t t-esc="doc.company_id.phone"/>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                </table>-->
+                <!--                <hr style="border: 1px solid #737373;"></hr>-->
+            </div>
+
+            <!-- page part-->
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+            <!-- footer part-->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div>
+                    <img t-if="doc.company_id.footer_logo"
+                         t-att-src="image_data_uri(doc.company_id.footer_logo)"
+                         alt="Logo" width="1020" height="150"/>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>
+
+
+        <!--Replace external layout footer -->
+        <!--    <template id="external_layout_standard_custom_footer" inherit_id="web.external_layout_standard">-->
+        <!--        &lt;!&ndash;  footer part &ndash;&gt;-->
+        <!--        <xpath expr="//div[hasclass('text-center')]" position="replace">-->
+        <!--            <div>-->
+        <!--                <img t-if="doc.company_id.logo"-->
+        <!--                     t-att-src="image_data_uri(doc.company_id.logo)"-->
+        <!--                     alt="Logo" width="400" height="100"/>-->
+        <!--            </div>-->
+        <!--        </xpath>-->
+        <!--    </template>-->
+
+
+        <!--Replace external layout header -->
+        <!--    <template id="external_layout_standard_custom_header" inherit_id="web.external_layout_standard">-->
+        <!--        &lt;!&ndash; Header Part &ndash;&gt;-->
+
+        <!--        <xpath expr="//div[hasclass('row')][1]" position="replace"/>-->
+        <!--        <xpath expr="//div[hasclass('row')][2]" position="replace"/>-->
+
+        <!--        <xpath expr="//div[1][hasclass('row')]" position="replace">-->
+        <!--            <table style="border-top: 3px solid #737373;text-align: right; font-size: 10px;">-->
+        <!--                <tr style="height:30px;color: #737373;">-->
+        <!--                    <th style="vertical-align: bottom;padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.name"/>-->
+        <!--                    </th>-->
+        <!--                    <th style="vertical-align: bottom;padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_name"/>-->
+        <!--                    </th>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.street"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_street"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.street2"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_street2"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.city"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_city_name"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.state_id.name"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_state_name"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <t t-esc="doc.company_id.country_id.name"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <t t-esc="doc.company_id.arabic_country_name"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--                <tr style="color: #737373;">-->
+        <!--                    <td style="padding: .1em 1em;">-->
+        <!--                        <span>P:</span>-->
+        <!--                        <t t-esc="doc.company_id.phone"/>-->
+        <!--                    </td>-->
+        <!--                    <td style="padding: .1em 1em;direction: rtl;">-->
+        <!--                        <span>ص:</span>-->
+        <!--                        <t t-esc="doc.company_id.phone"/>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--            </table>-->
+        <!--            <hr style="border: 1px solid #737373;"></hr>-->
+
+        <!--        </xpath>-->
+        <!--    </template>-->

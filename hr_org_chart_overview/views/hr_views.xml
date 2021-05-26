@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="action_org_chart_overview" model="ir.actions.client">
+            <field name="name">Organizational Chart</field>
+            <field name="tag">hr_org_chart_overview</field>
+            <field name="target">main</field>
+        </record>
+        <menuitem
+                parent="hr.menu_hr_root"
+                id="menu_org_chart_overview_report"
+                action="action_org_chart_overview"
+                sequence="10"
+        />
+
+
+        <record id="color_class_tree_view" model="ir.ui.view">
+            <field name="name">color.class.tree</field>
+            <field name="model">color.class</field>
+            <field name="arch" type="xml">
+                <tree string="Color Classes" editable="bottom" create="0" delete="0">
+                    <field name="name"/>
+                    <field name="color" placeholder="#abc123" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_color_class" model="ir.actions.act_window">
+            <field name="name">Color Class</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">color.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+                parent="hr.menu_human_resources_configuration"
+                id="menu_color_class"
+                action="action_color_class"
+        />
+    </data>
+</odoo>

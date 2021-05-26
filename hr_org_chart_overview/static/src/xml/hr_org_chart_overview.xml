@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="HrOrgChartOverview">
+        <div class="HrOrgChart">
+            <div class="custom_control_panel">
+                <t t-call="ControlPanel"/>
+            </div>
+            <div id="chart-container"/>
+        </div>
+    </t>
+
+    <t t-name="orgchart-searchview">
+        <div class="o_searchview" role="search" aria-autocomplete="list" style="border-bottom: 0px">
+            <div class="o_searchview_input_container" style="margin-right: 2px;">
+                <input type="text" class="o_searchview_input" id="key-word8" accesskey="Q"
+                       placeholder="Search System ID" style="border-bottom: 1px solid black;margin: 5px;"/>
+
+                <select name="employees" class="o_searchview_input" id="key-word1"
+                        style="border-bottom: 1px solid black;margin: 5px;">
+                    <option value="">Select Employees
+                    </option> <!--disabled="disabled" style="color: #999;" -->
+                    <t t-foreach="data['employees']" t-as="employee">
+                        <option t-att-value="employee['id']">
+                            <t t-esc="employee['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <select name="job title" class="o_searchview_input" id="key-word6"
+                        style="border-bottom: 1px solid black;margin: 5px;">
+                    <option value="">Select Job Title</option>
+                    <t t-foreach="data['job_titles']" t-as="job_title">
+                        <option t-att-value="job_title['id']">
+                            <t t-esc="job_title['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <select name="job position" class="o_searchview_input" id="key-word7"
+                        style="border-bottom: 1px solid black;margin: 5px;">
+                    <option value="">Select Job Position</option>
+                    <t t-foreach="data['job_positions']" t-as="job_position">
+                        <option t-att-value="job_position['id']">
+                            <t t-esc="job_position['name']"/>
+                        </option>
+                    </t>
+                </select>
+
+                <select name="group" class="o_searchview_input" id="key-word2"
+                        style="border-bottom: 1px solid black;margin: 5px;">
+                    <option value="">Select Group</option>
+                    <t t-foreach="data['groups']" t-as="group">
+                        <option t-att-value="group['id']">
+                            <t t-esc="group['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <select name="departments" class="o_searchview_input" id="key-word3"
+                        style="border-bottom: 1px solid black;margin: 5px;" placeholder="Search Department">
+                    <!--                    <option></option>-->
+                    <option value="">Select Department</option>
+                    <t t-foreach="data['departments']" t-as="department">
+                        <option t-att-value="department['id']">
+                            <t t-esc="department['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <select name="sections" class="o_searchview_input" id="key-word4"
+                        style="border-bottom: 1px solid black;margin: 5px;" placeholder="Search Section">
+                    <option value="">Select Section</option>
+                    <t t-foreach="data['sections']" t-as="section">
+                        <option t-att-value="section['id']">
+                            <t t-esc="section['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <select name="subsections" class="o_searchview_input" id="key-word5"
+                        style="border-bottom: 1px solid black;margin: 5px;" placeholder="Search Subsection">
+                    <option value="">Select Subsection</option>
+                    <t t-foreach="data['subsections']" t-as="subsection">
+                        <option t-att-value="subsection['id']">
+                            <t t-esc="subsection['name']"/>
+                        </option>
+                    </t>
+                </select>
+                <button type="button" id="search-all" class="btn btn-primary" style="margin-right: 1%">
+                    Search
+                </button>
+                <button type="button" id="clear-all" class="btn btn-primary">
+                    clear
+                </button>
+            </div>
+        </div>
+    </t>
+
+</templates>

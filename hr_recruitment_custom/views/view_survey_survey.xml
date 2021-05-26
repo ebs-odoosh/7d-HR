@@ -1,0 +1,32 @@
+<odoo>
+    <record id="inherited_survey_form_view" model="ir.ui.view">
+        <field name="name">inherited.survey.form.view</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[2]" position="replace">
+                <page string="Options">
+                    <group name="options">
+                        <group class="o_label_nowrap" name="general" string="General">
+                            <field name="users_can_go_back" string="User can come back in the previous page"/>
+                            <field name="quizz_mode" groups="base.group_no_one"/>
+                        </group>
+                        <group string="Candidates" name="candidates">
+                            <field name="access_mode"/>
+                            <field name="auth_required"/>
+                            <label for="is_attempts_limited" string="Attempts Limit"
+                                   attrs="{'invisible': [('access_mode', '=', 'public'), ('auth_required', '=', False)]}"/>
+                            <div attrs="{'invisible': [('access_mode', '=', 'public'), ('auth_required', '=', False)]}">
+                                <field name="is_attempts_limited" nolabel="1"/>
+                                <field name="attempts_limit"
+                                       attrs="{'invisible': [('is_attempts_limited', '=', False)]}" nolabel="1"
+                                       class="oe_inline"/>
+                                <span attrs="{'invisible': [('is_attempts_limited', '=', False)]}">attempts</span>
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

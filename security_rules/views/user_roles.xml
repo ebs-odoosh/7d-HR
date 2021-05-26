@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_approval_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="base.module_category_human_resources_approvals"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+    <record id="group_hr_appraisal_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="base.module_category_human_resources_appraisals"/>
+        <field name="implied_ids" eval="[(4, ref('hr_appraisal.group_hr_appraisal_user'))]"/>
+    </record>
+
+    <record id="group_hr_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="base.module_category_human_resources_employees"/>
+        <field name="implied_ids"
+               eval="[(6, 0, [ ref('security_groups.group_approval_employee'), ref('security_groups.group_hr_appraisal_employee')])]"/>
+    </record>
+
+    <record model="ir.module.category" id="module_category_company">
+        <field name="name">Company Roles</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="group_company_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="module_category_company"/>
+        <field name="implied_ids"
+               eval="[(6, 0, [ref('security_groups.group_hr_employee'), ref('security_groups.group_approval_employee'), ref('security_groups.group_hr_appraisal_employee')])]"/>
+    </record>
+
+    <record id="group_hc_employee" model="res.groups">
+        <field name="name">HC Employee</field>
+        <field name="category_id" ref="module_category_company"/>
+        <field name="implied_ids"
+               eval="[(6, 0, [ref('hr.group_hr_manager'), ref('hr_contract.group_hr_contract_manager'), ref('hr_recruitment.group_hr_recruitment_manager'), ref('documents.group_documents_manager'), ref('survey.group_survey_manager'), ref('base.user_admin')])]"/>
+    </record>
+
+    <record id="group_company_hc" model="res.groups">
+        <field name="name">HC Admin</field>
+        <field name="category_id" ref="module_category_company"/>
+        <field name="implied_ids"
+               eval="[(6, 0, [ref('hr_appraisal.group_hr_appraisal_manager'), ref('security_groups.group_hc_employee')])]"/>
+    </record>
+
+
+</odoo>

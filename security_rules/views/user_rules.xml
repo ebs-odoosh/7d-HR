@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+
+        <record model="ir.rule" id="interviews_employee">
+            <field name="name">Interviews Employee Rule</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="domain_force">[('panel_ids','in',[user.id])]</field>
+            <field name="groups" eval="[(4,ref('security_groups.group_company_employee'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+        </record>
+
+
+        <record model="ir.rule" id="trial_period_employee_rule">
+            <field name="name">Trial Period Employee Rule</field>
+            <field name="model_id" ref="hr_contract_custom.model_trial_period"/>
+            <field name="domain_force">['|','|',('user_id', '=',user.id),('related_employee.parent_id.user_id',
+                '=',user.id),('related_employee.parent_id.parent_id.user_id', '=',user.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('security_groups.group_company_employee'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+        </record>
+
+<!--        <record model="ir.rule" id="employee_manager_contract_rule">-->
+<!--            <field name="name">Employee Manager Contract Rule</field>-->
+<!--            <field name="model_id" ref="hr_contract.model_hr_contract"/>-->
+<!--            <field name="domain_force">[('employee_id.user_id.id', '=', user.id)]</field>-->
+<!--            <field name="groups" eval="[(4,ref('security_groups.group_hr_employee'))]"/>-->
+<!--            <field name="perm_create" eval="0"/>-->
+<!--            <field name="perm_unlink" eval="0"/>-->
+<!--            <field name="perm_write" eval="0"/>-->
+<!--        </record>-->
+
+        <record model="ir.rule" id="hc_admin_contract_rule">
+            <field name="name">HC Admin Contract Rule</field>
+            <field name="model_id" ref="hr_contract.model_hr_contract"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('security_groups.group_hc_employee'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+        </record>
+
+        <record model="ir.rule" id="appraisal_restriction">
+            <field name="name">Employee/Manager Appraisal rule</field>
+            <field name="model_id" ref="hr_appraisal.model_hr_appraisal"/>
+            <field name="domain_force">
+                ['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('security_groups.group_hr_employee'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+        </record>
+
+        <record model="ir.rule" id="hc_admin_appraisal_rule">
+            <field name="name">HC Admin Appraisal Rule</field>
+            <field name="model_id" ref="hr_appraisal.model_hr_appraisal"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('security_groups.group_company_hc'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+        </record>
+
+<!--        <record model="ir.rule" id="employee_approval_category_access">-->
+<!--            <field name="name">Employee Approval Category Rule</field>-->
+<!--            <field name="model_id" ref="approvals.model_approval_category"/>-->
+<!--            <field name="domain_force">[('can_see','=',True)]</field>-->
+<!--            <field name="groups" eval="[(4,ref('security_groups.group_company_employee'))]"/>-->
+<!--            <field name="perm_unlink" eval="0"/>-->
+<!--        </record>-->
+
+        <record id="hr_contract.act_hr_employee_2_hr_contract" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="res_model">hr.contract</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('employee_id','=', active_id)]</field>
+            <field name="context">{}</field>
+
+        </record>
+    </data>
+</odoo>

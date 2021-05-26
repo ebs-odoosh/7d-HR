@@ -1,0 +1,70 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="view_employee_form_simplit_hrms_inherit">
+      <field name="name">hr.employee.form.inherit</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+
+        <xpath expr='//field[@name="category_ids"]' position = "before">
+          <h3><field name="internal_emp_number" readonly="1"/></h3>
+        </xpath>
+
+        <xpath expr='//page[@name="personal_information"]/group/group[1]' position = "after">
+          <group string="Mobile Details">
+            <field name="mobile_number"/>
+            <field name="mobile_bill_limit"/>
+            <field name="service_provider_id" groups="hr.group_hr_user"/>
+            <field name="data"/>
+            <field name="roaming"/>
+          </group>
+        </xpath>
+        
+        <xpath expr='//field[@name="passport_id"]' position="replace">
+        </xpath> 
+
+        <xpath expr='//group[@name="work_permit"]' position="replace">
+         <!-- <group string="Education">
+            <field name="certificate"/>
+            <field name="study_field"/>
+            <field name="study_school"/>
+          </group> -->
+        </xpath>
+
+        <xpath expr='//field[@name="identification_id"]' position="after">
+          <field name="civil_id_number"/>
+          <field name="civil_id_expiry"/>
+        </xpath> 
+
+        <xpath expr='//page[@name="personal_information"]/group/group[6]' position = "after">
+          <group string="Passport Details">
+            <field name="passport_id"/>
+            <field name="passport_issuing_country"/>
+            <field name="passport_issue_date"/>
+            <field name="passport_expiry_date"/>
+            <field name="holder"/>
+          </group>
+          
+          <group string="Residency Details" name="work_permit">
+            <field name="permit_no"/>
+            <field name="visa_no"/>
+            <field name="visa_expire"/>
+            <field name="residency_job_title"/>
+           <!-- <label for="visa_residency_validity_from" string="Visa Residency Validity" />
+            <div>
+              <label for="visa_residency_validity_from" string="From" />
+                <div>
+                  <field name="visa_residency_validity_from" class = "oe_inline"/>
+                </div>
+               <label for="visa_residency_validity_to" string="To" />
+                <div>
+                   <field name="visa_residency_validity_to" class = "oe_inline"/>
+                </div>
+            </div>-->
+          </group>
+        </xpath> 
+      </field>
+    </record>
+  </data>
+</odoo>

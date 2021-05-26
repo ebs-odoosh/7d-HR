@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--        <record id="compensation_form_view" model="ir.ui.view">-->
+        <!--            <field name="name">compensation.form</field>-->
+        <!--            <field name="model">hr.compensation</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <form string="Contract Compensation">-->
+        <!--                    <sheet>-->
+        <!--                        <div class="oe_title">-->
+        <!--                            <label for="example_title"/>-->
+        <!--                            <h1>-->
+        <!--                                <field name="example_title" placeholder="Title"/>-->
+        <!--                            </h1>-->
+        <!--                        </div>-->
+        <!--                        <group>-->
+        <!--                            <group>-->
+        <!--                                <field name="create_date"/>-->
+        <!--                            </group>-->
+        <!--                            <group>-->
+        <!--                                <field name="example_field"/>-->
+        <!--                            </group>-->
+        <!--                        </group>-->
+        <!--                    </sheet>-->
+        <!--                </form>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <record id="contract_hr_compensation_filter" model="ir.ui.view">
+            <field name="name">Contract Compensation Filter</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Contract" name="group_by_related_contract" domain=""
+                                context="{'group_by':'related_contract'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="contract_compensation_tree" model="ir.ui.view">
+            <field name="name">compensation.tree.custom</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <tree string="Contract Compensation">
+                    <field name="related_contract"/>
+                    <field name="is_payroll"/>
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="component_description"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="value"/>
+                    <field name="amount"/>
+                    <field name="currency"/>
+                    <field name="amount_type"/>
+                    <field name="frequency"/>
+                    <field name="period"/>
+                    <field name="compensation_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="contract_compensation_form" model="ir.ui.view">
+            <field name="name">Job HR Compensation Form</field>
+            <field name="model">hr.compensation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title" name='related_contract'>
+                            <label for="related_contract" class="oe_edit_only"></label>
+                            <h1><field name="related_contract"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="compensation_id" readonly="1"
+                                       attrs="{'invisible':[('compensation_id','=',False)]}"/>
+                                <field name="name"/>
+                                <field name="state"/>
+                                <field name="is_payroll"/>
+                                <field name="amount_type" attrs="{'invisible':[('is_payroll','!=',True)],'required':[('is_payroll','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="value" attrs="{'invisible':[('is_payroll','=',True)]}"/>
+                                <field name="amount" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                                <field name="currency" attrs="{'invisible':[('is_payroll','=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="frequency"/>
+                                <field name="period"/>
+                            </group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="compensation_act_window" model="ir.actions.act_window">
+            <field name="name">Contract Compensations</field>
+            <field name="res_model">hr.compensation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('related_contract', '!=', False)]</field>
+            <field name="context">{'search_default_group_by_related_contract': 1}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('contract_compensation_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('contract_compensation_form')})]"/>
+            <field name="search_view_id" ref="contract_hr_compensation_filter"/>
+        </record>
+
+        <menuitem name="Contract Compensations" id="contract_compensation_menu" parent="hr.menu_hr_root"
+                  action="compensation_act_window" sequence="5" groups="base.user_admin"/>
+
+        <record id="view_contract_pivot" model="ir.ui.view">
+            <field name="name">hr.contract.report_pivot</field>
+            <field name="model">hr.contract</field>
+            <field name="arch" type="xml">
+                <pivot string="Contracts Summary">
+                    <field name="employee_id" type="row"/>
+                    <field name="working_days_week" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="hr_contract.action_hr_contract" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="res_model">hr.contract</field>
+            <field name="view_mode">kanban,tree,form,activity,pivot</field>
+        </record>
+
+    </data>
+</odoo>

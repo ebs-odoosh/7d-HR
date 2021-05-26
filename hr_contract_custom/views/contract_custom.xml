@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="contract_custom_form_inherit" model="ir.ui.view">
+            <field name="name">contract.custom.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary_and_advantages']" position="attributes">
+                    <attribute name="string">Total Figures</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_start']" position="attributes">
+                    <attribute name="string">Date of Joining</attribute>
+                </xpath>
+
+                <xpath expr="//label[@for='date_end']" position="attributes">
+                    <attribute name="string">Contract End Date</attribute>
+                </xpath>
+
+                <xpath expr="//label[@for='wage']" position="attributes">
+                    <attribute name="string">Total Salary</attribute>
+                </xpath>
+
+                <!-- for Inactive Salary Components in contract view Added by Bhavesh Jadav 21/08/2020-->
+                <xpath expr="//form/sheet/notebook/page[@name='information']" position="after">
+                    <page string="Inactive Salary Components" name="inactive_salary_components"
+                    >
+<!--                        <group name="inactive_compensation" string="Inactive Compensation">-->
+<!--                            <label for="related_compensation"/>-->
+<!--                            <br/>-->
+<!--                            <div class="o_row" name="inactive_related_compensation">-->
+                                <field name="inactive_related_compensation" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="is_payroll"/>
+                                        <field name="state"/>
+                                        <field name="name"/>
+                                        <field name="component_description"
+                                               attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                        <field name="from_date"/>
+                                        <field name="to_date"/>
+                                        <field name="value" attrs="{'readonly':[('is_payroll','=',True)]}"/>
+                                        <field name="amount" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                        <field name="currency" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                        <field name="amount_type" attrs="{'readonly':[('is_payroll','=',False)]}"/>
+                                        <field name="frequency"/>
+                                        <field name="period"/>
+                                    </tree>
+                                </field>
+<!--                            </div>-->
+<!--                        </group>-->
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

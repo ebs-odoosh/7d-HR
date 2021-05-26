@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_contract_trial_period,hr_contract.trial_period,model_trial_period,,1,1,1,1
+access_hr_contract_hr_contract_group,hr_contract.hr_contract_group,model_hr_contract_group,,1,1,1,1
+access_hr_contract_hr_contract_subgroup,hr_contract.hr_contract_subgroup,model_hr_contract_subgroup,,1,1,1,1
+access_hr_contract_hr_payscale_group,hr_contract.hr_payscale_group,model_hr_payscale_group,,1,1,1,1
+access_hr_contract_hr_payscale_level,hr_contract.hr_payscale_level,model_hr_payscale_level,,1,1,1,1
+access_hr_contract_hr_payroll_area,hr_contract.hr_payroll_area,model_hr_payroll_area,,1,1,1,1
+access_hr_contract_hr_pay_type,hr_contract.hr_pay_type,model_hr_pay_type,,1,1,1,1
+access_hr_contract_hr_contract_type,hr_contract.hr_contract_type,model_hr_contract_type,,1,1,1,1
+access_hr_contract_hr_resignation,hr_contract.hr_resignation,model_hr_resignation,,1,1,1,1
+access_hr_contract_standard_weekly_hours,hr_contract.standard_weekly_hours,model_standard_weekly_hours,,1,1,1,1

@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_contract_view_form_simplit_hrms_inherit">
+            <field name="name">hr.contract.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr='//page[@name="information"]' position="after">
+                    <page name='offcial_contract' string="Official Government Contract" attrs="{'invisible': [('contract_type', '!=', 'contract_official')]}">
+                        <group>
+                            <group name="sponsor_details_offical" string="Sponsor Details">
+                                <field name="sponsor_name"/>
+                                <field name="company_sponsorship_license"/>
+                                <field name="registration_number"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath> 
+
+                <xpath expr='//field[@name="type_id"]' position="before">
+                    <field name='employement_type'/>
+                    <field name='contract_type'/>
+                </xpath> 
+
+                <xpath expr='//group[@name="salary_and_advantages"]' position="after">
+                    <group name="other_advantages" string="Other Advantages">
+                        <field name="car_gas_card_limit"/>
+                        <field name="vendor_card_limit"/>
+                    </group>
+
+                    <group string="House Rent Allowance">
+                        <field name="house_rent_allowance"/>
+                        <field name="landlord_info" attrs="{'invisible': [('house_rent_allowance','=', False)]}"/>
+                        <field name="contact_person" attrs="{'invisible': [('house_rent_allowance','=', False)]}"/>
+                        <field name="rent" attrs="{'invisible': [('house_rent_allowance','=', False)]}"/>
+                    </group>
+                </xpath> 
+
+                <xpath expr='//field[@name="date_end"]' position = "after">
+                    <field name="contract_duration"/>
+                </xpath>
+                <xpath expr="//field[@name='schedule_pay']" position="after">
+                    <label for="contract_period"/>
+                    <div class="o_row">
+                        <field string="Contract Period" name="contract_period_duration"/>
+                        <field name="contract_period"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
