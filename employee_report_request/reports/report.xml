@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- bank letter english-->
+        <report
+                string="Bank Letter"
+                id="report_bank_letter_eng"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_bank_letter_eng_template"
+                file="employee_report_request.report_bank_letter_eng_template"
+                print_report_name="'Bank Letter English '"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+
+        <!--employment letter English-->
+        <report
+                string="Employment Letter English"
+                id="report_employment_letter_eng"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_employment_letter_eng_template"
+                file="employee_report_request.report_employment_letter_eng_template"
+                print_report_name="'Employment Letter English'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+
+
+        <!--employment letter Arabic -->
+        <report
+                string="Employment Letter Arabic"
+                id="report_employment_letter_arabic"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_employment_letter_arabic_template"
+                file="employee_report_request.report_employment_letter_arabic_template"
+                print_report_name="'Employment Letter Arabic'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+
+        />
+        <!--To Whom it May Concern letter English -->
+        <report
+                string="To Whom it May Concern letter English"
+                id="report_whom_it_may_concern_letter_eng"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_whom_it_may_concern_eng_template"
+                file="employee_report_request.report_whom_it_may_concern_eng_template"
+                print_report_name="'To Whom it May Concern letter English'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+
+
+        <!--To Whom it May Concern letter arabic -->
+        <report
+                string="To Whom it May Concern letter Arabic "
+                id="report_whom_it_may_concern_letter_arabic"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_whom_it_may_concern_arabic_template"
+                file="employee_report_request.report_whom_it_may_concern_arabic_template"
+                print_report_name="'To Whom it May Concern letter Arabic'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+
+
+        <!-- immigration letter arabic -->
+        <report
+                string="Immigration Letter Arabic"
+                id="report_immigration_letter_arabic"
+                model="report.request"
+                report_type="qweb-pdf"
+                name="employee_report_request.report_immigration_letter_arabic_template"
+                file="employee_report_request.report_immigration_letter_arabic_template"
+                print_report_name="'Immigration Letter Arabic'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+
+        />
+    </data>
+</odoo>

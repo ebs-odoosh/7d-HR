@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for the education_eligibility-->
+<!--    <record id="education_eligibility_tree_view" model="ir.ui.view">-->
+<!--        <field name="name">education.eligibility.tree</field>-->
+<!--        <field name="model">education.eligibility</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="currency_id" invisible="1"/>-->
+<!--                <field name="name" optional="show"/>-->
+<!--                <field name="exception" force_save="1"/>-->
+<!--                <field name="contract_subgroup" widget="many2many_tags"-->
+<!--                       options="{'no_create': True, 'no_edit': True,'no_open': True}"-->
+<!--                       optional="show"/>-->
+<!--                <field name="academic_year_id" optional="show"/>-->
+<!--                <field name="valid_from_date" optional="show"/>-->
+<!--                <field name="valid_to_date" optional="show"/>-->
+<!--                <field name="job_grades" widget="many2many_tags"-->
+<!--                       options="{'no_create': True, 'no_edit': True,'no_open': True}"-->
+<!--                       optional="show"/>-->
+<!--                <field name="employee_ids" optional="show"/>-->
+<!--                <field name="employee_id" optional="show"/>-->
+<!--                <field name="number_of_child" optional="show"/>-->
+<!--                <field name="child_min_age" optional="show"/>-->
+<!--                <field name="child_max_age" optional="show"/>-->
+<!--                <field name="per_child_amount" widget="monetary"-->
+<!--                       options="{'currency_field': 'currency_id'}" optional="show"/>-->
+<!--                <field name="is_uae_nationals" optional="show"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <!-- Form view for the report.request-->
+    <record model="ir.ui.view" id="education_eligibility_form_view">
+        <field name="name">Education.Eligibility.Conf.Form</field>
+        <field name="model">education.eligibility</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="exception" widget="radio" force_save="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Eligibility" name="education_eligibility_page">
+                            <group>
+                                <group>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="contract_subgroup"
+                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                           widget="many2many_tags"
+                                           attrs="{'invisible': [('exception','in',['exception','specific_per_child'])]}"/>
+                                    <field name="employee_ids" widget="many2many_tags"
+                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                           attrs="{'invisible': [('exception','in',['no_exception','specific_per_child'])]}"
+                                    />
+                                    <field name="job_grades"
+                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                           widget="many2many_tags"
+                                           attrs="{'invisible': [('exception','in',['exception','specific_per_child'])]}"/>
+
+                                    <field name="employee_id"
+                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                           attrs="{'invisible': [('exception','in',['no_exception','exception'])]}"/>
+                                    <field name="academic_year_id"/>
+                                    <field name="number_of_child"/>
+                                    <field name="child_min_age"
+                                           attrs="{'invisible': [('exception','in',['specific_per_child'])]}"/>
+                                    <field name="child_max_age"
+                                           attrs="{'invisible': [('exception','in',['specific_per_child'])]}"/>
+                                    <field name="specific_child_education_eligibility_line_ids" mode="tree"
+                                           context="{'default_education_eligibility_id':id}"
+                                           attrs="{'invisible': [('exception','in',['no_exception','exception'])]}">
+                                        <tree editable="bottom">
+                                            <field name="name" readonly="1"/>
+                                            <field name="employee_id" readonly="1"/>
+                                            <field name="child_id"
+                                                   context="{'is_child_education_eligibility_dynamic_domain':True,'employee_id':employee_id,'education_eligibility_id':education_eligibility_id}"/>
+                                            <field name="specific_amount_for_child"/>
+                                            <field name="education_eligibility_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <field name="per_child_amount" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"
+                                           attrs="{'invisible': [('exception','in',['specific_per_child'])]}"/>
+                                </group>
+                                <group>
+                                    <field name="is_uae_nationals"
+                                           attrs="{'invisible': [('exception','in',['specific_per_child','exception'])]}"/>
+                                    <field name="valid_from_date" required="1"/>
+                                    <field name="valid_to_date" required="1"/>
+
+                                </group>
+                            </group>
+                            <group>
+                                <field name="note"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--Main Menu  for Education Request-->
+    <menuitem id="main_menu_education"
+              name="Child Education"
+              parent="hr_payroll.menu_hr_payroll_configuration"
+              sequence="82"/>
+
+
+    <!-- Menu action for the Education Eligibility-->
+    <record id="child_menu_action_for_education_eligibility" model="ir.actions.act_window">
+        <field name="name">Education Eligibility Configuration</field>
+        <field name="res_model">education.eligibility</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new Education Eligibility Configuration record found
+            </p>
+        </field>
+    </record>
+
+    <!-- Child Menu action for the Education Eligibility-->
+    <menuitem id="child_menu_for_education_eligibility"
+              name="Education Eligibility Configuration"
+              parent="main_menu_education"
+              action="child_menu_action_for_education_eligibility"
+              sequence="1"/>
+</odoo>

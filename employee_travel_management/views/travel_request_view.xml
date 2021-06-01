@@ -1,0 +1,560 @@
+<odoo>
+    <data>
+
+        <!-- Tree view for the travel request-->
+<!--        <record id="view_employee_travel_request_tree" model="ir.ui.view">-->
+<!--            <field name="name">employee.travel.request.tree</field>-->
+<!--            <field name="model">employee.travel.request</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree edit="false">-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="employee_id" optional="show"/>-->
+<!--                    <field name="travel_start_date" optional="show"/>-->
+<!--                    <field name="travel_end_date" optional="show"/>-->
+<!--                    <field name="trip_days" optional="hide"/>-->
+<!--                    <field name="request_owner_id" optional="show"/>-->
+<!--                    <field name="request_status" optional="show"/>-->
+<!--                    <field name="travel_type" optional="hide"/>-->
+<!--                    <field name="to_country_id" optional="show"/>-->
+<!--                    <field name="accommodation_type" optional="hide"/>-->
+<!--                    <field name="approver_ids" optional="show"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!-- Form view  for the employee travel request-->
+        <record model="ir.ui.view" id="employee_travel_request_form_view">
+            <field name="name">employee.travel.request.form</field>
+            <field name="model">employee.travel.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="user_status" invisible="1"/>
+                        <field name="is_return_employee" invisible="1"/>
+                        <field name="has_access_travel_quotation" invisible="1"/>
+                        <field name="is_expense_report_created" invisible="1"/>
+                        <field name="expense_sheet_ids" invisible="1"/>
+
+
+                        <field name="request_status" widget="statusbar"
+                               statusbar_visible="new,wait_for_quotations,select_quotation,pending,under_approval,approved"/>
+                        <button name="action_wait_for_quotations"
+                                string="Submit" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('request_status','not in',['new'])]}"/>
+                        <button name="action_quotation_submit"
+                                string="Submit Quotations" type="object"
+                                class="btn-primary"
+                                groups="employee_travel_management.group_travel_quotation_employee"
+                                attrs="{'invisible': [('request_status','not in',['wait_for_quotations'])]}"/>
+                        <button name="action_submit_request"
+                                string="Submit To Approver" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('request_status','not in',['select_quotation'])]}"/>
+                        <button name="action_approve" string="Approve" type="object"
+                                attrs="{'invisible':[('user_status','!=','pending')]}"/>
+                        <button name="print_ticket_request" string="Print Ticket Request" type="object"
+                                attrs="{'invisible':[('request_status','not in',['approved'])]}"/>
+                        <button name="print_ticket_request_with_perdiem" string="Print Ticket Request with perdiem"
+                                type="object"
+                                attrs="{'invisible':[('request_status','not in',['expenses_added'])]}"/>
+                        <button name="action_return" string="Return" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':['|',('request_status','not in',['approved']),('is_return_employee','=',True)]}"/>
+                        <button name="action_create_expense_sheet" string="Create Expense Report" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':['|',('request_status','not in',['returned','expenses_added']),('is_expense_report_created','=',True)]}"/>
+                        <button name="%(open_travel_reject_reason_action)d" string="Refuse" type="action"
+                                attrs="{'invisible':[('user_status','!=','pending')]}"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                attrs="{'invisible':['|',('request_status','in',['new','cancel']),'&amp;',('user_status','==',False)]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"
+                             attrs="{'invisible': [('expense_count','=', 0)]}">
+                            <button name="action_view_expense_sheet" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o">
+                                <div class="o_stat_info">
+                                    <field name="expense_count"/>
+                                    <span class="o_stat_text">Expenses</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id" required="1" force_save="1"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                       attrs="{'readonly': [('request_status','not in',['new'])]}"/>
+                                <field name="employee_contact_number"
+                                       attrs="{'readonly': [('request_status','not in',['new'])]}" force_save="1"/>
+                                <field name="employee_email"
+                                       attrs="{'readonly': [('request_status','not in',['new'])]}"
+                                       force_save="1"/>
+                                <field name="request_owner_id" readonly="1"/>
+
+                            </group>
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="request_submit_date" readonly="1"/>
+                                <field name="approval_date" readonly="1"/>
+                                <field name="travel_settings_id" readonly="1"/>
+                                <field name="perdiem_rule" readonly="1"/>
+                                <field name="company_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Travel Information" name="travel_info">
+                                <group>
+                                    <group>
+                                        <field name="travel_purpose" required="1"
+                                               attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"
+                                        />
+                                        <field name="travel_type"
+                                               attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                               required="1"/>
+                                        <field name="accommodation_type"
+                                               attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                               required="1"/>
+                                        <field name="travel_start_date"
+                                               attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                               required="1" widget="date"/>
+                                        <field name="travel_end_date"
+                                               attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                               required="1" widget="date"/>
+                                        <!--                                        <field name="class_of_travel_str" readonly="1"/>-->
+
+
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <label for="street" string="From"/>
+                                        <div class="o_address_format">
+                                            <field name="from_country_id" placeholder="Country"
+                                                   class="o_address_country" required="1"
+                                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"/>
+                                            <field name="from_city" placeholder="City" class="o_address_city"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                                   required="1"/>
+                                            <field name="from_state_id" class="o_address_state" placeholder="State"
+                                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"/>
+                                            <field name="from_zip" placeholder="ZIP" class="o_address_zip"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"/>
+                                        </div>
+
+                                    </group>
+                                    <group>
+                                        <label for="street" string="To Destination"/>
+                                        <div class="o_address_format">
+                                            <field name="to_country_id" placeholder="Country"
+                                                   class="o_address_country" required="1"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                            <field name="to_city" placeholder="City"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                                   class="o_address_city"
+                                                   required="1"/>
+                                            <field name="to_state_id" class="o_address_state" placeholder="State"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                                   context="{'to_country_id': to_country_id, 'to_zip': to_zip}"
+                                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                            <field name="to_zip" placeholder="ZIP"
+                                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                                   class="o_address_zip"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="trip_days" readonly="1"/>
+                                    </group>
+                                    <field name="note" placeholder="Note For Travel..."
+                                           attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"
+                                    />
+                                </group>
+                            </page>
+                            <page string="Cost Center" name="cost_center">
+                                <group string="Cost Center">
+                                    <field name="travel_cost_center_lines"
+                                           attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"
+                                           context="{'employee_id': employee_id}">
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="cost_center_id" required="1"
+                                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                                    <field name="share_percentage" required="1" readonly="1"/>
+                                                    <field name="description"/>
+                                                                                                        <div name="share_percentage">
+                                                                                                            <label for="share_percentage"/>
+                                                                                                            <field name="share_percentage"/>
+                                                                                                            <span>%%</span>
+                                                                                                            <field name="description"/>
+                                                                                                        </div>
+                                                </group>
+                                            </group>
+                                        </form>
+                                        <tree>
+                                            <field name="cost_center_id"/>
+                                            <field name="share_percentage" readonly="1"/>
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Travel Quotation" name="travel_quotation">
+                                <group>
+                                    <group>
+                                        <field name="set_default_quotation"
+                                               attrs="{'invisible': [('request_status','not in',['select_quotation'])],
+                                               'readonly':[('request_status','in',['approved','refused','cancel'])]}"/>
+                                        <field name="travel_request_quotation_line"
+                                               context="{'is_dynamic_domain':True,'current_id':id}"
+                                               options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                               attrs="{'invisible': [('set_default_quotation', '=',False)],'readonly':[('request_status','in',['approved','refused','cancel'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="quotation_comment" string="Justification" required="0"
+                                               attrs="{'invisible': [('set_default_quotation', '=',False)],
+                                           'required':[('set_default_quotation', '=', True)],'readonly':[('request_status','in',['approved','refused','cancel'])]}"/>
+                                    </group>
+                                </group>
+                                <label for="travel_request_quotation_lines"/>
+                                <field name="travel_request_quotation_lines"/>
+                                                                <group>
+                                                                    <field name="travel_request_quotation_lines" string="Quotation lines"
+                                                                           context="{'employee_id': employee_id,'travel_settings_id':travel_settings_id,'perdiem_rule':perdiem_rule}"
+                                                                           mode="tree"
+                                                                           attrs="{'readonly':['|',('has_access_travel_quotation','=',False),('request_status','in',['approved','refused','cancel'])]}">
+                                                                        <tree edit="false">
+                                                                            <field name="name" optional="show"/>
+                                                                            <field name="travel_agency_id" optional="show"/>
+                                                                            <field name="class_of_travel" optional="show"/>
+                                                                            <field name="flight_no" optional="show"/>
+                                                                            <field name="boarding_time" optional="show"/>
+                                                                            <field name="value_cost" optional="show"/>
+                                                                            <field name="markup_amount" optional="show"/>
+                                                                            <field name="car_rental_days" optional="show"/>
+                                                                            <field name="car_rental_amount" optional="show"/>
+                                                                            <field name="hotel_accommodation_days" optional="show"/>
+                                                                            <field name="hotel_accommodation_amount" optional="show"/>
+                                                                            <field name="total_amount" readonly="1" optional="show"/>
+                                                                            <field name="attachment_ids" widget="many2many_binary" optional="hide"/>
+                                                                        </tree>
+                                                                    </field>
+                                                                </group>
+                            </page>
+                            <page string="Expense" name="expense"
+                                  attrs="{'invisible': [('request_status','not in',['approved','returned','expenses_added','refused','cancel'])],
+                                  'readonly':[('request_status','in',['refused','cancel'])]}">
+                                                                <group>
+                                                                    <group>
+                                                                        <field name="project_id"
+                                                                               attrs="{'required':[('request_status', 'in',['returned'])]}"
+                                                                               string="Project"/>
+                                                                    </group>
+                                                                </group>
+                                <group>
+                                    <field name="hr_expense_ids"
+                                           context="{'employee_id': employee_id}"
+                                           attrs="{'readonly':[('request_status', 'not in',['approved','returned'])]}">
+                                        <form string="Expenses" class="o_expense_form">
+                                            <field name="state" invisible="1"/>
+                                            <field name="employee_id" invisible="1"/>
+                                            <header>
+                                                                                                <button name="action_submit_expenses" string="Create Report"
+                                                                                                        type="object" class="oe_highlight o_expense_submit"
+                                                                                                        attrs="{'invisible': ['|', ('attachment_number', '&lt;=', 0), ('sheet_id', '!=', False)]}"/>
+                                                                                                <widget name="attach_document" string="Attach Document"
+                                                                                                        action="message_post"
+                                                                                                        attrs="{'invisible': ['|', ('attachment_number', '&lt;', 1), ('id','=',False)]}"/>
+                                                                                                <widget name="attach_document" string="Attach Document"
+                                                                                                        action="message_post" highlight="1"
+                                                                                                        attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
+                                                                                                <button name="action_submit_expenses" string="Create Report"
+                                                                                                        type="object" class="o_expense_submit"
+                                                                                                        attrs="{'invisible': ['|', ('attachment_number', '&gt;=', 1), ('sheet_id', '!=', False)]}"/>
+                                                                                                <field name="state" widget="statusbar"
+                                                                                                       statusbar_visible="draft,reported,approved,done,refused"/>
+                                                                                                <button name="action_view_sheet" type="object" string="View Report"
+                                                                                                        class="oe_highlight"
+                                                                                                        attrs="{'invisible': [('sheet_id', '=', False)]}"/>
+                                            </header>
+                                            <sheet>
+                                                                                                <div class="oe_button_box" name="button_box">
+                                                                                                    <button name="action_get_attachment_view" class="oe_stat_button"
+                                                                                                            icon="fa-file-text-o" type="object">
+                                                                                                        <field name="attachment_number" widget="statinfo"
+                                                                                                               string="Documents" options="{'reload_on_button': true}"/>
+                                                                                                    </button>
+                                                                                                </div>
+                                                <div class="oe_title">
+                                                    <label for="name" class="oe_edit_only"/>
+                                                    <h1>
+                                                        <field name="name" placeholder="e.g. Lunch with Customer"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                    </h1>
+                                                </div>
+                                                <group>
+                                                    <group>
+<!--                                                        <field name="is_editable" invisible="1"/>-->
+<!--                                                        <field name="is_ref_editable" invisible="1"/>-->
+                                                        <field name="expense_type"
+                                                               options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                                               required="1"/>
+                                                        <field name="product_id" required="1"
+                                                               context="{'default_can_be_expensed': 1, 'tree_view_ref': 'hr_expense.product_product_expense_tree_view'}"
+                                                               widget="many2one_barcode"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                        <field name="unit_amount" required="1" widget="monetary"
+                                                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+<!--                                                        <field name="product_uom_category_id" invisible="1"/>-->
+                                                        <label for="quantity"/>
+                                                        <div class="o_row">
+                                                            <field name="quantity" class="oe_inline"
+                                                                   attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                            <field name="product_uom_id" required="1"
+                                                                   widget="selection"
+                                                                   class="oe_inline"
+                                                                   attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                                   groups="uom.group_uom"/>
+                                                        </div>
+                                                        <field name="tax_ids" widget="many2many_tags"
+                                                               groups="account.group_account_user"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                               context="{'default_company_id': company_id}"/>
+                                                        <field name="total_amount" widget="monetary"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                               options="{'currency_field': 'currency_id'}"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="reference"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                        <field name="date"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                        <field name="account_id" options="{'no_create': True}"
+                                                               domain="[('internal_type', '=', 'other'), ('company_id', '=', company_id),'|',('is_per_diem_expense', '=', True)]"
+                                                               groups="account.group_account_user"
+                                                               context="{'default_company_id': company_id}"/>
+                                                        <field name="employee_id" readonly="1"/>
+                                                        <field name="document_name" invisible="1"/>
+                                                        <field name="document" required="1"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                               filename="document_name"/>
+
+
+                                                        <!--                                                        <field name="attachment_ids" widget="many2many_binary"/>-->
+                                                        <!--                                                        <field name="employee_id"-->
+                                                        <!--                                                               groups="hr_expense.group_hr_expense_team_approver"-->
+                                                        <!--                                                               context="{'default_company_id': company_id}"/>-->
+                                                        <field name="sheet_id" invisible="1"/>
+                                                        <field name="currency_id"
+                                                               groups="base.group_multi_currency"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                               options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                                        <field name="analytic_account_id"
+                                                               domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                                                               groups="analytic.group_analytic_accounting"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                        <field name="analytic_tag_ids" widget="many2many_tags"
+                                                               groups="analytic.group_analytic_tags"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"/>
+                                                        <field name="company_id"
+                                                               attrs="{'readonly': [('is_per_diem_expense', '=', True)]}"
+                                                               groups="base.group_multi_company"/>
+                                                        <field name="is_per_diem_expense"/>
+
+                                                    </group>
+                                                    <!--                                                    <group>-->
+                                                    <!--                                                        <label for="payment_mode"/>-->
+                                                    <!--                                                        <div>-->
+                                                    <!--                                                            <field name="payment_mode" widget="radio"/>-->
+                                                    <!--                                                        </div>-->
+                                                    <!--                                                    </group>-->
+                                                </group>
+                                                <div>
+                                                    <field name="description" class="oe_inline"
+                                                           placeholder="Notes..."/>
+                                                </div>
+                                                <notebook>
+                                                    <page name="cost_center" string="Cost Center">
+                                                        <group string="Cost Center">
+                                                            <field name="expense_cost_center_lines"
+                                                                   attrs="{'readonly':[('state','not in',['draft'])]}"
+                                                                   context="{'employee_id': employee_id}">
+                                                                <form>
+                                                                    <group>
+                                                                        <group>
+                                                                            <field name="cost_center_id" required="1"
+                                                                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                                                            <field name="share_percentage" required="1"
+                                                                                   readonly="1"/>
+                                                                            <field name="description"/>
+                                                                        </group>
+                                                                    </group>
+                                                                </form>
+                                                                <tree>
+                                                                    <field name="cost_center_id"/>
+                                                                    <field name="share_percentage" readonly="1"/>
+                                                                    <field name="description"/>
+                                                                </tree>
+                                                            </field>
+                                                        </group>
+                                                    </page>
+                                                </notebook>
+                                            </sheet>
+                                            <div class="o_attachment_preview"/>
+                                            <div class="oe_chatter">
+                                                <field name="message_follower_ids" widget="mail_followers"/>
+                                                <field name="activity_ids" widget="mail_activity"/>
+                                                <field name="message_ids" widget="mail_thread"/>
+                                            </div>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Approver(s)" name="approvers">
+                                <group>
+                                    <field name="read_only_user" invisible="1"/>
+                                    <field name="approver_ids" mode="tree,form" force_save="1"
+                                           attrs="{'readonly':[('read_only_user','=',True)]}">
+                                        <tree editable="bottom" decoration-success="status=='approved'"
+                                              decoration-warning="status=='pending'"
+                                              decoration-danger="status=='refused'">
+                                            <field name="sequence" invisible="1" widget="handle"/>
+                                            <field name="sequence"/>
+                                            <field name="user_id" string="Approver" force_save="1"
+                                                   attrs="{'readonly':[('status','!=','new')]}"/>
+                                            <field name="status"/>
+                                            <field name="approval_category"/>
+                                            <!--                                            <field name="approval_type" readonly="1"/>-->
+                                        </tree>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <field name="sequence" readonly="1"/>
+                                                        <field name="user_id"
+                                                               options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                                               readonly="1"/>
+                                                        <field name="status" readonly="1"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="approval_category" readonly="1"/>
+                                                        <field name="reject_reason" readonly="1"/>
+                                                        <field name="request_id" readonly="1"/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- need to test-->
+        <record id="employee_travel_request_search_view" model="ir.ui.view">
+            <field name="name">employee.travel.request.search.view</field>
+            <field name="model">employee.travel.request</field>
+            <field name="arch" type="xml">
+                <search string="Search allocations">
+                    <filter invisible="1" string="Late Activities" name="activities_overdue"
+                            domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                            help="Show all records which has next action date is before today"/>
+                    <filter invisible="1" string="Today Activities" name="activities_today"
+                            domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter invisible="1" string="Future Activities" name="activities_upcoming_all"
+                            domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                        ]"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- Menu action for the Travel Request-->
+        <record id="employee_travel_request_act_window" model="ir.actions.act_window">
+            <field name="name">My Travel Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.travel.request</field>
+            <field name="domain">[('request_owner_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No new travel request found
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu action for the Travel Request  to Review-->
+        <record id="travel_request_action_to_review" model="ir.actions.act_window">
+            <field name="name">Travel Request to Review</field>
+            <field name="res_model">employee.travel.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('approver_ids.user_id', '=', uid), ('request_status', 'in',
+                ['pending','under_approval'])]
+            </field>
+            <!--            <field name="domain">['&amp;',('approver_ids.user_id','=',uid),('request_status','=','pending')]</field>-->
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No new travel request to review
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu action for the All Travel Request-->
+        <record id="all_travel_request_act_window" model="ir.actions.act_window">
+            <field name="name">All Travel Request</field>
+            <field name="res_model">employee.travel.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No new travel request
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Parent Menu  for the Travel Request-->
+        <!--        <menuitem name="Travel Request" id="employee_travel_request_menu"-->
+        <!--                  parent="approvals.approvals_menu_root"-->
+        <!--                  sequence="25"/>-->
+
+        <!-- Child Menu for the Travel Request-->
+        <!--        <menuitem id="child_menu_employee_travel_request"-->
+        <!--                  name="My Travel Request"-->
+        <!--                  parent="employee_travel_management.employee_travel_request_menu"-->
+        <!--                  action="employee_travel_request_act_window"-->
+        <!--                  sequence="1"/>-->
+
+        <!-- Child Menu for the Travel Request to Review-->
+        <!--        <menuitem id="child_menu_employee_travel_request_to_review"-->
+        <!--                  name="Travel Request to Review"-->
+        <!--                  parent="employee_travel_management.employee_travel_request_menu"-->
+        <!--                  action="travel_request_action_to_review"-->
+        <!--                  sequence="2"/>-->
+
+
+        <!-- Child Menu for the All Travel Request-->
+        <menuitem id="child_menu_employee_all_travel_request_to_review"
+                  name="All Travel Request"
+                  parent="approvals.approvals_menu_manager"
+                  action="all_travel_request_act_window"
+                  sequence="23"/><!--  groups="security_rules.group_strata_hc"-->
+
+
+    </data>
+</odoo>

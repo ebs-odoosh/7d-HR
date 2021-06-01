@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="approval.category" id="res_approval_category_bank_changes">
+            <field name="name">Bank Changes</field>
+            <field name="is_bank_changes_request">yes</field>
+            <field name="has_employee_name">required</field>
+            <field name="has_employee_number">required</field>
+            <field name="has_department_id_e_bank">required</field>
+            <field name="has_date_of_join_e_bank">required</field>
+            <field name="has_current_bank_name">required</field>
+            <field name="has_current_iban">required</field>
+            <field name="has_current_account_number">required</field>
+            <field name="has_account_number">required</field>
+            <field name="has_iban">required</field>
+            <field name="has_effective_month_year">required</field>
+            <field name="has_select_bank">required</field>
+            <field name="has_your_company">required</field>
+            <field name="image" type="base64" file="employee_bank_approvals/static/src/bank_loan.jpg"/>
+        </record>
+    </data>
+</odoo>

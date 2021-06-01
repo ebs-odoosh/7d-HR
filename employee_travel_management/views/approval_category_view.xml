@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="approval_category_view_form_travel_request" model="ir.ui.view">
+            <field name="name">approval.category.view.form</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="hr_approvals.approval_category_view_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='transfer_fields']" position="after">
+                    <page string="Travel Request" name="travel_request">
+                        <label for="is_travel_request"/>
+                        <field name="is_travel_request" widget="radio" options="{'horizontal': true}"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- for the hide base request_to_validate_count and the added travel_request_to_validate_count-->
+        <record id="approval_category_view_kanban_travel_request" model="ir.ui.view">
+            <field name="name">approval.category.view.form.travel.request</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="approvals.approval_category_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='request_to_validate_count']" position="before">
+                    <field name="is_travel_request" invisible="1"/>
+                    <field name="travel_request_to_validate_count"
+                           attrs="{'invisible': [('is_travel_request','=','no')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='request_to_validate_count']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_travel_request','=','yes')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

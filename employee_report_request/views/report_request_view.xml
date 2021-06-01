@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+        <!-- search view for the the letter request -->
+        <record id="res_report_request_view_search" model="ir.ui.view">
+            <field name="name">report.request.view.search</field>
+            <field name="model">report.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Letter Request">
+                    <field name="name"/>
+                    <field name="reference"/>
+                    <separator/>
+                    <group expand="1" string="Group by">
+                        <filter string="Employee" name="employee_id" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Language" name="letter_lang" context="{'group_by': 'letter_lang'}"/>
+                        <filter string="Type" name="letter_type" context="{'group_by': 'letter_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Tree view for the report.request-->
+        <record id="view_report_request_tree" model="ir.ui.view">
+            <field name="name">report.request.tree</field>
+            <field name="model">report.request</field>
+            <field name="arch" type="xml">
+                <tree edit="false" delete="0">
+                    <field name="name" optional="show"/>
+                    <field name="reference" optional="show"/>
+                    <field name="employee_id" optional="show"/>
+                    <field name="request_owner_id" readonly="1" optional="show"/>
+                    <field name="letter_type" optional="show"/>
+                    <field name="letter_lang" optional="show"/>
+                    <field name="submit_date" optional="show"/>
+                    <field name="state" readonly="1" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view for the report.request-->
+        <record model="ir.ui.view" id="report_request_form_view_">
+            <field name="name">Report.Request.Form</field>
+            <field name="model">report.request</field>
+            <field name="arch" type="xml">
+                <form delete="0">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_submit"
+                                string="Submit" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state', 'not in',['new'])]}"/>
+                        <button name="action_print_report"
+                                string="Download Letter" type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state', 'not in',['submitted'])]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field string="Select Employee" name="employee_id" required="1"
+                                       attrs="{'readonly': [('state', 'in', ['submitted'])]}"
+                                       context="{'is_report_request_dynamic_domain':True}"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                <field name="letter_type" widget="radio" required="1"
+                                       attrs="{'readonly': [('state', 'in', ['submitted'])]}"/>
+                            </group>
+                            <group>
+                                <field name="submit_date" string="Submit Date" readonly="1"/>
+                                <field name="reference" readonly="1"/>
+                                <field name="request_owner_id" readonly="1"/>
+                                <field name="company_id" readonly="1"/>
+                                <field name="auto_unique_num" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="request_report_select_lang" string="Letter Language">
+                                <group>
+                                    <group>
+                                        <field name="letter_lang" string="Letter Language"
+                                               widget="radio" force_save="1"
+                                               attrs="{'readonly': ['|',('letter_type', 'in', ['bank_letter','immigration_letter']),('state','in',['submitted'])]}"/>
+                                        <field name="whom_this_letter_issue" widget="radio"
+                                               string="To whom this letter is issue?"
+                                               attrs="{'invisible': [('letter_type', 'in', ['bank_letter','immigration_letter','to_whom_it_may_concern'])],'readonly':[('state', 'in', ['submitted'])]}"/>
+                                        <field name="bank_id" string="Banks" force_save="1"
+                                               options="{'no_create': True, 'no_edit': True, 'no_open': True}"
+                                               attrs="{'invisible': ['|',('whom_this_letter_issue', 'in', ['embassy','other']),('letter_type','in',['immigration_letter','to_whom_it_may_concern'])],
+                                               'readonly':['|',('state', 'in', ['submitted']),('letter_type', 'in', 'bank_letter')],
+                                               'required': ['&amp;',('letter_type','=','employment_letter'),('whom_this_letter_issue','=','bank')]}"/> <!--'|','|',('letter_type', '=', 'bank_letter'),-->
+                                        <field name="embassy_id" string="Embassy"
+                                               options="{'no_create': True, 'no_edit': True, 'no_open': True}"
+                                               attrs="{'invisible': ['|',('whom_this_letter_issue', 'in', ['bank','other']),('letter_type','in',['bank_letter','to_whom_it_may_concern','immigration_letter'])],'readonly':[('state', 'in', ['submitted'])],
+                                               'required': ['&amp;',('letter_type','=','employment_letter'),('whom_this_letter_issue','=','embassy')]}"/>
+                                        <field name="other_entities_id" string="Other Entities"
+                                               options="{'no_open': True}"
+                                               attrs="{'invisible': ['|',('whom_this_letter_issue', 'in', ['embassy','bank']),('letter_type','in',['bank_letter','to_whom_it_may_concern'])],'readonly':[('state', 'in', ['submitted'])],
+                                               'required': [('letter_type','=','employment_letter'),('whom_this_letter_issue','=','other')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu action for the report.request-->
+        <record id="report_request_act_window" model="ir.actions.act_window">
+            <field name="name">Letters Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.request</field>
+            <field name="domain">[('request_owner_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu action for the approval category-->
+        <record id="report_request_all_act_window" model="ir.actions.act_window">
+            <field name="name">All Letters Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--        &lt;!&ndash; Parent Menu  for the report.request&ndash;&gt;-->
+        <!--        <menuitem name="Letter Request" id="report_request_menu"-->
+        <!--                  parent="approvals.approvals_menu_root"-->
+        <!--                  sequence="25"/>-->
+
+        <menuitem id="child_menu_all_report_request"
+                  name="All Letter Request"
+                  parent="approvals.approvals_menu_manager"
+                  action="report_request_all_act_window"
+                  sequence="22" groups="security_rules.group_strata_hc"/>
+    </data>
+</odoo>

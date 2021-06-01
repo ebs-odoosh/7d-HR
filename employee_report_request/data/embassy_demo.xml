@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="res.embassy" id="res_embassy_1">
+            <field name="name">Embassy of Afghanistan</field>
+            <field name="arabic_name">سفارة افغانستان</field>
+            <field name="country_id">3</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_2">
+            <field name="name">Embassy of Algeria</field>
+            <field name="arabic_name">سفارة الجزائر</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_3">
+            <field name="name">Embassy of Argentina</field>
+            <field name="arabic_name">سفارة انغولا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_4">
+            <field name="name">Embassy of Australia</field>
+            <field name="arabic_name">سفارة الولايات المتحدة الأمريكية</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_5">
+            <field name="name">Embassy of Austria</field>
+            <field name="arabic_name">سفارة استراليا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_6">
+            <field name="name">Embassy of Azerbaijan</field>
+            <field name="arabic_name">سفارة اذربيجان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_7">
+            <field name="name">Embassy of Bahrain</field>
+            <field name="arabic_name">سفارة بنغلاديش</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_8">
+            <field name="name">Embassy of Bangaladesh</field>
+            <field name="arabic_name">سفارة بلغاريا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_9">
+            <field name="name">Embassy of Belarus</field>
+            <field name="arabic_name">سفارة كندا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_10">
+            <field name="name">Embassy of Belgium</field>
+            <field name="arabic_name">سفارة جمهورية الصين الشعبية</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_11">
+            <field name="name">Embassy of Benin</field>
+            <field name="arabic_name">سفارة قبرص</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_12">
+            <field name="name">Embassy of Bosnia and Herzegovinia</field>
+            <field name="arabic_name">سفارة الدنمارك</field>
+        </record>
+
+        <record model="res.embassy" id="res_embassy_13">
+            <field name="name">Embassy of Brazil</field>
+            <field name="arabic_name">سفارة هولندا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_14">
+            <field name="name">Embassy of Brunei</field>
+            <field name="arabic_name">سفارة جمهورية مصر العربية</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_15">
+            <field name="name">Embassy of Canada</field>
+            <field name="arabic_name">سفارة إريتريا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_16">
+            <field name="name">Embassy of China</field>
+            <field name="arabic_name">سفارة إريتريا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_17">
+            <field name="name">Embassy of Czech Republic</field>
+            <field name="arabic_name">سفارة جمهورية ألمانيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_18">
+            <field name="name">Embassy of Egypt</field>
+            <field name="arabic_name">سفارة الهند</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_19">
+            <field name="name">Embassy of Eritrea</field>
+            <field name="arabic_name">سفارة اندونيسيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_20">
+            <field name="name">Embassy of Finland</field>
+            <field name="arabic_name">سفارة ايران</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_21">
+            <field name="name">Embassy of Germany</field>
+            <field name="arabic_name">سفارة ايطاليا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_22">
+            <field name="name">Embassy of Greece</field>
+            <field name="arabic_name">سفارة اليابان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_23">
+            <field name="name">Embassy of Guinea</field>
+            <field name="arabic_name">سفارة المملكة الأردنية الهاشمية</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_24">
+            <field name="name">Embassy of Hungary</field>
+            <field name="arabic_name">سفارة كازاخستان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_25">
+            <field name="name">Embassy of India</field>
+            <field name="arabic_name">سفارة كينيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_26">
+            <field name="name">Embassy of Indonesia</field>
+            <field name="arabic_name">سفارة الكويت</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_27">
+            <field name="name">Embassy of Iraq</field>
+            <field name="arabic_name">سفارة قيرغيزستان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_28">
+            <field name="name">Embassy of Ireland</field>
+            <field name="arabic_name">سفارة لبنان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_29">
+            <field name="name">Embassy of Italy</field>
+            <field name="arabic_name">سفارة ماليزيا</field>
+        </record>
+
+        <record model="res.embassy" id="res_embassy_30">
+            <field name="name">Embassy of Japan</field>
+            <field name="arabic_name">سفارة نيوزيلندا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_31">
+            <field name="name">Embassy of Jordan</field>
+            <field name="arabic_name">سفارة النرويجا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_32">
+            <field name="name">Embassy of Kazakhstan</field>
+            <field name="arabic_name">سفارة سلطنة عمان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_33">
+            <field name="name">Embassy of Kenya</field>
+            <field name="arabic_name">سفارة باكستان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_34">
+            <field name="name">Embassy of South Korea</field>
+            <field name="arabic_name">سفارة فلسطين</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_35">
+            <field name="name">Embassy of Kuwait</field>
+            <field name="arabic_name">سفارة بنما</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_36">
+            <field name="name">Embassy of Lebanon</field>
+            <field name="arabic_name">سفارة بيرو</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_37">
+            <field name="name">Embassy of Libya</field>
+            <field name="arabic_name">سفارة الفلبين</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_38">
+            <field name="name">Embassy of Malaysia</field>
+            <field name="arabic_name">سفارة قطر</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_39">
+            <field name="name">Embassy of Montenegro</field>
+            <field name="arabic_name">سفارة روسيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_40">
+            <field name="name">Embassy of Morocco</field>
+            <field name="arabic_name">سفارة المملكة العربية السعودية</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_41">
+            <field name="name">Embassy of Nepal</field>
+            <field name="arabic_name">سفارة سنغافورة</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_42">
+            <field name="name">Embassy of Netherlands</field>
+            <field name="arabic_name">سفارة الصومال</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_43">
+            <field name="name">Embassy of Nigeria</field>
+            <field name="arabic_name">سفارة اسبانيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_44">
+            <field name="name">Embassy of Norway</field>
+            <field name="arabic_name">سفارة سريلانكا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_45">
+            <field name="name">Embassy of Oman</field>
+            <field name="arabic_name">سفارة السودان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_46">
+            <field name="name">Embassy of Pakistan</field>
+            <field name="arabic_name">سفارة سويسرا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_47">
+            <field name="name">Embassy of Palestine</field>
+            <field name="arabic_name">سفارة السويد</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_48">
+            <field name="name">Embassy of Palestine</field>
+            <field name="arabic_name">سفارة السويد</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_49">
+            <field name="name">Embassy of Poland</field>
+            <field name="arabic_name">سفارة تايوان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_50">
+            <field name="name">Embassy of Qatar</field>
+            <field name="arabic_name">سفارة تنزانيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_51">
+            <field name="name">Embassy of Romania</field>
+            <field name="arabic_name">سفارة تايلاند</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_52">
+            <field name="name">Embassy of Russia</field>
+            <field name="arabic_name">سفارة تركيا</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_53">
+            <field name="name">Embassy of Saudi Arabia</field>
+            <field name="arabic_name">سفارة المملكة المتحدة</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_54">
+            <field name="name">Embassy of Senegal</field>
+            <field name="arabic_name">سفارة اوزبكستان</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_55">
+            <field name="name">Embassy of Somalia</field>
+            <field name="arabic_name">سفارة فيتنام</field>
+        </record>
+        <record model="res.embassy" id="res_embassy_56">
+            <field name="name">Embassy of South Africa</field>
+            <field name="arabic_name">سفارة اليمن</field>
+        </record>
+
+    </data>
+</odoo>

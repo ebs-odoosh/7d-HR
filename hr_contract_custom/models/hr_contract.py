@@ -612,10 +612,10 @@ class Contract(models.Model):
         if self.date_start:
             self.trial_date_end = self.date_start + datetime.timedelta(days=self.job_id.job_grade.probation_period)
 
-    # @api.onchange('trial_date_end')
-    # def on_change_trial_date(self):
-    #     if self.trial_date_end:
-    #         self.trial_date_end = self.trial_date_end + datetime.timedelta(days=1)
+    @api.onchange('trial_date_end')
+    def on_change_trial_date(self):
+        if self.trial_date_end:
+            self.trial_date_end = self.trial_date_end + datetime.timedelta(days=1)
 
     def action_offer_print(self):
         return self.env.ref('hr_contract_custom.contract_job_offer').report_action(self)

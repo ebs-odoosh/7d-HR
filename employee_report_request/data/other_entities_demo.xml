@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="res.other.entities" id="res_other_entities_1">
+            <field name="name">Du – Telecommunication Company</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_2">
+            <field name="name">Etisalat - Telecommunication Company</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_3">
+            <field name="name">Finance House</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_4">
+            <field name="name">Civil Aviation</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_5">
+            <field name="name">Etihad airway</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_6">
+            <field name="name">Emirates Airline</field>
+            <field name="arabic_name"></field>
+        </record>
+        <record model="res.other.entities" id="res_other_entities_7">
+            <field name="name">Thiqa</field>
+            <field name="arabic_name"></field>
+        </record>
+
+        <record model="res.other.entities" id="res_other_entities_9">
+            <field name="name">Special License Office</field>
+            <field name="arabic_name"></field>
+        </record>
+
+    </data>
+</odoo>

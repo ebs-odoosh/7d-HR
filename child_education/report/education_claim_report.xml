@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_child_education_request_document_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page" style="border:2 px solid black">
+                        <style>
+                            .table_1 {
+                            table-layout: fixed;
+                            }
+                            .table_1 td,.table_1 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_1 th{
+                            width: 250px;
+                            }
+                            .table_1 td p{
+                            width: 99%;
+                            }
+                        </style>
+                        <div style="padding-left: 4%;padding-top: 1%;font-size: 15px;">
+                            <!--                            <div>-->
+                            <!--                                <span>Creation Date:</span>-->
+                            <!--                                <span t-field="doc.create_date" t-field-options='{"format": "d/m/Y"}'/>-->
+                            <!--                            </div>-->
+                            <!--                            <div style="padding-top: 2%;font-size: 20px;">-->
+                            <!--                                <b>-->
+                            <!--                                    <span>Subject :Education Assistance Form</span>-->
+                            <!--                                </b>-->
+                            <!--                            </div>-->
+                            <div style="padding-top: 2%;">
+                                <div style="font-size: 28px; font-weight: bold; text-align: center; color: #FCFBFC; background-color: #c00000; border: 1px solid #875A7B;">
+                                    <span>Education Assistance Form</span>
+                                </div>
+                                <table class="table_1" width="100%">
+                                    <tr>
+                                        <th style="width:20%">Employee Name</th>
+                                        <td style="width:30%">
+                                            <span t-field="doc.employee_id.name"/>
+                                        </td>
+                                        <th style="width:20%">Employee ID</th>
+                                        <td style="width:30%">
+                                            <span t-field="doc.employee_id.system_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position</th>
+                                        <td>
+                                            <span t-field="doc.employee_job_title.name"/>
+                                        </td>
+                                        <th>Grade</th>
+                                        <td>
+                                            <span t-field="doc.employee_job_grade.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Claim Number</th>
+                                        <td>
+                                            <span t-field="doc.claim_number"/>
+                                        </td>
+                                        <th>Claim Date</th>
+                                        <td>
+                                            <span t-field="doc.claim_date"
+                                                  t-field-options='{"format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Academic Year</th>
+                                        <td>
+                                            <span t-field="doc.academic_year.name"/>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                <br/>
+
+                                <t t-set="page_num" t-value="1"/>
+                                <t t-set="child_num" t-value="1"/>
+                                <t t-set="fee_num" t-value="1"/>
+                                <t t-foreach="doc.request_lines" t-as="child_line">
+                                    <t t-if="child_num == 1 and fee_num >= 5">
+                                        <t t-set="page_num" t-value="page_num+1"/>
+                                        <p style="page-break-before: always"/>
+                                    </t>
+                                    <t t-if="child_num == 2 and fee_num >= 2">
+                                        <p style="page-break-before: always"/>
+                                    </t>
+                                    <div style="font-size: 20px; font-weight: bold; text-align: center; color: #FCFBFC; background-color: #c00000; border: 1px solid #875A7B;">
+                                        <span>Child Information</span>
+                                    </div>
+
+                                    <table class="table_1" width="100%">
+
+                                        <tr>
+                                            <th>Child Name</th>
+                                            <td>
+                                                <b>
+                                                    <span t-field="child_line.child_id.name"/>
+                                                </b>
+                                            </td>
+                                            <th>Eligible Amount</th>
+                                            <td>
+                                                <span t-field="child_line.eligibility_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Birthdate</th>
+                                            <td>
+                                                <span t-field="child_line.child_birthdate"
+                                                      t-field-options='{"format": "d/m/Y"}'/>
+                                            </td>
+
+                                            <th>Balance Amount</th>
+                                            <td>
+                                                <span t-field="child_line.balance_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Relation</th>
+                                            <td>
+                                                <t t-if="child_line.child_id.contact_relation_type_id">
+                                                    <span t-field="child_line.child_id.contact_relation_type_id.name"/>
+                                                </t>
+                                            </td>
+                                            <th>Total Claimed Amount</th>
+                                            <td>
+                                                <span t-field="child_line.total_claimed_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>School</th>
+                                            <td>
+                                                <span t-field="child_line.school.name"/>
+                                            </td>
+                                            <th>Total Approved Amount</th>
+                                            <td>
+                                                <span t-field="child_line.total_approved_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Reference No</th>
+                                            <td>
+                                                <span t-field="child_line.reference_no"/>
+                                            </td>
+                                            <th>Reference Date</th>
+                                            <td>
+                                                <span t-field="child_line.reference_date"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>School Grade</th>
+                                            <td>
+                                                <span t-field="child_line.school_grade.code"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <t t-if="child_line.terms_fees_line_ids">
+                                        <div style="font-size: 20px; font-weight: bold; text-align: center; color: #FCFBFC; background-color: #c00000; border: 1px solid #875A7B;">
+                                            <span>
+                                                <span t-field="child_line.child_id.name"/>
+                                            </span>
+                                            <span>-Terms &amp; Fees Information</span>
+                                        </div>
+                                    </t>
+                                    <t t-set="counter" t-value="1"/>
+
+                                    <div style="padding-top: 0%;">
+                                        <table class="table_1" width="100%">
+                                            <t t-foreach="child_line.terms_fees_line_ids" t-as="terms_fees_line">
+                                                    <tr>
+                                                        <th>Terms &amp; Fees</th>
+                                                        <td>
+                                                            <span t-esc="terms_fees_line.school_terms_fees.name"/>
+                                                        </td>
+                                                        <th>Claimed Amount</th>
+                                                        <td>
+                                                            <span t-field="terms_fees_line.claimed_amount"/>
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                    <th>Approve Amount</th>
+                                                    <td>
+                                                        <span t-field="terms_fees_line.approve_amount"/>
+                                                    </td>
+                                                    <th>Paid To</th>
+                                                    <td>
+                                                        <span t-field="terms_fees_line.paid_to"/>
+                                                    </td>
+                                                </tr>
+                                                <t t-set="fee_num" t-value="fee_num+1"/>
+                                            </t>
+                                        </table>
+
+                                    </div>
+                                    <t t-set="child_num" t-value="child_num+1"/>
+                                    <br/>
+                                </t>
+                                <br/>
+                                <div style="font-size: 20px; font-weight: bold; text-align: center; color: #FCFBFC; background-color: #c00000; border: 1px solid #875A7B;">
+                                    <span>Approvals History</span>
+                                </div>
+                                <table class="table_1" width="100%" style="font-size:12px">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10%">Sequence</th>
+                                            <th style="width:20%">Approver</th>
+                                            <th style="width:10%">Status</th>
+                                            <th style="width:20%">Category</th>
+                                            <th style="width:20%">Approval Date</th>
+                                            <th style="width:30%">Rejection Reason</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.approver_ids" t-as="approver_line">
+                                            <t t-if="approver_line.status=='approved'">
+                                                <tr style="color:green">
+                                                    <td>
+                                                        <span t-field="approver_line.sequence"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.user_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.status"/>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_category"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_date"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.reject_reason"/>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-if="approver_line.status=='pending'">
+                                                <tr style="color: #FA901F;">
+                                                    <td>
+                                                        <span t-field="approver_line.sequence"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.user_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.status"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.approval_category"/>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_date"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.reject_reason"/>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-if="approver_line.status=='refused'">
+                                                <tr style="color:red">
+                                                    <td>
+                                                        <span t-field="approver_line.sequence"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.user_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.status"/>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_category"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_date"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.reject_reason"/>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-if="approver_line.status=='new'">
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="approver_line.sequence"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.user_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="approver_line.status"/>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_category"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.approval_date"/>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <span t-field="approver_line.reject_reason"/>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <!--                <table class="table_1">-->
+                                <!--                    <t t-foreach="doc.request_lines" t-as="child_line">-->
+                                <!--                        <t t-set="counter" t-value="1"/>-->
+                                <!--                        <t t-foreach="child_line.terms_fees_line_ids" t-as="terms_fees_line">-->
+                                <!--                            <t t-if="counter == 1">-->
+                                <!--                                <tr>-->
+                                <!--                                    <th>Child Name</th>-->
+                                <!--                                    <td>-->
+                                <!--                                        <b>-->
+                                <!--                                            <span t-field="child_line.child_id.name"/>-->
+                                <!--                                            <t t-set="counter" t-value="2"/>-->
+                                <!--                                        </b>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                                <!--                            </t>-->
+                                <!--                            <tr>-->
+                                <!--                                <th>Terms &amp; Fees</th>-->
+                                <!--                                <td>-->
+                                <!--                                    <span t-esc="terms_fees_line.terms_and_fees_name()"/>-->
+                                <!--                                </td>-->
+                                <!--                            </tr>-->
+                                <!--                            <tr>-->
+                                <!--                                <th>Claimed Amount</th>-->
+                                <!--                                <td>-->
+                                <!--                                    <span t-field="terms_fees_line.claimed_amount"/>-->
+                                <!--                                </td>-->
+                                <!--                            </tr>-->
+                                <!--                            <tr>-->
+                                <!--                                <th>Approve Amount</th>-->
+                                <!--                                <td>-->
+                                <!--                                    <span t-field="terms_fees_line.approve_amount"/>-->
+
+                                <!--                                </td>-->
+                                <!--                            </tr>-->
+                                <!--                        </t>-->
+                                <!--                    </t>-->
+                                <!--                </table>-->
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

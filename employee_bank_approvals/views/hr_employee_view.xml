@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="view_employee_form_custom_bank_info" model="ir.ui.view">-->
+    <!--        <field name="name">hr.employee.form.custom.bank_info</field>-->
+    <!--        <field name="model">hr.employee</field>-->
+    <!--        <field name="inherit_id" ref="employee_report_request.view_employee_form_custom_iban"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//group[@name='bank_info']" position="replace">-->
+    <!--                <group string="Current Bank Information" name="bank_info">-->
+    <!--                    <field name="iban" string="Current IBAN No."/>-->
+<!--                        <field name="current_account_number"/>-->
+<!--                        <field name="current_bank_name" options="{'no_open': True}"/>-->
+    <!--                </group>-->
+
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+    <record id="view_employee_bank_history_form" model="ir.ui.view">
+        <field name="name">hr.employee.bank.history.form.</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_document_custom.view_employee_form_custom"/>
+        <field name="arch" type="xml">
+            <page name="document_page" position="after">
+                <page name="employee_bank_history" string="Employee Bank History" attrs="{'invisible': [('invisible_user_role','=',True)]}">
+                    <field name="bank_history_ids">
+                        <tree editable="0" create="0" delete="0">
+                            <field name="bank_change_approval" invisible="1"/>
+                            <field name="employee_bank_change"/>
+                            <field name="employee_number"/>
+                            <field name="department_id_e_bank" optional="hide"/>
+                            <field name="date_of_join_e_bank" optional="hide"/>
+                            <field name="current_bank_name"/>
+                            <field name="current_iban"/>
+                            <field name="current_account_number"/>
+                            <!--                            <field name="account_number"/>-->
+                            <!--                            <field name="iban"/>-->
+                            <!--                            <field name="effective_month_year"/>-->
+<!--                            <field name="effective_date"/>-->
+                            <field name="effective_month_year"/>
+                            <!--                            <field name="select_bank"/>-->
+                            <!--                            <field name="attachment"/>-->
+                        </tree>
+                    </field>
+                </page>
+            </page>
+
+        </field>
+    </record>
+</odoo>
+

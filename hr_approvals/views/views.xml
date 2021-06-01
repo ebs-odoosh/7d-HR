@@ -1,175 +1,175 @@
 <odoo>
     <data>
-<!--        <record id="approval_category_view_kanban_inherit" model="ir.ui.view">-->
-<!--            <field name="name">approval.category.view.kanban</field>-->
-<!--            <field name="model">approval.category</field>-->
-<!--            <field name="inherit_id" ref="approvals.approval_category_view_kanban"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//kanban" position="inside">-->
-<!--                    <field name="can_see" invisible="1"/>-->
-<!--                    <field name="can_see_false" invisible="1"/>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//kanban[1]/templates[1]//field[@name='name']" position="after">-->
-<!--                    <field name="can_see" invisible="1"/>-->
-<!--                    <field name="can_see_false" invisible="1"/>-->
-<!--                </xpath>-->
-<!--                &lt;!&ndash; add by Bhavesh Jadav 14/10/2020&ndash;&gt;-->
-<!--                <xpath expr="//button[2]" position="replace">-->
-<!--                    <button type="object" class="btn btn-sm btn-secondary float-right"-->
-<!--                            name="call_to_review_action"-->
-<!--                            groups="approvals.group_approval_user">To Review:-->
-<!--                        <field name="request_to_validate_count"/>-->
-<!--                    </button>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+        <record id="approval_category_view_kanban_inherit" model="ir.ui.view">
+            <field name="name">approval.category.view.kanban</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="approvals.approval_category_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="inside">
+                    <field name="can_see" invisible="1"/>
+                    <field name="can_see_false" invisible="1"/>
+                </xpath>
+                <xpath expr="//kanban[1]/templates[1]//field[@name='name']" position="after">
+                    <field name="can_see" invisible="1"/>
+                    <field name="can_see_false" invisible="1"/>
+                </xpath>
+                <!-- add by Bhavesh Jadav 14/10/2020-->
+                <xpath expr="//button[2]" position="replace">
+                    <button type="object" class="btn btn-sm btn-secondary float-right"
+                            name="call_to_review_action"
+                            groups="approvals.group_approval_user">To Review:
+                        <field name="request_to_validate_count"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
 
         <!-- explicit list view definition -->
-<!--        <record id="approval_category_view_form_inherit" model="ir.ui.view">-->
-<!--            <field name="name">approval.category.view.form</field>-->
-<!--            <field name="model">approval.category</field>-->
-<!--            <field name="inherit_id" ref="approvals.approval_category_view_form"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <field name="description" position="after">-->
-<!--                    <field name="managers_only"/>-->
-<!--                    <field name="can_see" invisible="1"/>-->
-<!--                    <field name="can_see_false" invisible="1"/>-->
-<!--&lt;!&ndash;                    <field name="contract_subgroups" widget="many2many_tags"/>&ndash;&gt;-->
-<!--                </field>-->
-<!--                &lt;!&ndash;                <field name="is_manager_approver" position="before">&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <field name="is_head_department_approver"/>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </field>&ndash;&gt;-->
-<!--                <field name="approval_minimum" position="after">-->
-<!--                    <field name="approval_sequence">-->
-<!--                        <tree editable="bottom">-->
-<!--                            <field name="sequence" widget="handle"/>-->
-<!--                            <field name="user_id"/>-->
-<!--                            <field name="approver_category"/>-->
-<!--                            &lt;!&ndash;                            <field name="is_head_department_approver"/>&ndash;&gt;-->
-<!--                            <field name="is_manager_approver"/>-->
-<!--                        </tree>-->
-<!--                    </field>-->
-<!--                </field>-->
+        <record id="approval_category_view_form_inherit" model="ir.ui.view">
+            <field name="name">approval.category.view.form</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="approvals.approval_category_view_form"/>
+            <field name="arch" type="xml">
+                <field name="description" position="after">
+                    <field name="managers_only"/>
+                    <field name="can_see" invisible="1"/>
+                    <field name="can_see_false" invisible="1"/>
+                    <field name="contract_subgroups" widget="many2many_tags"/>
+                </field>
+                                <field name="is_manager_approver" position="before">
+                                    <field name="is_head_department_approver"/>
+                                </field>
+                <field name="approval_minimum" position="after">
+                    <field name="approval_sequence">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="user_id"/>
+                            <field name="approver_category"/>
+                            <!--                            <field name="is_head_department_approver"/>-->
+                            <field name="is_manager_approver"/>
+                        </tree>
+                    </field>
+                </field>
 
-<!--                <xpath expr="//page[@name='options']" position="after">-->
-<!--                    <page string="Manpower" name="manpower_fields">-->
-<!--                        <label for="is_requisition_request"/>-->
-<!--                        <field name="is_requisition_request" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>-->
-<!--                        <group>-->
-<!--                            <field name="has_vacancy_type" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_title" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_group" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_department" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_section" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_subsection" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_desc" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_replacement_employee_id" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_contract_type" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_requisition_type" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_cost_center" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        </group>-->
-<!--                    </page>-->
-<!--                    <page string="Resignation" name="resignation_fields">-->
-<!--                        <label for="is_termination_request"/>-->
-<!--                        <field name="is_termination_request" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>-->
-<!--                        <group>-->
-<!--                            <field name="has_resignation_date" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_grade" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_related_manager" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_related_oc" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_eligible_rehire" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_eligible_rehire_comment" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_related_time_hired" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_related_warnings" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_notice_period" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_position" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_personal_phone_no" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_personal_email" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_resignation_reason" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_replacement_position" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        </group>-->
-<!--                    </page>-->
-<!--                    <page string="Resignation Extension" name="resignation_extension_fields">-->
-<!--                        <label for="is_termination_extend_request"/>-->
-<!--                        <field name="is_termination_extend_request" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>-->
-<!--                        <group>-->
-<!--                            <field name="has_resignation_extension_reason" widget="radio"-->
-<!--                                   options="{'horizontal': true}"/>-->
-<!--                        </group>-->
-<!--                    </page>-->
-<!--                    <page string="Transfer" name="transfer_fields">-->
-<!--                        <label for="is_internal_transfer_request"/>-->
-<!--                        <field name="is_internal_transfer_request" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>-->
-<!--                        <group>-->
-<!--                            <field name="has_employee_transferred" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_company_employee_id" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_transfer_type" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_transfer_reason" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_employee_type_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_employee_type_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_cost_center_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_cost_center_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_sap_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_sap_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_3dx_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_3dx_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_shared_folder_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_shared_folder_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_shared_folder_status_source" widget="radio"-->
-<!--                                   options="{'horizontal': true}"/>-->
-<!--                            <field name="has_shared_folder_status_destination" widget="radio"-->
-<!--                                   options="{'horizontal': true}"/>-->
-<!--                            <field name="has_other_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_other_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_title_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_title_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_line_manager_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_line_manager_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_group_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_group_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_department_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_department_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_section_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_section_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_subsection_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_subsection_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_grade_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_job_grade_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_working_shift_source" widget="radio" options="{'horizontal': true}"/>-->
-<!--                            <field name="has_working_shift_destination" widget="radio" options="{'horizontal': true}"/>-->
-<!--                        </group>-->
-<!--                    </page>-->
-<!--                </xpath>-->
+                <xpath expr="//page[@name='options']" position="after">
+                    <page string="Manpower" name="manpower_fields">
+                        <label for="is_requisition_request"/>
+                        <field name="is_requisition_request" widget="radio" options="{'horizontal': true}"/>
+                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>
+                        <group>
+                            <field name="has_vacancy_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_title" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_group" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_department" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_section" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_subsection" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_desc" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_replacement_employee_id" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_contract_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_requisition_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_cost_center" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                    <page string="Resignation" name="resignation_fields">
+                        <label for="is_termination_request"/>
+                        <field name="is_termination_request" widget="radio" options="{'horizontal': true}"/>
+                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>
+                        <group>
+                            <field name="has_resignation_date" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_grade" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_related_manager" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_related_oc" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_eligible_rehire" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_eligible_rehire_comment" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_related_time_hired" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_related_warnings" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_notice_period" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_position" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_personal_phone_no" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_personal_email" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_resignation_reason" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_replacement_position" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                    <page string="Resignation Extension" name="resignation_extension_fields">
+                        <label for="is_termination_extend_request"/>
+                        <field name="is_termination_extend_request" widget="radio" options="{'horizontal': true}"/>
+                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>
+                        <group>
+                            <field name="has_resignation_extension_reason" widget="radio"
+                                   options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                    <page string="Transfer" name="transfer_fields">
+                        <label for="is_internal_transfer_request"/>
+                        <field name="is_internal_transfer_request" widget="radio" options="{'horizontal': true}"/>
+                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>
+                        <group>
+                            <field name="has_employee_transferred" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_company_employee_id" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_transfer_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_transfer_reason" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_employee_type_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_employee_type_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_cost_center_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_cost_center_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_sap_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_sap_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_3dx_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_3dx_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_shared_folder_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_shared_folder_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_shared_folder_status_source" widget="radio"
+                                   options="{'horizontal': true}"/>
+                            <field name="has_shared_folder_status_destination" widget="radio"
+                                   options="{'horizontal': true}"/>
+                            <field name="has_other_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_other_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_title_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_title_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_line_manager_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_line_manager_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_group_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_group_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_department_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_department_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_section_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_section_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_subsection_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_subsection_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_grade_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_job_grade_destination" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_working_shift_source" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_working_shift_destination" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                </xpath>
 
-<!--                <field name="requirer_document" position="before">-->
-<!--                    <h3 style="text-decoration: underline;" colspan="2">Other Fields</h3>-->
-<!--                    <field name="has_related_employee_id" widget="radio" options="{'horizontal': true}"/>-->
-<!--                    <field name="has_related_contract" widget="radio" options="{'horizontal': true}"/>-->
-<!--                </field>-->
+                <field name="requirer_document" position="before">
+                    <h3 style="text-decoration: underline;" colspan="2">Other Fields</h3>
+                    <field name="has_related_employee_id" widget="radio" options="{'horizontal': true}"/>
+                    <field name="has_related_contract" widget="radio" options="{'horizontal': true}"/>
+                </field>
 
-<!--            </field>-->
-<!--        </record>-->
-<!--        <record id="approval_rejection_form" model="ir.ui.view">-->
-<!--            <field name="name">approval.rejection.form</field>-->
-<!--            <field name="model">approval.reject.reason</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <form>-->
-<!--                    <sheet>-->
-<!--                        <group>-->
-<!--                            <field name="name"/>-->
-<!--                        </group>-->
-<!--                    </sheet>-->
-<!--                    <footer>-->
-<!--                        <button name="on_done_action" string="Done" type="object" class="oe_highlight"/>-->
-<!--                        <button string="Cancel" class="btn-secondary" special="cancel"/>-->
-<!--                    </footer>-->
-<!--                </form>-->
-<!--            </field>-->
-<!--        </record>-->
+            </field>
+        </record>
+        <record id="approval_rejection_form" model="ir.ui.view">
+            <field name="name">approval.rejection.form</field>
+            <field name="model">approval.reject.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="on_done_action" string="Done" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
         <record id="approval_eligible_form" model="ir.ui.view">
             <field name="name">approval.eligible.form</field>
             <field name="model">approval.eligible</field>

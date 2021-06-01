@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- custom layout for the travel ticket request-->
+        <template id="external_layout_custom_for_travel">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="employee_travel_management.external_layout_standard_custom_for_travel">
+                <t t-raw="0"/>
+            </t>
+
+        </template>
+
+        <template id="external_layout_standard_custom_for_travel">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div style="text-align: center;">
+                    <img src='employee_travel_management/static/src/img/strata_new_logo.png' width="360" height="100"/>
+                    <!--                    <img t-if="doc.company_id.header_logo"-->
+                    <!--                         t-att-src="image_data_uri(doc.company_id.header_logo)"-->
+                    <!--                         alt="Logo" width="1200" height="230"/>-->
+                </div>
+<!--                <hr style="border: 1px solid #737373;"></hr>-->
+            </div>
+
+            <!-- page part-->
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+            <!-- footer part-->
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <!--                <hr style="border: 1px solid #737373;"></hr>-->
+                <style>
+                    .table_footer {
+                    table-layout: fixed;
+                    border-left: 1px solid black;
+                    border-right: 1px solid black;
+                    border-bottom: 1px solid black;
+                    border-top: 1px solid black;
+                    width:100%;
+                    }
+                    .table_footer th {
+                    text-align: left;
+                    padding: 8px;
+                    width:2%;
+                    }
+                    .table_footer td {
+                    text-align: left;
+                    padding: 5px;
+                    width:98%;
+                    }
+                    .table_footer_2 {
+                    border: 1px solid #454141;
+                    width: 100%;
+                    }
+                    .table_footer_2 td {
+                    text-align: center;
+                    padding: 8px;
+                    font-weight: bold;
+                    }
+
+                </style>
+                <div style="font-family: Calibri;font-size: 12px">
+                    <div style="padding-left: 3%;">
+                        <div>
+                            <table class="table_footer">
+                                <tr>
+                                    <th></th>
+                                    <td style="text-align: center;">
+                                        <b>
+                                            <u>Terms &amp; Conditions</u>
+                                        </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <td>
+                                        Travel agent shall submit bookings and tickets in accordance with STRATA policy
+                                        using
+                                        the corporate rates and the selected Airlines.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <td>
+                                        This TR shall be attached to the vendor’s invoice for easy tracking and prompt
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>3</th>
+                                    <td>
+                                        If the ticket cost is > 20,000 AED, clearance is needed from the senior officer.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding-top: 2%;">
+                            <table class="table_footer_2">
+                                <tr>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>Strata Manufacturing PJSC, P.O Box 86519, 101, Al Ain – United
+                                        Arab Emirates
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
+    </data>
+</odoo>

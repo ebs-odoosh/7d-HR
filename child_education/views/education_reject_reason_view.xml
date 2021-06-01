@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+
+        <record id="education_approval_rejection_form" model="ir.ui.view">
+            <field name="name">education.approval.rejection.form</field>
+            <field name="model">education.approval.reject.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_done" string="Done" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="open_education_reject_reason_action" model="ir.actions.act_window">
+            <field name="name">Education Rejection Reason</field>
+            <field name="res_model">education.approval.reject.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="education_approval_rejection_form"/>
+            <field name="target">new</field>
+            <field name="context">{'default_request_id' : active_id}</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="product.product" id="expense_product_1">
+            <field name="name">Car Rental</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">CONB</field>
+        </record>
+        <record model="product.product" id="expense_product_2">
+            <field name="name">Conference rooms</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">CONF</field>
+        </record>
+        <record model="product.product" id="expense_product_3">
+            <field name="name">Conference Fees</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">CONP</field>
+        </record>
+        <record model="product.product" id="expense_product_4">
+            <field name="name">Training Fees</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">FEES</field>
+        </record>
+        <record model="product.product" id="expense_product_5">
+            <field name="name">Travel Fuel</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">FUEL</field>
+        </record>
+        <record model="product.product" id="expense_product_6">
+            <field name="name">Gifts &amp; Promotions</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">GIFT</field>
+        </record>
+        <record model="product.product" id="expense_product_7">
+            <field name="name">Local Moving Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">LMEX</field>
+        </record>
+        <record model="product.product" id="expense_product_8">
+            <field name="name">GPS Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">GPS</field>
+        </record>
+        <record model="product.product" id="expense_product_9">
+            <field name="name">Medical Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">MEDI</field>
+        </record>
+        <record model="product.product" id="expense_product_10">
+            <field name="name">Miscellaneous Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">MISC</field>
+        </record>
+        <record model="product.product" id="expense_product_11">
+            <field name="name">Miscellaneous Expenses.</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">MISO</field>
+        </record>
+        <record model="product.product" id="expense_product_12">
+            <field name="name">Parking expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">PARK</field>
+        </record>
+        <record model="product.product" id="expense_product_13">
+            <field name="name">Parking Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">PARO</field>
+        </record>
+        <record model="product.product" id="expense_product_14">
+            <field name="name">Per Diem</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">PERB</field>
+        </record>
+        <record model="product.product" id="expense_product_15">
+            <field name="name">Reception And Events</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">RECP</field>
+        </record>
+        <record model="product.product" id="expense_product_16">
+            <field name="name">Software Maintenance and Repair</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">SM&amp;R</field>
+        </record>
+        <record model="product.product" id="expense_product_17">
+            <field name="name">Taxi</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">TAXI</field>
+        </record>
+        <record model="product.product" id="expense_product_18">
+            <field name="name">Toll Expenses</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">TOLL</field>
+        </record>
+        <record model="product.product" id="expense_product_19">
+            <field name="name">Visa-STRATA</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">VISA</field>
+        </record>
+        <record model="product.product" id="expense_product_20">
+            <field name="name">Visa-STRATA</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">VISA</field>
+        </record>
+        <record model="product.product" id="expense_product_21">
+            <field name="name">Visa-Business / Training Trip</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">VISB</field>
+        </record>
+        <record model="product.product" id="expense_product_22">
+            <field name="name">Visa-Business / Training Trip</field>
+            <field name="purchase_ok">False</field>
+            <field name="sale_ok">False</field>
+            <field name="can_be_expensed">True</field>
+            <field name="type">service</field>
+            <field name="default_code">VIST</field>
+        </record>
+    </data>
+</odoo>

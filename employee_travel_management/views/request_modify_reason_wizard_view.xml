@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="request_modify_reason_form_view" model="ir.ui.view">
+            <field name="name">request.modify.reason.form</field>
+            <field name="model">request.modify.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_done" string="Done" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

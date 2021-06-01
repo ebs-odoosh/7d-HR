@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_immigration_letter_arabic_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page" style="direction: rtl; text-align: right;font-size: 20px">
+                        <link href="https://fonts.googleapis.com/css2?family=Scheherazade&amp;display=swap"
+                              rel="stylesheet"/>
+                        <div style="padding-right: 6%;font-family: 'Scheherazade', serif;">
+                            <div style="padding-top: 5%;">
+                                <span>المرجع:</span>
+
+                                <span t-esc="doc.reference_generator()"/>
+
+                            </div>
+                            <div>
+                                <span>التاريـخ:</span>
+
+                                <span t-esc="doc.date_format(True)"/>
+
+                            </div>
+                            <div style="margin-top: 40px;">
+                                <span>
+                                    السادة / الهيئة الاتحـــادية للهــوية والجنسية
+                                </span>
+                                <span style="margin-right:40%;">المحترميـن
+                                </span>
+                            </div>
+                            <div>
+                                <span>تحيـة طيبـة وبعـد،،،
+                                </span>
+                            </div>
+                            <div style=" margin-top: 60px;text-align: center;">
+                                <span style="font-size: 30px">
+                                    <b>
+                                        <u>شــــــــــهـادة عـمـــــــــــل</u>
+                                    </b>
+                                </span>
+                            </div>
+                            <!--issue-->
+                            <div style=" margin-top: 35px;">
+                                <p>
+                                    <span>تشـــهد شركة ســتراتا للتصنيع (شركة مساهمة خاصة - العين) بأن (السيد/السيدة)</span>
+                                    <span>
+                                        <b>
+                                            <span t-field="doc.employee_id.arabic_name"/>,
+                                            <span t-field="doc.employee_id.country_id.arabic_name"/>
+                                        </b>
+                                    </span>
+                                    <span>الجنسية وحامل جواز رقم</span>
+                                    <span>
+                                        <b>
+                                            <span t-esc="doc.emp_passport_num()"/>
+                                        </b>
+                                    </span>
+                                    <span>, يعمل لديهـــا منذ تاريـــخ</span>
+                                    <span>
+                                        <b>
+                                            <span t-field="doc.employee_id.contract_id.date_start"/>
+                                        </b>
+                                    </span>
+                                    <span>ويشغل حاليا وظيفـة</span>
+                                    <span>
+                                        <b>
+                                            <span t-field="doc.employee_id.contract_id.job_title.arabic_name"/>
+                                        </b>
+                                    </span>
+                                    <span>براتب شهري وقــدره</span>
+                                    <span>
+                                        <b>
+                                            <span t-field="doc.employee_id.contract_id.wage"/>
+                                        </b>
+                                    </span>
+                                    <span>ولا يزال على رأس عمله حتى تاريخه.</span> <!--درهم-->
+                                </p>
+                                <!--                                <p>درهم ولا يزال على رأس عمله حتى تاريخه.-->
+                                <!--                                    <span t-field="doc.employee_id.contract_id.wage"/>-->
+                                <!--                                    براتب شهري وقــدره-->
+                                <!--                                    <span t-field="doc.employee_id.contract_id.job_title.arabic_name"/>-->
+                                <!--                                    , ويشغل حاليا وظيفـة-->
+                                <!--                                    <span t-field="doc.employee_id.contract_id.date_start"/>-->
+                                <!--                                    يعمل لديهـــا منذ تاريـــخ<span t-esc="doc.emp_passport_num()"/>الجنسية وحامل جواز-->
+                                <!--                                    رقم-->
+                                <!--                                    <span t-field="doc.employee_id.country_id.arabic_name"/>-->
+                                <!--                                    ,-->
+                                <!--                                    <span t-field="doc.employee_id.arabic_name"/>-->
+                                <!--                                    تشـــهد شركة ســتراتا للتصنيع (شركة مساهمة خاصة - العين) بأن السيد-->
+                                <!--                                </p>-->
+                            </div>
+                            <!--issue-->
+
+                            <div style=" margin-top: 10px;">
+                                <p>
+                                    أصدرت هذه الشهادة بناءً على طلب الموظف دون أن تتحمل الشركة أي مسؤولية تجاه الغير.
+                                </p>
+                            </div>
+                            <div style=" margin-top: 10px;margin-right: 40%;"> <!--margin-right: 30%;-->
+                                <p>
+                                    وتفضلوا بقبول فائق الاحترام،،،
+                                </p>
+                            </div>
+                            <div style="margin-top: 70px;margin-right: 50%;">
+                                <t t-set="signature" t-value="doc.get_responsible_info(signature=True)"/>
+                                <t t-if="signature">
+                                    <img t-att-src="image_data_uri(signature)" width="340"
+                                         height="130"/>
+                                </t>
+                            </div>
+                            <div style=" margin-top: 7px;margin-right: 70%;">
+                                <span>
+                                    <b>
+                                        <span t-esc="doc.get_responsible_info(name=True,arabic=True)"/>
+
+                                    </b>
+                                </span>
+                            </div>
+                            <div style="margin-right: 70%;">
+                                <b>
+                                    <span t-esc="doc.get_responsible_info(position=True,arabic=True)"/>
+                                </b>
+                            </div>
+                            <!--                            <div style="margin-top: 100px;margin-right: 70%;">-->
+                            <!--                                <span>-->
+                            <!--                                    <b>نعيمـــة عبد الله البشـــــر</b>-->
+                            <!--                                </span>-->
+                            <!--                            </div>-->
+                            <!--                            <div style="margin-right: 70%;">-->
+                            <!--                                <span>مدير أول الموارد البشرية-->
+                            <!--                                </span>-->
+                            <!--                            </div>-->
+                            <div style="margin-top: 70px;">
+                                <p style="color:red;">
+                                    ملاحظة: هذه الشهادة صالحة لمدة شهر من تاريخ إصدارها وأي كشط أو شطب أو تعديل
+                                    على
+                                    هذه
+                                    الرسالة يلغي صلاحيتها
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

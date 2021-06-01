@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <!-- Tree view for the HR expense settings -->
+
+<!--        <record id="hr_expense_settings_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">hr.expense.settings.tree</field>-->
+<!--            <field name="model">hr.expense.settings</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="expense_type" widget="many2many_tags" optional="show"/>-->
+<!--                    <field name="is_travel_expense_approval" optional="hide"/>-->
+<!--                    <field name="approval_minimum" optional="hide"/>-->
+<!--                    <field name="approver_ids" optional="hide"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!-- form view for the hr expense settings-->
+        <record model="ir.ui.view" id="hr_expense_settings_form_view">
+            <field name="name">hr.expense.settings.form</field>
+            <field name="model">hr.expense.settings</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" required="1"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_manager_approver"/>
+                                <field name="is_higher_manager_approver"/>
+                                <field name="approval_minimum"/>
+                                <field name="approval_sequence"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}">
+                                    <tree editable="bottom">
+                                        <field name="sequence" invisible="1" widget="handle"/>
+                                        <field name="sequence"/>
+                                        <field name="user_id"
+                                               attrs="{'readonly': ['|',('is_manager_approver','=',True),('is_higher_manager_approver','=',True)]}"/>
+                                        <field name="approval_category"/>
+                                        <field name="is_manager_approver" force_save="1" readonly="1"/>
+                                        <field name="is_higher_manager_approver" force_save="1" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="expense_type" required="1" widget="many2many_tags"/>
+                                <field name="is_travel_expense_approval"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu action for the Hr Expense settings -->
+        <record id="action_hr_expense_settings_act_window" model="ir.actions.act_window">
+            <field name="name">Expense Approval Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.expense.settings</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Child Menu for the Hr Expense settings-->
+        <menuitem id="child_hr_expense_settings_settings"
+                  name="Expense Approval Settings"
+                  parent="hr_expense.menu_hr_expense_configuration"
+                  action="action_hr_expense_settings_act_window"
+                  sequence="12"/>
+
+<!--    groups="security_rules.group_company_hc"-->
+</odoo>

@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Added By Bhavesh Jadav 18/11/2020 -->
+
+
+    <!-- Form view for the School Terms and Fees-->
+    <record model="ir.ui.view" id="school_terms_and_fees_form_view">
+        <field name="name">School.Terms.And.Fees.Form.view</field>
+        <field name="model">school.terms.fees</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Menu action for the  school Terms and Fees-->
+    <record id="child_menu_action_school_terms_and_fees_view_action" model="ir.actions.act_window">
+        <field name="name">Schools Terms And Fees</field>
+        <field name="res_model">school.terms.fees</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new School Terms and Fees record found
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Menu  for school Terms and Fees-->
+    <menuitem id="menu_school_terms_and_fees"
+              name="School Terms &amp; Fees"
+
+              parent="main_menu_school"
+              action="child_menu_action_school_terms_and_fees_view_action"
+              sequence="3"/>
+<!--    groups="security_rules.group_strata_hc"-->
+</odoo>

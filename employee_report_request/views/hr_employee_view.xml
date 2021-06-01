@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- inherited form view of hr.employee  for the IBAN No-->
+    <record id="view_employee_form_custom_iban" model="ir.ui.view">
+        <field name="name">hr.employee.form.custom</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']//group" position="inside">
+                <group string="Bank Information" name="bank_info">
+                    <field name="iban" string="IBAN No." force_save="1"/>
+                    <field name="current_account_number" force_save="1"/>
+                    <field name="current_bank_name" force_save="1" options="{'no_open': True}"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
+

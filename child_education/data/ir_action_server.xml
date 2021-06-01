@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="action_generate_education_claim_report" model="ir.actions.server">
+            <field name="name">Education Claim Details Report </field>
+            <field name="model_id" ref="model_education_request"/>
+            <field name="binding_model_id" ref="model_education_request"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.generate_education_claim_report()</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="mail_activity_data_education_request" model="mail.activity.type">
+            <field name="name">Education Request Approvals</field>
+            <field name="icon">fa-check-circle</field>
+            <field name="sequence">4</field>
+            <field name="res_model_id" ref="child_education.model_education_request"/>
+        </record>
+    </data>
+</odoo>

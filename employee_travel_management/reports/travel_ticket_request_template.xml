@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_travel_ticket_request_document_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="employee_travel_management.external_layout_custom_for_travel">
+                    <div class="page">
+                        <style>
+                            .table_1 {
+                            table-layout: fixed;
+                            width: 100%;
+                            }
+                            .table_1 td,.table_1 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_1 th{
+                            width: 250px;
+                            }
+                            .table_1 td p{
+                            width: 99%;
+                            }
+                            .table_accommodation {
+                            table-layout: fixed;
+                            width: 50%;
+                            }
+                            .table_accommodation td, .table_accommodation th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_travel {
+                            table-layout: fixed;
+                            width: 100%;
+                            }
+                            .table_travel td,.table_travel th {
+                            border: 1px solid #454141;
+                            text-align: center;
+                            padding: 4px;
+                            }
+                        </style>
+                        <div style="font-family: Calibri;font-size: 12px">
+                            <div style="text-align: center;font-size: 20px">
+                                <p>
+                                    <b>Ticket Request</b>
+                                </p>
+                            </div>
+                            <div style="padding-top: 2px;">
+                                <span>Travel Agency :</span>
+                                <span t-field="doc.travel_request_quotation_line.travel_agency_id.name"/>
+                                <span style=" text-align: right;color:red;">(Provide travel insurance to employee as per
+                                    policy)
+                                </span>
+                            </div>
+                            <div>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Request Date</th>
+                                        <td>
+                                            <span t-field="doc.request_submit_date"
+                                                  t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Number</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.strata_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.contract_id.job_grade.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Travel Type</th>
+                                        <td>
+                                            <span t-field="doc.travel_type"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Emp.Cost Center</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.cost_center">
+                                                    <span t-field="doc.employee_id.contract_id.cost_center.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Business Unit</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.department">
+                                                    <span t-field="doc.employee_id.contract_id.department.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Business Section</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.section">
+                                                    <span t-field="doc.employee_id.contract_id.section.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Travel Purpose</th>
+                                        <td>
+                                            <p>
+                                                <span t-field="doc.travel_purpose"/>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <table class="table_accommodation">
+                                    <tr>
+                                        <th>Trip Number :</th>
+                                        <td>
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Accommodation by :</th>
+                                        <td>
+                                            <span t-field="doc.accommodation_type"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 10px;">
+                                <table class="table_travel">
+                                    <tr>
+                                        <th>From City</th>
+                                        <th>To City</th>
+                                        <th>Travel Date</th>
+                                    </tr>
+                                    <tr>
+                                        <!-- For first line-->
+                                        <td>
+                                            <span t-field="doc.from_country_id.code"/>
+                                            -
+                                            <span t-field="doc.from_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.to_country_id.code"/>
+                                            -
+                                            <span t-field="doc.to_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.travel_start_date"
+                                                  t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- For return line-->
+                                        <td>
+                                            <span t-field="doc.to_country_id.code"/>
+                                            -
+                                            <span t-field="doc.to_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.from_country_id.code"/>
+                                            -
+                                            <span t-field="doc.from_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.travel_end_date" t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <p>Comments</p>
+                                <p>
+                                    <span t-field="doc.note"/>
+                                </p>
+                            </div>
+                            <div>
+                                <span>Trip Cost Center / Project</span>
+                                <table class="table_travel">
+                                    <tr>
+                                        <th>Cost Center Name</th>
+                                        <th>Cost Center</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                    <t t-foreach="doc.travel_cost_center_lines" t-as="cost_center_line">
+                                        <tr>
+                                            <td>
+                                                <span t-field="cost_center_line.cost_center_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="cost_center_line.cost_center_id.code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="cost_center_line.share_percentage"/>
+                                                <span>%</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <span>Approvers</span>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Status</th>
+                                        <th>Signature</th>
+                                    </tr>
+                                    <t t-foreach="doc.approver_ids" t-as="approver_line">
+                                        <tr>
+                                            <td>
+                                                <t t-if="approver_line.user_id.employee_id">
+                                                    <span t-field="approver_line.user_id.employee_id.name"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="approver_line.user_id.employee_id">
+                                                    <t t-if="approver_line.user_id.employee_id.contract_id">
+                                                        <t t-if="approver_line.user_id.employee_id.contract_id.job_title">
+                                                            <span t-field="approver_line.user_id.employee_id.contract_id.job_title.name"/>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-field="approver_line.status"/>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_travel_ticket_request_document_template_with_cost">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="employee_travel_management.external_layout_custom_for_travel">
+                    <div class="page">
+                        <style>
+                            .table_1 {
+                            table-layout: fixed;
+                            width: 100%;
+                            }
+                            .table_1 td,.table_1 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_1 th{
+                            width: 250px;
+                            }
+                            .table_1 td p{
+                            width: 99%;
+                            }
+                            .table_accommodation {
+                            table-layout: fixed;
+                            width: 50%;
+                            }
+                            .table_accommodation td, .table_accommodation th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_travel {
+                            table-layout: fixed;
+                            width: 100%;
+                            }
+                            .table_travel td,.table_travel th {
+                            border: 1px solid #454141;
+                            text-align: center;
+                            padding: 4px;
+                            }
+                        </style>
+                        <div style="font-family: Calibri;font-size: 12px">
+                            <div style="text-align: center;font-size: 20px">
+                                <p>
+                                    <b>Ticket Request</b>
+                                </p>
+                            </div>
+                            <div style="padding-top: 2px;">
+                                <span>Travel Agency :</span>
+                                <span t-field="doc.travel_request_quotation_line.travel_agency_id.name"/>
+                                <span style=" text-align: right;color:red;">(Provide travel insurance to employee as per
+                                    policy)
+                                </span>
+                            </div>
+                            <div>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Request Date</th>
+                                        <td>
+                                            <span t-field="doc.request_submit_date"
+                                                  t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Number</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.strata_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.contract_id.job_grade.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Travel Type</th>
+                                        <td>
+                                            <span t-field="doc.travel_type"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Emp.Cost Center</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.cost_center">
+                                                    <span t-field="doc.employee_id.contract_id.cost_center.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Business Unit</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.department">
+                                                    <span t-field="doc.employee_id.contract_id.department.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Business Section</th>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.section">
+                                                    <span t-field="doc.employee_id.contract_id.section.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Travel Purpose</th>
+                                        <td>
+                                            <p>
+                                                <span t-field="doc.travel_purpose"/>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <table class="table_accommodation">
+                                    <tr>
+                                        <th>Trip Number :</th>
+                                        <td>
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Accommodation by :</th>
+                                        <td>
+                                            <span t-field="doc.accommodation_type"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 10px;">
+                                <table class="table_travel">
+                                    <tr>
+                                        <th>From City</th>
+                                        <th>To City</th>
+                                        <th>Travel Date</th>
+                                    </tr>
+                                    <tr>
+                                        <!-- For first line-->
+                                        <td>
+                                            <span t-field="doc.from_country_id.code"/>
+                                            -
+                                            <span t-field="doc.from_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.to_country_id.code"/>
+                                            -
+                                            <span t-field="doc.to_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.travel_start_date"
+                                                  t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- For return line-->
+                                        <td>
+                                            <span t-field="doc.to_country_id.code"/>
+                                            -
+                                            <span t-field="doc.to_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.from_country_id.code"/>
+                                            -
+                                            <span t-field="doc.from_city"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.travel_end_date" t-options='{"format": "dd/MMM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <p>Comments</p>
+                                <p>
+                                    <span t-field="doc.note"/>
+                                </p>
+                            </div>
+                            <div>
+                                <span>Trip Cost Center / Project</span>
+                                <table class="table_travel">
+                                    <tr>
+                                        <th>Cost Center Name</th>
+                                        <th>Cost Center</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                    <t t-foreach="doc.travel_cost_center_lines" t-as="cost_center_line">
+                                        <tr>
+                                            <td>
+                                                <span t-field="cost_center_line.cost_center_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="cost_center_line.cost_center_id.code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="cost_center_line.share_percentage"/>
+                                                <span>%</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <span>Approvers</span>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Status</th>
+                                        <th>Signature</th>
+                                    </tr>
+                                    <t t-foreach="doc.approver_ids" t-as="approver_line">
+                                        <tr>
+                                            <td>
+                                                <t t-if="approver_line.user_id.employee_id">
+                                                    <span t-field="approver_line.user_id.employee_id.name"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="approver_line.user_id.employee_id">
+                                                    <t t-if="approver_line.user_id.employee_id.contract_id">
+                                                        <t t-if="approver_line.user_id.employee_id.contract_id.job_title">
+                                                            <span t-field="approver_line.user_id.employee_id.contract_id.job_title.name"/>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-field="approver_line.status"/>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div style="padding-top: 15px;">
+                                <span>Accommodation Booking Limit</span>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Maximum Accommodation Daily Rate (AED)</th>
+                                        <th>Class of Travel</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <t t-if="doc.employee_id.contract_id">
+                                                <t t-if="doc.employee_id.contract_id.job_grade">
+                                                    <span t-field="doc.employee_id.contract_id.job_grade.name"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span t-esc="doc.maximum_accommodation_rate()"/>
+                                        </td>
+                                        <td>
+                                            ===Need to Discuss==
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

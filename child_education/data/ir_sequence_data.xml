@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Sequences for education eligibility -->
+        <record id="seq_education_eligibility" model="ir.sequence">
+            <field name="name">Education Eligibility</field>
+            <field name="code">education.eligibility</field>
+            <field name="prefix">EE</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for Specific Child Education Eligibility -->
+        <record id="seq_specific_child_education_eligibility" model="ir.sequence">
+            <field name="name">Specific Child Education Eligibility</field>
+            <field name="code">specific.child.education.eligibility</field>
+            <field name="prefix">SCEE</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <!-- Sequences for Education Request -->
+        <!--        <record id="seq_education_request" model="ir.sequence">-->
+        <!--            <field name="name">Education Request</field>-->
+        <!--            <field name="code">education.request</field>-->
+        <!--            <field name="prefix">ER</field>-->
+        <!--            <field name="padding">4</field>-->
+        <!--            <field name="company_id" eval="False"/>-->
+        <!--        </record>-->
+
+
+        <!-- Sequences for Education Request  Line-->
+        <record id="seq_education_request_line" model="ir.sequence">
+            <field name="name">Education Request Line</field>
+            <field name="code">education.request.line</field>
+            <field name="prefix">ERL</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <!-- Sequences for Claim Number-->
+        <record id="seq_education_request_claim_number" model="ir.sequence">
+            <field name="name">Education Request Claim Number</field>
+            <field name="code">claim.number</field>
+            <field name="prefix">CE</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences Education Terms And  Fees Line -->
+        <record id="seq_education_terms_line_fees" model="ir.sequence">
+            <field name="name">Education Terms Fees Line</field>
+            <field name="code">education.terms.fees.line</field>
+            <field name="prefix">TF</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

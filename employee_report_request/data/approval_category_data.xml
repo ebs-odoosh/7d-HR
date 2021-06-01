@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- xml record for the approval.category -->
+        <record model="approval.category" id="res_approval_category_letter_request">
+            <field name="name">Letter Request</field>
+            <field name="is_letter_request">yes</field>
+            <field name="image" type="base64" file="employee_report_request/static/src/img/logo.png"/>
+        </record>
+    </data>
+</odoo>

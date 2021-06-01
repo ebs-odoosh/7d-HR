@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record model="ir.ui.view" id="travel_perdiem_tree_view">-->
+<!--            <field name="name">travel.perdiem.rule.tree</field>-->
+<!--            <field name="model">travel.perdiem.rule</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree editable="bottom">-->
+<!--                    <field name="currency_id" invisible="1"/>-->
+<!--                    <field name="travel_settings_id" invisible="1" optional="show"/>-->
+<!--                    <field name="name" optional="show" readonly="1"/>-->
+<!--                    <field name="job_grade_ids" optional="show"-->
+<!--                           options="{'no_create': True, 'no_edit': True,'no_open': True}" widget="many2many_tags"/>-->
+<!--                    <field name="min_days" optional="show" required="1"/>-->
+<!--                    <field name="max_days" optional="show" required="1"/>-->
+<!--                    <field name="amount" optional="show" required="1"/>-->
+<!--                    <field name="accommodation_by_self_percentage" required="1" optional="show"/>-->
+<!--                    <field name="accommodation_by_company_percentage" required="1" optional="show"/>-->
+<!--                    <field name="class_of_travel" required="1" optional="show"/>-->
+<!--                    <field name="active" optional="show"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="travel_perdiem_form_view" model="ir.ui.view">
+            <field name="name">travel.perdiem.rule.form</field>
+            <field name="model">travel.perdiem.rule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" readonly="1"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="job_grade_ids" widget="many2many_tags"/>
+                                <field name="min_days"/>
+                                <field name="max_days"/>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="accommodation_by_self_percentage"/>
+                                <field name="accommodation_by_company_percentage"/>
+                                <field name="class_of_travel" required="1"/>
+                                <field name="travel_settings_id" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+
+</odoo>

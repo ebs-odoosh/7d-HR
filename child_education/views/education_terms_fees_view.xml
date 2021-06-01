@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for the Education Terms Fees Line-->
+<!--    <record id="education_terms_fees_tree_view" model="ir.ui.view">-->
+<!--        <field name="name">Education.Terms.Fees.Line.Tree</field>-->
+<!--        <field name="model">education.terms.fees.line</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree editable="bottom"> &lt;!&ndash;editable="bottom"  edit="False"&ndash;&gt;-->
+<!--                <field name="is_readonly_approve_amount" invisible="1"/>-->
+<!--                <field name="is_readonly_claim_amount" invisible="1"/>-->
+<!--                <field name="name" readonly="1" optional="show"/>-->
+<!--                <field name="school_terms_fees"  required="1" optional="show"/>-->
+<!--                <field name="claimed_amount" required="1" attrs="{'readonly':[('is_readonly_claim_amount','=',True)]}" optional="show"/>-->
+<!--                <field name="approve_amount" attrs="{'readonly':[('is_readonly_approve_amount','=',True)]}" required="0"-->
+<!--                       optional="show"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <!-- Form view for the terms fees-->
+    <record model="ir.ui.view" id="education_terms_fees_form_view">
+        <field name="name">Education.Terms.Fees.Line.form</field>
+        <field name="model">education.terms.fees.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" invisible="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="school_terms_fees"  required="1" optional="show"/>
+                            <field name="is_readonly_claim_amount" invisible="1"/>
+                            <field name="claimed_amount" attrs="{'readonly':[('is_readonly_claim_amount','=',True)]}" required="1"/>
+                        </group>
+                        <group>
+                            <field name="is_readonly_approve_amount" invisible="1"/> <!-- readonly-->
+                            <field name="approve_amount" attrs="{'readonly':[('is_readonly_approve_amount','=',True)]}"
+                                   required="0"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

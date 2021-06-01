@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- Tree view for the Education Request line-->
+<!--    <record id="education_request_line_tree_view" model="ir.ui.view">-->
+<!--        <field name="name">Education.Request.Line.Tree</field>-->
+<!--        <field name="model">education.request.line</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree edit="False">-->
+<!--                <field name="reference_no" optional="show"/>-->
+<!--                <field name="reference_date" optional="hide"/>-->
+<!--                <field name="child_id" optional="show"/>-->
+<!--                <field name="child_birthdate" optional="show"/>-->
+<!--                <field name="school" optional="show"/>-->
+<!--                <field name="school_grade" optional="show"/>-->
+<!--                &lt;!&ndash;                <field name="paid_to_school" optional="show"/>&ndash;&gt;-->
+<!--                <field name="request_claimed_amount" optional="show"/>-->
+<!--                <field name="eligibility_amount" optional="hide"/>-->
+<!--                <field name="request_approved_amount" optional="hide"/>-->
+<!--                <field name="balance_amount" optional="hide"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <!-- Form view for the Education.Request.Line-->
+    <record model="ir.ui.view" id="education_request_line_form_view">
+        <field name="name">Education.Request.Line.Form</field>
+        <field name="model">education.request.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="currency_id" invisible="1"/>
+
+
+                    <group>
+                        <group>
+                            <field name="child_id" string="Children"
+                                   context="{'is_child_education_child_id_request_dynamic_domain':True,'employee_id':employee_id}"
+                                   domain="[('related_employee', '=', employee_id), ('state', '=', 'approved'),
+                                   ('contact_relation_type_id.name','in',['Son', 'Child', 'Daughter', 'SON', 'CHILD', 'DAUGHTER', 'son', 'child', 'daughter'])]"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                   required="1" force_save="1"/>
+                            <field name="child_birthdate" required="1"/>
+                            <field name="child_age" force_save="1" readonly="1"/>
+
+                            <field name="school" required="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="school_grade" required="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                        </group>
+                        <group>
+                            <!--                            <field name="paid_to_school"-->
+                            <!--                                   string="Paid To School"/>-->
+                            <field name="reference_no"
+                                   string="Reference No"/>
+                            <field name="reference_date"
+                                   string="Reference Date"/>
+                            <field name="education_request_id" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="employee_id" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="attachment_ids" required="1"
+                                   widget="many2many_binary"
+                                   string="Documents"/>
+                            <!--                            <field name="cheque_required" invisible="1"/>-->
+                            <field name="cheque_number"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="eligibility_amount" widget="monetary"
+                               options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="total_approved_amount" force_save="1" widget="monetary"
+                               options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="balance_amount" force_save="1" widget="monetary"
+                               options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="total_claimed_amount" force_save="1" options="{'currency_field': 'currency_id'}"
+                               string="Total Claimed Amount" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page name="terms_and_fees" string="Terms and Fees">
+                            <group>
+                                <field name="terms_fees_line_ids"
+                                       mode="tree">
+                                    <tree editable="bottom">
+                                        <field name="name" readonly="1" optional="show"/>
+                                        <field name="school_terms_fees"
+                                               options="{'no_create': False, 'no_edit': False,'no_open': False}"
+                                               required="1" optional="show"/>
+                                        <field name="is_readonly_claim_amount" invisible="1"/>
+                                        <field name="claimed_amount" required="1"
+                                               attrs="{'readonly':[('is_readonly_claim_amount','=',True)]}"
+                                               optional="show"/>
+                                        <field name="is_readonly_approve_amount" invisible="1"/>
+                                        <field name="approve_amount"
+                                               attrs="{'readonly':[('is_readonly_approve_amount','=',True)]}"
+                                               required="0"
+                                               optional="show"/>
+                                        <field name="paid_to" optional="show"/>
+                                    </tree>
+                                </field>
+
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</data>
+</odoo>

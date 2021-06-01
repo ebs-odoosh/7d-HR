@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for the education.academic.year-->
+    <record id="education_academic_year_tree_view" model="ir.ui.view">
+        <field name="name">education.academic.year.tree</field>
+        <field name="model">education.academic.year</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" placeholder="2019 - 2020" required="1"/>
+                <field name="academic_year_start_date" required="1"/>
+                <field name="academic_year_end_date" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view for the report.request-->
+    <record model="ir.ui.view" id="education_academic_year_form_view">
+        <field name="name">education.academic.year.form</field>
+        <field name="model">education.academic.year</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+
+                    </div>
+                    <group>
+                        <group>
+                            <field name="academic_year_start_date" required="1"/>
+                            <field name="academic_year_end_date" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Menu action for the Education Academic Year-->
+    <record id="action_all_education_academic_year_act_window" model="ir.actions.act_window">
+        <field name="name">Education Academic Year</field>
+        <field name="res_model">education.academic.year</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new Education Academic Year
+            </p>
+        </field>
+    </record>
+
+    <!-- Child Menu action for the Education Academic Year-->
+    <menuitem id="child_menu_for_education_academic_year"
+              name="Education Academic Year"
+              parent="main_menu_education"
+              action="action_all_education_academic_year_act_window"
+              sequence="2"/>
+
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Report Action for the Employee Bank Change Request -->
+        <report
+                string="Employee Bank Change Request Report"
+                id="report_bank_change"
+                model="approval.request"
+                report_type="qweb-pdf"
+                name="employee_bank_approvals.report_bank_change_template"
+                file="employee_bank_approvals.report_bank_change_template"
+                print_report_name="'Employee Bank Change Request Report '"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+        <!-- search view for the other entities-->
+        <record id="res_other_entities_view_search" model="ir.ui.view">
+            <field name="name">res.other.entities.view.search</field>
+            <field name="model">res.other.entities</field>
+            <field name="arch" type="xml">
+                <search string="Search Entities">
+                    <field name="name"/>
+                    <field name="arabic_name"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- Tree view for the other entities-->
+        <record id="res_other_entities_tree_view" model="ir.ui.view">
+            <field name="name">res.other.entities.tree</field>
+            <field name="model">res.other.entities</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" optional="show"/>
+                    <field name="arabic_name" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view  for the other entities-->
+        <record model="ir.ui.view" id="res_other_entities_form_view">
+            <field name="name">res.other.entities.form</field>
+            <field name="model">res.other.entities</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="arabic_name"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="note" placeholder="Notes..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu Action for the other entities-->
+        <record id="other_entities_act_window" model="ir.actions.act_window">
+            <field name="name">Other Entities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.other.entities</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Main Menu for the other entities-->
+        <menuitem id="menu_config_other_entities"
+                  name="Other Entities"
+                  parent="contacts.res_partner_menu_config"
+                  groups="security_rules.group_hc_employee"
+                  sequence="7"/>
+
+        <!-- Child  Menu for the other entities-->
+        <menuitem id="menu_config_other_entities_tree"
+                  action="other_entities_act_window"
+                  parent="menu_config_other_entities"
+                  groups="security_rules.group_hc_employee"
+                  sequence="1"/>
+    </data>
+</odoo>

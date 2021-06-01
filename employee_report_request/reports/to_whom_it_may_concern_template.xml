@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_whom_it_may_concern_eng_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page" style="font-family: Calibri;font-size: 12px">
+                        <div style="padding-left: 6%;">
+                            <div style="padding-top: 5%;">
+                                <span>Ref:</span>
+                                <span t-esc="doc.reference_generator()"/>
+                            </div>
+                            <div>
+                                <span>Date:</span>
+
+                                <span t-esc="doc.date_format()"/>
+
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <span>
+                                    <h6>
+                                        <b>
+                                            <u>Subject: To Whom It May Concern</u>
+                                        </b>
+                                    </h6>
+                                </span>
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <p>We hereby confirm that the below-mentioned is an employee of Strata Manufacturing
+                                    PJSC,
+                                    Strata is a wholly owned subsidiary of Mubadala Investment Company based in Alain.
+                                </p>
+                                <p>Details are as follows:</p>
+                            </div>
+                            <div style=" margin-top: 30px;margin-left: 30px;">
+                                <table style=" width: 100%;text-align: left;">
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">Name
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            Nationality
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.country_id.name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            Passport Number
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-esc="doc.emp_passport_num()"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            Job Title
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.contract_id.job_title.name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            Joining Date
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.contract_id.date_start"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <!--                                    <tr>-->
+                                    <!--                                        <th style="display:list-item;list-style:disc inside;">-->
+                                    <!--                                            Total Salary-->
+                                    <!--                                        </th>-->
+                                    <!--                                        <td>-->
+                                    <!--                                            <span>-->
+                                    <!--                                                <b>:</b>-->
+                                    <!--                                            </span>-->
+                                    <!--                                            <span t-field="doc.employee_id.contract_id.wage"/>-->
+                                    <!--                                        </td>-->
+                                    <!--                                    </tr>-->
+                                </table>
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <p>This certificate is valid for one month and has been issued based on the employee’s
+                                    request without incurring any liabilities on the company.
+                                </p>
+                            </div>
+                            <div style=" margin-top: 130px;">
+                                <p>Regards,
+                                </p>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <t t-set="signature" t-value="doc.get_responsible_info(signature=True)"/>
+                                <t t-if="signature">
+                                    <img t-att-src="image_data_uri(signature)" width="340"
+                                         height="130"/>
+                                </t>
+                            </div>
+                            <div style=" margin-top: 7px;">
+                                <span>
+                                    <b>
+
+                                        <span t-esc="doc.get_responsible_info(name=True,english=True)"/>
+
+                                    </b>
+                                </span>
+                            </div>
+                            <div>
+                                <b>
+                                    <span t-esc="doc.get_responsible_info(position=True,english=True)"/>
+                                </b>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="report_whom_it_may_concern_arabic_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page" style="direction: rtl; text-align: right;font-size: 20px">
+                        <link href="https://fonts.googleapis.com/css2?family=Scheherazade&amp;display=swap"
+                              rel="stylesheet"/>
+                        <div style="padding-right: 6%;font-family: 'Scheherazade', serif;">
+                            <div style="padding-top: 5%;">
+                                <span>المرجع:</span>
+                                <span t-esc="doc.reference_generator()"/>
+
+                            </div>
+                            <div>
+                                <span>التاريـخ:</span>
+
+                                <span t-esc="doc.date_format(True)"/>
+
+                            </div>
+                            <!--                            <div style="margin-top: 30px;">-->
+                            <!--                                <span>-->
+                            <!--                                    <h5>-->
+                            <!--                                        لمـن يهمـه الامـر-->
+                            <!--                                    </h5>-->
+                            <!--                                </span>-->
+                            <!--                            </div>-->
+                            <div style=" margin-top: 60px;text-align: center;">
+                                <span style="font-size: 30px">
+                                    <b>
+                                        <!--                                            <u>شــــــــــهـادة عـمـــــــــــل</u>-->
+                                        <u>شـهـادة لـمـن يـهمـه الامـر</u>
+                                    </b>
+                                </span>
+                            </div>
+                            <div style=" margin-top: 35px;">
+                                <p>تفيد شركة ستراتا للتصنيع (شركـة مساهمـة خاصـة - العين) بأن الموظف المذكورة بياناته
+                                    أدناه
+                                    يعمل لدى الشركة ولا يزال على رأس عمله:
+                                </p>
+                                <!--                                <p>ولا يزال على رأس عمله:</p>-->
+                            </div>
+                            <div style="margin-top: 25px;margin-right: 60px;">
+                                <table style="width:70%;text-align: right;">
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">الإســــــــم
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.arabic_name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            الجنسيـــــــة
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.country_id.arabic_name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            رقـم جـواز السفـر
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-esc="doc.emp_passport_num()"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            المسمـى الوظيفــي
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.contract_id.job_title.arabic_name"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:list-item;list-style:disc inside;">
+                                            تاريــخ التعييــن
+                                        </th>
+                                        <td>
+                                            <span>
+                                                <b>:</b>
+                                            </span>
+                                            <b>
+                                                <span t-field="doc.employee_id.contract_id.date_start"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <!--                                    <tr>-->
+                                    <!--                                        <th style="display:list-item;list-style:disc inside;">-->
+                                    <!--                                            Total Salary-->
+                                    <!--                                        </th>-->
+                                    <!--                                        <td>-->
+                                    <!--                                            <span>-->
+                                    <!--                                                <b>:</b>-->
+                                    <!--                                            </span>-->
+                                    <!--                                            <span t-field="doc.employee_id.contract_id.wage"/>-->
+                                    <!--                                        </td>-->
+                                    <!--                                    </tr>-->
+                                </table>
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <p>أصدرت هذه الشهادة بناءً على طلب الموظف دون أن تتحمل الشركة أي مسؤولية تجاه الغير.
+                                </p>
+                            </div>
+                            <div style="margin-right: 40%;"><!--style=" margin-top: 80px;margin-right: 67%;"-->
+                                <p>وتفضلوا بقبول فائق الاحترام ،،،
+                                </p>
+                            </div>
+                            <div style="margin-top: 60px;margin-right: 50%;">
+                                <t t-set="signature" t-value="doc.get_responsible_info(signature=True)"/>
+                                <t t-if="signature">
+                                    <img t-att-src="image_data_uri(signature)" width="340"
+                                         height="130"/>
+                                </t>
+                            </div>
+                            <div style=" margin-top: 7px;margin-right: 70%;">
+                                <span>
+                                    <b>
+
+                                        <span t-esc="doc.get_responsible_info(name=True,arabic=True)"/>
+
+                                    </b>
+                                </span>
+                            </div>
+                            <div style="margin-right: 70%;">
+                                <b>
+                                    <span t-esc="doc.get_responsible_info(position=True,arabic=True)"/>
+                                </b>
+                            </div>
+                            <!--                            <div style=" margin-top: 90px;margin-right: 70%;">-->
+                            <!--                                <span>-->
+                            <!--                                    <b>نعيـمــــة عبد الله البشــــــــر</b>-->
+                            <!--                                </span>-->
+                            <!--                            </div>-->
+                            <!--                            <div style="margin-right: 70%;">-->
+                            <!--                                <span>مدير أول المـوارد</span>-->
+                            <!--                            </div>-->
+                            <!--                            <div style=" margin-top: 10px;margin-right: 50%;">-->
+                            <!--                                <p>البشـــرية-->
+                            <!--                                </p>-->
+                            <!--                            </div>-->
+                            <div style="margin-top: 40px;">
+                                <p style="color:red;">ملاحظة: هذه الشهادة صالحة لمدة شهر من تاريخ إصدارها وأي كشط أو شطب
+                                    أو
+                                    تعديل على هذه الرسالة يلغي صلاحيتها.
+
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

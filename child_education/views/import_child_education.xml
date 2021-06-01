@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+
+        <record id="form_view_import_child_education" model="ir.ui.view">
+            <field name="name">form.view.import.child.education</field>
+            <field name="model">import.child.education</field>
+            <field name="arch" type="xml">
+                <form string="Import Child Education Mismatch Logs" create="0">
+                    <header>
+                        <button string="Import Child Education" class="btn btn-primary" type="object"
+                                name="import_child_education_data"/>
+                        <field name="state" widget="statusbar" statusbar_visible="pending,done" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name="name" readonly="True"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="file_name" invisible="1"/>
+                                <field widget="binary" name="choose_file" filename="file_name"/>
+                            </group>
+                            <group>
+                                <field name="attachment_path"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Log Lines">
+                                <field name="log_line_ids" mode="tree" readonly="1">
+                                    <tree string="Log Lines" editable="bottom">
+                                        <field name="line_no"/>
+                                        <field name="message"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="import_child_education_tree_view" model="ir.ui.view">
+            <field name="name">import.child.education.tree</field>
+            <field name="model">import.child.education</field>
+            <field name="arch" type="xml">
+                <tree string="Import Child Education Logs" edit="1" delete="1">
+                    <field name="name"/>
+                    <field name="log_line_ids" string="Mismatch Records"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="import_child_education_act_window" model="ir.actions.act_window">
+            <field name="name">Import Child Education</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">import.child.education</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Import Child Education" id="import_child_education_menu" sequence="150"
+                  parent="approvals.approvals_menu_config"
+                  action="import_child_education_act_window"/>
+
+
+    </data>
+</odoo>

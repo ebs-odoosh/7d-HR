@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_expense_view_form_for_expense_type" model="ir.ui.view">
+            <field name="name">hr.expense.view.form.expense.type</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,refused"/>
+                </field>
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="expense_type" options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                           required="1"/>
+                </xpath>
+                <xpath expr="//form/sheet" position="inside">
+                    <notebook>
+                        <page name="cost_center" string="Cost Center">
+                            <group string="Cost Center">
+                                <field name="expense_cost_center_lines"
+                                       attrs="{'readonly':[('state','not in',['draft'])]}"
+                                       context="{'employee_id': employee_id}">
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="cost_center_id" required="1"
+                                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                                <field name="share_percentage" required="1" readonly="1"/>
+                                                <field name="description"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                    <tree>
+                                        <field name="cost_center_id"/>
+                                        <field name="share_percentage" readonly="1"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--        <record id="hr_expense_view_tree_for_no_open_no_create_currency" model="ir.ui.view">-->
+        <!--            <field name="name">hr.expense.view.tree.currency</field>-->
+        <!--            <field name="model">hr.expense</field>-->
+        <!--            <field name="inherit_id" ref="hr_expense.view_expenses_tree"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='total_amount']" position="after">-->
+        <!--                    <field name="aed_currency" invisible="True"/>-->
+        <!--                    <field name="amount_in_aed" sum="Total Amount In AED" options="{'currency_field': 'aed_currency'}"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

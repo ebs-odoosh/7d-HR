@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Template for the Employee Bank Change Request -->
+    <template id="report_bank_change_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page">
+                        <style>
+                            .table_1 {
+                            table-layout: fixed;
+                            }
+                            .table_1 td,.table_1 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_1 th{
+                            width: 250px;
+                            }
+                            .table_1 td p{
+                            width: 99%;
+                            }
+                            .table_2 {
+                            table-layout: fixed;
+                            }
+                            .table_2 td,.table_2 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_2 th{
+                            color: black;
+                            }
+                        </style>
+                        <div style="padding-left: 6%;font-size: 17px;">
+                            <div style="padding-top: 2%;font-size: 22px;">
+                                <b>
+                                    <span>Subject : Employee Bank Change Report</span>
+                                </b>
+                            </div>
+                            <div style="padding-top: 4%;">
+                                <div>
+                                    <b>
+                                        <span>Request Information Table</span>
+                                    </b>
+                                </div>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td>
+                                            <span t-field="doc.employee_name.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Strata Id</th>
+                                        <td>
+                                            <span t-field="doc.employee_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Department</th>
+                                        <td>
+                                            <span t-field="doc.department_id_e_bank.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date of joining</th>
+                                        <td>
+                                            <p>
+                                                <span t-field="doc.date_of_join_e_bank"/>
+                                            </p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Current Bank Name</th>
+                                        <td>
+                                            <span t-if="doc.current_bank_name" t-field="doc.current_bank_name.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Current IBAN</th>
+                                        <td>
+                                            <span t-field="doc.current_iban"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Current Account Number</th>
+                                        <td>
+                                            <span t-field="doc.current_account_number"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number</th>
+                                        <td>
+                                            <span t-esc="doc.account_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Effective Month/Year</th>
+                                        <td>
+                                            <span t-field="doc.effective_month"/><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                            <span t-field="doc.effective_year"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Limit Month Day</th>
+                                        <td>
+                                            <span t-field="doc.category_id.has_limit_month_days"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>IBAN</th>
+                                        <td>
+                                            <span t-field="doc.iban"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Select Bank</th>
+                                        <td>
+                                            <span t-field="doc.select_bank"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding-top: 4%;">
+                                <div>
+                                    <b>
+                                        <span>Approval Information Table</span>
+                                    </b>
+                                </div>
+                                <table class="table_2">
+                                    <thead>
+                                        <tr>
+                                            <th>Approval ID</th>
+                                            <th>Approval Name</th>
+                                            <th>Approval Status</th>
+                                            <th>Approval Date</th>
+                                            <th>Approval Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.approver_ids" t-as="approver_line">
+                                            <tr>
+                                                <td>
+                                                    <t t-if="approver_line.user_id.employee_id">
+                                                        <span t-field="approver_line.user_id.employee_id.system_id"/>
+                                                    </t>
+                                                </td>
+
+                                                <td>
+                                                    <t t-if="approver_line.user_id">
+                                                        <span t-field="approver_line.user_id.name"/>
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <span t-field="approver_line.status"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="approver_line.approval_date"/>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <span t-field="approver_line.reject_reason"/>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

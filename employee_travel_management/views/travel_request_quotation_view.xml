@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+
+        <!-- Tree view for the travel request quotation-->
+<!--        <record id="travel_request_quotation_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">travel.request.quotation.tree</field>-->
+<!--            <field name="model">travel.request.quotation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree edit="false">-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="travel_agency_id" optional="show"/>-->
+<!--                    <field name="class_of_travel" optional="show"/>-->
+<!--                    <field name="flight_no" optional="show"/>-->
+<!--                    <field name="boarding_time" optional="show"/>-->
+<!--                    <field name="value_cost" optional="hide"/>-->
+<!--                    <field name="markup_amount" optional="hide"/>-->
+<!--                    <field name="car_rental_days" optional="hide"/>-->
+<!--                    <field name="car_rental_amount" optional="hide"/>-->
+<!--                    <field name="hotel_accommodation_days" optional="hide"/>-->
+<!--                    <field name="hotel_accommodation_amount" optional="hide"/>-->
+<!--                    <field name="total_amount" readonly="1" optional="hide"/>-->
+<!--                    <field name="comment" optional="hide"/>-->
+<!--                    <field name="attachment_ids" widget="many2many_binary" optional="hide"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <record model="ir.ui.view" id="travel_request_quotation_form_view">
+            <field name="name">travel.request.quotation.form</field>
+            <field name="model">travel.request.quotation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="travel_agency_id" required="1"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                <field name="class_of_travel"/>
+                                <field name="flight_no" required="1"/>
+                                <field name="boarding_time" required="1"/>
+                            </group>
+                            <group>
+
+                                <field name="currency_id" invisible="1"/>
+                                <field name="travel_request_id" readonly="1"/>
+                                <field name="value_cost" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="markup_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="car_rental_days"/>
+                                <field name="car_rental_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="hotel_accommodation_days"/>
+                                <field name="hotel_accommodation_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_amount" readonly="1"/>
+                                <field name="comment"/>
+                            </group>
+                            <group>
+                                <field name="attachment_ids" required="1" widget="many2many_binary"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

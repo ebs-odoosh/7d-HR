@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Travel Agency Mail-->
+
+    <record id="mail_template_travel_agency_quotation" model="mail.template">
+        <field name="name">Request for the Trip Quotations</field>
+        <field name="subject">Request for the Trip Quotations</field>
+        <field name="email_from"></field>
+        <field name="email_to"></field>
+        <field name="body_html" type="xml">
+            <style>
+                .table_1 {
+                table-layout: fixed;
+                }
+                .table_1 td,.table_1 th {
+                border: 2px solid #454141;
+                text-align: left;
+                padding: 4px;
+                }
+                .table_1 th{
+                width: 250px;
+                }
+                .table_1 td p{
+                width: 99%;
+                }
+            </style>
+            <p>
+                Hello,
+                <br/>
+                I humbly request you please sent quotations for the trip
+                you can find the trip information below
+            </p>
+            <div style="padding-top: 2%;">
+                <p>Trip Information:</p>
+                <div style="padding-top: 5px;">
+                    <table class="table_1">
+                        <tr>
+                            <th>Travel Date</th>
+                            <td>${object.travel_start_date}</td>
+                        </tr>
+                        <tr>
+                            <th>From City</th>
+                            <td>${object.from_city}</td>
+                        </tr>
+                        <tr>
+                            <th>From Country</th>
+                            <td>${object.from_country_id.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Return Date</th>
+                            <td>${object.travel_end_date}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination City</th>
+                            <td>${object.to_city}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination Country</th>
+                            <td>${object.to_country_id.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Class Of Travel</th>
+                            <td>
+                                ${object.class_of_travel_str}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Note</th>
+                            <td>
+                                <p>${object.note or ''}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <p>
+                Thank you
+            </p>
+        </field>
+        <field name="model_id" ref="employee_travel_management.model_employee_travel_request"/>
+    </record>
+
+</odoo>

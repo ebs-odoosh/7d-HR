@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+
+        <record id="travel_approval_rejection_form" model="ir.ui.view">
+            <field name="name">travel.approval.rejection.form</field>
+            <field name="model">travel.approval.reject.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_done" string="Done" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_travel_reject_reason_action" model="ir.actions.act_window">
+            <field name="name">Travel Rejection Reason</field>
+            <field name="res_model">travel.approval.reject.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="travel_approval_rejection_form"/>
+            <field name="target">new</field>
+            <field name="context">{'default_request_id' : active_id}</field>
+        </record>
+    </data>
+</odoo>

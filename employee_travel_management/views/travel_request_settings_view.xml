@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+        <!-- Tree view for the travel request settings -->
+<!--        <record id="travel_request_settings_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">travel.request.settings.tree</field>-->
+<!--            <field name="model">travel.request.settings</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree edit="false">-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="approval_minimum" optional="hide"/>-->
+<!--                    <field name="travel_agency_ids" optional="hide"/>-->
+<!--                    <field name="approver_ids" optional="hide"/>-->
+<!--                    <field name="default_approver" optional="hide"/>-->
+<!--                    <field name="default_approver" optional="hide"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- form view for the travel request settings -->
+        <record model="ir.ui.view" id="travel_request_settings_form_view">
+            <field name="name">travel.request.settings.form</field>
+            <field name="model">travel.request.settings</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" required="1"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_manager_approver"/>
+                                <field name="is_higher_manager_approver"/>
+                                <field name="approval_minimum"/>
+                                <field name="approval_sequence"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}">
+                                    <tree editable="bottom">
+                                        <field name="sequence" invisible="1" widget="handle"/>
+                                        <field name="sequence"/>
+                                        <field name="user_id"
+                                               attrs="{'readonly': ['|',('is_manager_approver','=',True),('is_higher_manager_approver','=',True)]}"/>
+                                        <field name="approval_category"/>
+                                        <field name="is_manager_approver" force_save="1" readonly="1"/>
+                                        <field name="is_higher_manager_approver" force_save="1" readonly="1"/>
+                                        <!--                                        <field name="approval_type" readonly="1"/>-->
+                                    </tree>
+                                </field>
+                                <field name="default_approver"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="travel_agency_ids" widget="many2many_tags"
+                                       domain="[('is_travel_agency','=',True)]"
+                                       options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                                <field name="email_from" widget="email" required="1"/>
+                                <field name="reply_to" widget="email" required="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="perdiem_expense_product" required="1"/>
+                            </group>
+                            <field name="perdiem_rule_lines"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Menu action for the Travel Request settings -->
+        <record id="employee_travel_request_settings_act_window" model="ir.actions.act_window">
+            <field name="name">Travel Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">travel.request.settings</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Child Menu for the Travel Request Settings-->
+        <menuitem id="child_menu_employee_travel_request_settings"
+                  name="Travel Settings"
+                  parent="approvals.approvals_menu_config"
+                  action="employee_travel_request_settings_act_window"
+
+                  sequence="12"/>
+<!--        groups="security_rules.group_travel_quotation_employee"-->
+    </data>
+</odoo>

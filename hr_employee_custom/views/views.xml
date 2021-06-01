@@ -1,36 +1,36 @@
 <odoo>
     <data>
-        <!--        <record id="hr.hr_employee_print_badge" model="ir.actions.report">-->
-        <!--            <field name="groups_id" eval="[(4, ref('base.user_admin'))]"/>-->
+<!--                <record id="hr.hr_employee_print_badge" model="ir.actions.report">-->
+<!--                    <field name="groups_id" eval="[(4, ref('base.user_admin'))]"/>-->
 
-        <!--        </record>-->
+<!--                </record>-->
 
-        <!--        <record id="resume_line_view_form_inherited" model="ir.ui.view">-->
-        <!--            <field name="name">hr.resume.line.form.inherited</field>-->
-        <!--            <field name="model">hr.resume.line</field>-->
-        <!--            <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>-->
-        <!--            <field name="arch" type="xml">-->
-        <!--                <group position="inside">-->
-        <!--                    <field name="related_line_type" invisible="1"/>-->
-        <!--                    <group attrs="{'invisible': [('related_line_type', '!=', 'edu')]}">-->
-        <!--                        <field name="education_level"/>-->
-        <!--                        <field name="institute_name"/>-->
-        <!--                        <field name="major_subject"/>-->
-        <!--                        <field name="educational_status"/>-->
-        <!--                        <field name="attachment_ids" widget="many2many_binary"/>-->
-        <!--                    </group>-->
-        <!--                    <group attrs="{'invisible': [('related_line_type', '!=', 'exp')]}">-->
-        <!--                        <field name="company_name"/>-->
-        <!--                        <field name="type_business"/>-->
-        <!--                        <field name="job_title"/>-->
-        <!--                        <field name="work_city"/>-->
-        <!--                        <field name="work_country"/>-->
-        <!--                        <field name="attachment_ids" widget="many2many_binary"/>-->
-        <!--                    </group>-->
+                <record id="resume_line_view_form_inherited" model="ir.ui.view">
+                    <field name="name">hr.resume.line.form.inherited</field>
+                    <field name="model">hr.resume.line</field>
+                    <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+                    <field name="arch" type="xml">
+                        <group position="inside">
+                            <field name="related_line_type" invisible="1"/>
+                            <group attrs="{'invisible': [('related_line_type', '!=', 'edu')]}">
+                                <field name="education_level"/>
+                                <field name="institute_name"/>
+                                <field name="major_subject"/>
+                                <field name="educational_status"/>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </group>
+                            <group attrs="{'invisible': [('related_line_type', '!=', 'exp')]}">
+                                <field name="company_name"/>
+                                <field name="type_business"/>
+                                <field name="job_title"/>
+                                <field name="work_city"/>
+                                <field name="work_country"/>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </group>
 
-        <!--                </group>-->
-        <!--            </field>-->
-        <!--        </record>-->
+                        </group>
+                    </field>
+                </record>
 
         <record id="custom_contacts_view_employee" model="ir.ui.view">
             <field name="name">custom.contacts.view.employee</field>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- we are use menu for that-->
+    <!--    <data noupdate="1">-->
+    <!--        <record id="ir_rule_request_report_visibility_user" model="ir.rule">-->
+    <!--            <field name="name">User can only see his/her report request</field>-->
+    <!--            <field name="model_id" ref="model_report_request"/>-->
+    <!--            <field name="groups" eval="[(4, ref('security_rules.group_strata_employee'))]"/>-->
+    <!--            <field name="perm_read" eval="True"/>-->
+    <!--            <field name="perm_write" eval="True"/>-->
+    <!--            <field name="perm_create" eval="True"/>-->
+    <!--            <field name="perm_unlink" eval="True"/>-->
+    <!--            <field name="domain_force">[('request_owner_id','=',user.id)]</field>-->
+    <!--        </record>-->
+    <!--    </data>-->
+</odoo>

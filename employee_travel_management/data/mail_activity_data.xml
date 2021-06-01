@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="mail_activity_data_travel_request" model="mail.activity.type">
+            <field name="name">Travel Request Approvals</field>
+            <field name="icon">fa-check-circle</field>
+            <field name="sequence">4</field>
+            <field name="res_model_id" ref="employee_travel_management.model_employee_travel_request"/>
+        </record>
+        <record id="mail_activity_data_travel_employee" model="mail.activity.type">
+            <field name="name">Select Quotation</field>
+            <field name="icon">fa-check-circle</field>
+            <field name="sequence">4</field>
+            <field name="res_model_id" ref="employee_travel_management.model_employee_travel_request"/>
+        </record>
+    </data>
+</odoo>

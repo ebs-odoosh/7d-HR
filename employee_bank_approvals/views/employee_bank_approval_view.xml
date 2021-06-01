@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <!--        <record id="approvals.approval_request_action" model="ir.actions.act_window">-->
+        <!--            <field name="context">{'active_model': 'approval.request'}</field>-->
+        <!--        </record>-->
+        <!--        <record id="approvals.approval_request_action_to_review" model="ir.actions.act_window">-->
+        <!--            <field name="context">{'active_model': 'approval.request'}</field>-->
+        <!--        </record>-->
+        <record id="approval_request_view_form_employee_bank_approve" model="ir.ui.view">
+            <field name="name">approval.request.view.employee.bank.form</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet/group" position="after">
+                    <field name="has_employee_name" invisible="1"/>
+                    <field name="has_employee_number" invisible="1"/>
+                    <field name="has_department_id_e_bank" invisible="1"/>
+                    <field name="has_date_of_join_e_bank" invisible="1"/>
+                    <field name="has_current_bank_name" invisible="1"/>
+                    <field name="has_current_iban" invisible="1"/>
+                    <field name="has_current_account_number" invisible="1"/>
+                    <field name="has_account_number" invisible="1"/>
+                    <field name="has_iban" invisible="1"/>
+                    <field name="has_effective_month_year" invisible="1"/>
+                    <field name="has_select_bank" invisible="1"/>
+                    <field name="is_bank_changes_request" invisible="1"/>
+                    <field name="bank_changes_request" invisible="1"/>
+                    <field name="can_create_bank_change" invisible="1"/>
+
+                    <div class="oe_title"
+                         attrs="{'invisible':[('has_employee_name','==','no')], 'required': [('has_employee_name','==','required')]} ">
+                        <h2>
+                            <field name="employee_name" style="width: 100%"  placeholder="Employee's Name"
+                                   options="{'no_create': True, 'no_edit':True, 'no_open':True}"
+                                   attrs="{'invisible':[('has_employee_name','==','no')],'readonly':[('all_approved','=',True)], 'required': [('has_employee_name','==','required')]}"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_number" options="{'no_create': True, 'no_create_edit':True}" readonly="1" force_save="1"
+                                   attrs="{'invisible':[('has_employee_number','==','no')], 'required': [('has_employee_number','==','required')]}"/>
+                            <field name="department_id_e_bank" options="{'no_open': True}" readonly="1" force_save="1"
+                                   attrs="{'invisible':[('has_department_id_e_bank','==','no')], 'required': [('has_department_id_e_bank','==','required')]}"/>
+                            <field name="date_of_join_e_bank" readonly="1" force_save="1"
+                                   attrs="{'invisible':[('has_date_of_join_e_bank','==','no')], 'required': [('has_date_of_join_e_bank','==','required')]}"/>
+
+                        </group>
+                        <group>
+                            <!--                            <field name="year"/>-->
+                            <field name="current_account_number" readonly="1" force_save="1"
+                                   attrs="{'invisible':[('has_current_account_number','==','no')], 'required': [('has_current_account_number','==','required')]}"/>
+                            <field name="current_bank_name" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_current_bank_name','==','no')], 'required': [('has_current_bank_name','==','required')]}"/>
+                            <field name="current_iban" readonly="1" force_save="1"
+                                   attrs="{'invisible':[('has_current_iban','==','no')], 'required': [('has_current_iban','==','required')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="after">
+<!--                    <button name="create_bank_changes" string="Create Bank Changes" type="object"-->
+<!--                            groups="hr_approvals.group_approval_category_manager_bank_change"-->
+<!--                            attrs="{'invisible':['|','|',['can_create_bank_change','==',False],['all_approved','==',False], ['bank_changes_request','!=',[]]]}"-->
+<!--                            class="btn-primary"/>-->
+                    <button name="action_print_employee_bank_change_report" string="Print Bank Change Report"
+                            type="object"
+                            attrs="{'invisible':['|',('is_bank_changes_request','=','no'),('request_status','not in',['pending','under_approval','approved','refused'])]}"/>
+                </xpath>
+                <xpath expr="//page[@name='description']" position="before">
+                    <page string="Bank Details" name="employee_bank_details"
+                          attrs="{'invisible':[('is_bank_changes_request','==','no')]}">
+                        <div style="color:red ! important;"
+                             attrs="{'invisible':['|',('is_bank_changes_request','=','no'),('request_status','in',['pending','under_approval','approved','refused'])]}">
+                            <span>
+                                Kindly attach the new bank account details with the original clearance latter
+                                from the previous bank (
+                                <field name="current_bank_name_msg" options="{'no_open': True}"
+                                       attrs="{'invisible':[('has_current_bank_name','==','no')]}"/>
+                                ) in the
+                                application. Submit the hard copies of the same documents in original on or before 16th
+                                of the month to Human Capital Department .
+                            </span>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="account_number"
+                                       attrs="{'readonly':[('all_approved','=',True)], 'invisible':[('has_account_number','==','no')], 'required': [('has_account_number','==','required')]}"/>
+                                <field name="iban"
+                                       attrs="{'readonly':[('all_approved','=',True)], 'invisible':[('has_iban','==','no')], 'required': [('has_iban','==','required')]}"/>
+                                <!--                                <field name="effective_month_year"-->
+                                <!--                                       attrs="{'invisible':[('has_effective_month_year','==','no')], 'required': [('has_effective_month_year','==','required')]}"/>-->
+                                <label for="has_effective_month_year"/>
+                                <div attrs="{'invisible':[('has_effective_month_year','==','no')], 'required': [('has_effective_month_year','==','required')]}">
+                                    <field name="effective_month" class="oe_inline" attrs="{'readonly':[('all_approved','=',True)]}"/><![CDATA[&nbsp;]]>
+                                    <![CDATA[&nbsp;]]>
+                                    <field name="effective_year" class="oe_inline" attrs="{'readonly':[('all_approved','=',True)]}"/>
+                                </div>
+                                <!--                                <field name="limit_month_day" readonly="1"-->
+                                <!--                                       attrs="{'invisible':[('is_bank_changes_request','=','no')]}"/>-->
+                                <!--                                <field name="effective_date" force_save="1"-->
+                                <!--                                       attrs="{'invisible':[('has_effective_month_year','==','no')], 'required': [('has_effective_month_year','==','required')]}"/>-->
+                                <field name="select_bank"
+                                       options="{'no_open': True, 'no_create': True, 'no_create_edit':True}"
+                                       attrs="{'readonly':[('all_approved','=',True)], 'invisible':[('has_select_bank','==','no')], 'required': [('has_select_bank','==','required')]}"/>
+
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="approval_category_view_form_housing_loan" model="ir.ui.view">
+            <field name="name">approval.category.view.form</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="approvals.approval_category_view_form"/>
+            <field name="arch" type="xml">
+                <!--                <xpath expr="//field[@name='is_internal_transfer_request']" position="after">-->
+                <!--                    <field name="is_bank_changes_request" widget="radio" options="{'horizontal': true}"/>-->
+                <!--                </xpath>-->
+                <xpath expr="//page[@name='transfer_fields']" position="after">
+                    <page string="Employee Bank" name="employee_bank">
+                        <label for="is_bank_changes_request"/>
+                        <field name="is_bank_changes_request" widget="radio" options="{'horizontal': true}"/>
+                        <h3 style="text-decoration: underline;" colspan="2">Fields</h3>
+                        <group>
+                            <field name="has_employee_name" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_employee_number" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_department_id_e_bank" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_date_of_join_e_bank" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_current_bank_name" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_current_iban" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_current_account_number" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_account_number" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_iban" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_effective_month_year" widget="radio" options="{'horizontal': true}"/>
+                            <field name="has_limit_month_days"/>
+                            <field name="has_select_bank" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

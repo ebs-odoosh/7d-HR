@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_bank_letter_eng_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page" style="font-family: Calibri;font-size: 12px">
+                        <div style="padding-left: 6%;">
+                            <div style="padding-top: 5%;">
+                                <span>Ref:</span>
+                                <span t-esc="doc.reference_generator()"/>
+                            </div>
+                            <div>
+                                <span>Date:</span>
+
+                                <span t-esc="doc.date_format()"/>
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <!--                                <span t-esc="doc.bank_id.name"/>-->
+                                <span t-esc="doc.employee_id.current_bank_name.name"/>
+                            </div>
+                            <div>
+                                <span>United Arab Emirates</span>
+                            </div>
+                            <div style=" margin-top: 30px;">
+                                <h6>
+                                    <b>
+                                        <span>
+                                            <u>Subject: Salary Transfer Letter</u>
+                                        </span>
+                                    </b>
+                                </h6>
+                            </div>
+                            <div style=" margin-top: 70px;">
+                                <span>Dear Sirs,</span>
+                            </div>
+                            <div style=" margin-top: 20px;">
+                                <p>This is to certify that
+                                    <b>
+                                        <span t-field="doc.employee_id.name"/>
+                                    </b>
+                                    , ID No.
+                                    <b>
+                                        <span
+                                                t-field="doc.employee_id.system_id"/>
+                                    </b>
+                                    , holder of
+                                    <b>
+                                        <span t-field="doc.employee_id.country_id.name"/>
+                                    </b>
+                                    . Passport No.
+                                    <b>
+                                        <span t-esc="doc.emp_passport_num()"/>
+                                    </b>
+                                    is a confirmed employee of STRATA, in the capacity of
+                                    <b>
+                                        <span t-field="doc.employee_id.contract_id.job_title.name"/>
+                                    </b>
+                                    working with us
+                                    since
+                                    <b>
+                                        <span t-field="doc.employee_id.contract_id.date_start"/>
+                                    </b>
+                                    .
+                                </p>
+                                <p>His/Her total monthly remuneration is
+                                    <b>
+                                        <span t-esc="doc.emp_salary_monthly()"/>
+                                    </b>
+                                </p>
+                                <p>We confirm that we will transfer his/her monthly remuneration into his/her A/C No.
+                                    <b>
+                                        <!--                                        <span t-field="doc.employee_id.bank_account_id.acc_number"/>-->
+                                        <span t-field="doc.employee_id.current_account_number"/>
+                                    </b>
+                                    (IBAN No.
+                                    <b>
+                                        <span t-field="doc.employee_id.iban"/>
+                                    </b>
+                                    ) with you. It is the Company Policy that salary will
+                                    not be transferred to any other bank account unless a clearance certificate is
+                                    obtained
+                                    from the current bank. Should the employment cease, the company will transfer
+                                    his/her
+                                    final settlement, after deducting dues to the company if any, to his/her bank
+                                    account as
+                                    registered with us to what the employee is entitled.
+                                </p>
+                                <p>This certificate has been issued at the request of the employee and does not
+                                    constitute a
+                                    financial guarantee on our part. This certificate is valid for one month only and
+                                    STRATA
+                                    shall have no liability in respect of this letter.
+                                </p>
+                                <p>Strata is a wholly owned subsidiary of Mubadala Investment Company PJSC based in
+                                    Alain.
+                                </p>
+                                <div style=" margin-top: 100px;">
+                                    <p>Yours faithfully,</p>
+                                </div>
+
+                                <div style="margin-top: 20px;">
+                                    <t t-set="signature" t-value="doc.get_responsible_info(signature=True)"/>
+                                    <t t-if="signature">
+                                        <img t-att-src="image_data_uri(signature)" width="340"
+                                             height="130"/>
+                                    </t>
+                                </div>
+                                <div style=" margin-top: 7px;">
+                                    <span>
+                                        <b>
+                                            <span t-esc="doc.get_responsible_info(name=True,english=True)"/>
+                                        </b>
+                                    </span>
+                                </div>
+                                <div>
+                                    <b>
+                                        <span t-esc="doc.get_responsible_info(position=True,english=True)"/>
+                                    </b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- xml record for the approval.category -->
+        <record model="approval.category" id="res_approval_category_education_request">
+            <field name="name">Education Request</field>
+            <field name="is_education_request">yes</field>
+            <field name="image" type="base64" file="child_education/static/src/img/edu2.png"/>
+        </record>
+    </data>
+</odoo>

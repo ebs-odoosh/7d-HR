@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_child_education_list_request_document_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="res_company_custom.external_layout_custom">
+                    <div class="page">
+                        <style>
+                            .table_1 {
+                            table-layout: fixed;
+                            }
+                            .table_1 td,.table_1 th {
+                            border: 1px solid #454141;
+                            text-align: left;
+                            padding: 4px;
+                            }
+                            .table_1 th{
+                            width: 250px;
+                            }
+                            .table_1 td p{
+                            width: 99%;
+                            }
+                        </style>
+                        <div style="padding-left: 4%;padding-top: 1%;font-size: 15px;">
+                            <div style="padding-top: 2%;">
+                                <div style="font-size: 28px; font-weight: bold; text-align: center; color: #FCFBFC; background-color: #C80F4A; border: 1px solid #875A7B;">
+                                    <span>Subject :Education Claim Details</span>
+                                </div>
+                                <br/>
+                                <br/>
+                                <div style="font-size: 28px; font-weight: bold; text-align: center; color: #5F5F5F; background-color: #F8F8F8; border: 1px solid #875A7B;">
+                                    <b>
+                                        <span>Employee Details</span>
+                                    </b>
+                                </div>
+                                <table class="table_1">
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.name"/>
+                                        </td>
+                                        <th>Employee ID</th>
+                                        <td>
+                                            <span t-field="doc.employee_id.system_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position</th>
+                                        <td>
+                                            <span t-field="doc.employee_job_title.name"/>
+                                        </td>
+                                        <th>Grade</th>
+                                        <td>
+                                            <span t-field="doc.employee_job_grade.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Claim Number</th>
+                                        <td>
+                                            <span t-field="doc.claim_number"/>
+                                        </td>
+                                        <th>Claim Date</th>
+                                        <td>
+                                            <span t-field="doc.claim_date"
+                                                  t-field-options='{"format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Academic Year</th>
+                                        <td>
+                                            <span t-field="doc.academic_year.name"/>
+                                        </td>
+                                        <th>Request Status</th>
+                                        <td>
+                                            <span t-field="doc.request_status"/>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                <br/>
+                                <div style="font-size: 20px; font-weight: bold; text-align: center; color: #5F5F5F; background-color: #F8F8F8; border: 1px solid #875A7B;">
+                                    <span>Child Information</span>
+                                </div>
+                                <t t-foreach="doc.request_lines" t-as="child_line">
+                                    <table class="table_1">
+                                        <tr>
+                                            <th>Child Name</th>
+                                            <td>
+                                                <b>
+                                                    <span t-field="child_line.child_id.name"/>
+                                                </b>
+                                            </td>
+                                            <th>Eligible Amount</th>
+                                            <td>
+                                                <span t-field="child_line.eligibility_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Birthdate</th>
+                                            <td>
+                                                <span t-field="child_line.child_birthdate"
+                                                      t-field-options='{"format": "d/m/Y"}'/>
+                                            </td>
+
+                                            <th>Balance Amount</th>
+                                            <td>
+                                                <span t-field="child_line.balance_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Relation</th>
+                                            <td>
+                                                <t t-if="child_line.child_id.contact_relation_type_id">
+                                                    <span t-field="child_line.child_id.contact_relation_type_id.name"/>
+                                                </t>
+                                            </td>
+                                            <th>Total Claimed Amount</th>
+                                            <td>
+                                                <span t-field="child_line.total_claimed_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>School</th>
+                                            <td>
+                                                <span t-field="child_line.school.name"/>
+                                            </td>
+                                            <th>Total Approved Amount</th>
+                                            <td>
+                                                <span t-field="child_line.approved_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Reference No</th>
+                                            <td>
+                                                <span t-field="child_line.reference_no"/>
+                                            </td>
+                                            <th>Reference Date</th>
+                                            <td>
+                                                <span t-field="child_line.reference_date"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>School Grade</th>
+                                            <td>
+                                                <span t-field="child_line.school_grade.code"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

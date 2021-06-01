@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- inherited form view of res.bank for the arabic_name -->
+        <record model="ir.ui.view" id="view_res_bank_inherit_arabic_name">
+            <field name="name">view.res.bank.inherit.arabic.name</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="arabic_bank_name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

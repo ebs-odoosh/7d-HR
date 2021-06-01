@@ -1208,49 +1208,49 @@ class HrResignationExtensionReason(models.Model):
     #
     #         return rec.can_see_eligible
 
-# class ApprovalRejectReason(models.TransientModel):
-#     _name = 'approval.reject.reason'
-#
-#     name = fields.Char('Rejection Reason', required=True)
-#     approval_id = fields.Many2one('approval.request')
-#
-#     def on_done_action(self):
-#         approver = self.approval_id.mapped('approver_ids').filtered(
-#             lambda approver: approver.user_id == self.env.user
-#         ).filtered(
-#             lambda approver: approver.status != 'approved').sorted(lambda x: x.sequence)
-#
-#         # if approver.approver_type == 'static':
-#         #     approver_list = self.approval_id.mapped('approver_ids').filtered(
-#         #         lambda approver: approver.approver_type == 'static'
-#         #     ).sorted(lambda x: x.sequence)
-#         #     print(approver_list[:1])
-#         #     if approver_list[:1].user_id == self.env.user:
-#         #         self.dynamic_refusal()
-#         #     else:
-#         #         self.static_refusal(approver_list)
-#         # elif approver.approver_type == 'dynamic':
-#         #     self.dynamic_refusal()
-#
-#         if len(approver) > 0:
-#             approver[0].update({'reject_reason': self.name, 'status': 'refused'})
-#             approver[0].request_id.approval_date = datetime.datetime.now()
-#
-#             msg = _('Request Rejected by ' + approver[0].user_id.name + '. Rejection Reason: ' + self.name)
-#             self.approval_id.message_post(body=msg)
-#
-#     def static_refusal(self, approver_list):
-#         self.approval_id.update({'request_status': 'pending'})
-#         approver_list[:1].update({'status': 'pending'})
-#         for app in approver_list[1:]:
-#             app.update({'status': 'new'})
-#
-#     def dynamic_refusal(self):
-#         self.approval_id.update({'request_status': 'new'})
-#         for app in self.approval_id.approver_ids:
-#             app.update({
-#                 'status': 'new'
-#             })
+class ApprovalRejectReason(models.TransientModel):
+    _name = 'approval.reject.reason'
+
+    name = fields.Char('Rejection Reason', required=True)
+    approval_id = fields.Many2one('approval.request')
+
+    def on_done_action(self):
+        approver = self.approval_id.mapped('approver_ids').filtered(
+            lambda approver: approver.user_id == self.env.user
+        ).filtered(
+            lambda approver: approver.status != 'approved').sorted(lambda x: x.sequence)
+
+        if approver.approver_type == 'static':
+            approver_list = self.approval_id.mapped('approver_ids').filtered(
+                lambda approver: approver.approver_type == 'static'
+            ).sorted(lambda x: x.sequence)
+            print(approver_list[:1])
+            if approver_list[:1].user_id == self.env.user:
+                self.dynamic_refusal()
+            else:
+                self.static_refusal(approver_list)
+        elif approver.approver_type == 'dynamic':
+            self.dynamic_refusal()
+
+        if len(approver) > 0:
+            approver[0].update({'reject_reason': self.name, 'status': 'refused'})
+            approver[0].request_id.approval_date = datetime.datetime.now()
+
+            msg = _('Request Rejected by ' + approver[0].user_id.name + '. Rejection Reason: ' + self.name)
+            self.approval_id.message_post(body=msg)
+
+    def static_refusal(self, approver_list):
+        self.approval_id.update({'request_status': 'pending'})
+        approver_list[:1].update({'status': 'pending'})
+        for app in approver_list[1:]:
+            app.update({'status': 'new'})
+
+    def dynamic_refusal(self):
+        self.approval_id.update({'request_status': 'new'})
+        for app in self.approval_id.approver_ids:
+            app.update({
+                'status': 'new'
+            })
 
 
 class ApprovalEligible(models.TransientModel):

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for the Education Request-->
+<!--    <record id="education_request_tree_view" model="ir.ui.view">-->
+<!--        <field name="name">Education.Request.Tree</field>-->
+<!--        <field name="model">education.request</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree edit="false" delete="0">-->
+<!--                <field name="employee_id" optional="show"/>-->
+<!--                <field name="employee_no" optional="show"/>-->
+<!--                <field name="employee_job_title" optional="hide"/>-->
+<!--                <field name="employee_job_grade" optional="hide"/>-->
+<!--                <field name="claim_number" optional="show"/>-->
+<!--                <field name="claim_date" optional="show"/>-->
+<!--                <field name="request_status" optional="show"/>-->
+
+
+<!--                <field name="request_owner_id" optional="hide"/>-->
+<!--                <field name="education_eligibility_id" optional="hide"/>-->
+<!--                <field name="education_settings_id" optional="hide"/>-->
+<!--                <field name="request_approver" optional="show"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Form view for the Education.request-->
+    <record model="ir.ui.view" id="education_request_form_view">
+        <field name="name">Education.Request.Form</field>
+        <field name="model">education.request</field>
+        <field name="arch" type="xml">
+            <form delete="0">
+                <header>
+                    <field name="request_status" invisible="1"/>
+                    <field name="user_status" invisible="1"/>
+                    <field name="request_status" widget="statusbar"
+                           statusbar_visible="new,pending,under_approval,approved"/>
+                    <button name="action_submit_request"
+                            string="Submit To Approver" type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': [('request_status','not in',['new'])]}"/>
+<!--                    <button name="send_finance_email"-->
+<!--                            string="Send Mail" type="object"-->
+<!--                            class="btn-primary"-->
+<!--                            />-->
+                    <button name="action_approve" string="Approve" type="object"
+                            attrs="{'invisible':[('user_status','!=','pending')]}"/>
+                    <button name="%(open_education_reject_reason_action)d" string="Refuse" type="action"
+                            attrs="{'invisible':[('user_status','!=','pending')]}"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            attrs="{'invisible':[('request_status','in',['cancel','refused'])]}"/><!--,'&amp;',('user_status','==',False)-->
+
+                    <button name="set_to_draft" string="Set To Draft" type="object"
+                        attrs="{'invisible':[('request_status','in',['new'])]}"
+                        />
+                    <button name="print_report" string="Print Report" type="object"
+                            attrs="{'invisible':[('request_status','in',['new','cancel'])]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" string="Select Employee"
+                                   context="{'is_child_education_request_dynamic_domain':True}"
+                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                   required="1" force_save="1"/>
+                            <field name="employee_no" string="Employee No"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="academic_year" string="Academic Year"
+                                   attrs="{'readonly':[('request_status','not in',['new'])]}"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                   required="1" force_save="1"/>
+                            <field name="employee_job_grade" string="Job Grade"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                   force_save="1"/>
+                            <field name="employee_job_title" string="Job Title"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                   force_save="1"/>
+                            <field name="create_date" string="Creation Date" readonly="1"/>
+                            <field name="claim_date" string="Claim Date" readonly="1"/>
+                            <field name="claim_number" string="Claim Number" readonly="1"/>
+                            <field name="is_hc_approved" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="education_eligibility_id" readonly="1" invisible="1" force_save="1" required="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="education_settings_id" required="1" invisible="1" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                            <field name="request_owner_id" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_edit': True,'no_open': True}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Child Information" name="education_request_page">
+                            <group>
+                                <field name="request_lines" context="{'default_employee_id':employee_id}"
+                                       attrs="{'readonly':[('request_status','not in',['new','pending'])]}" mode="tree">
+
+                                    <tree edit="false">
+                                        <field name="reference_no"
+                                               optional="hide"/>
+                                        <field name="reference_date"
+                                               optional="hide"/>
+                                        <field name="child_id"
+                                               optional="show"/>
+                                        <field name="child_birthdate"
+                                               optional="hide"/>
+                                        <field name="school"
+                                               optional="hide"/>
+                                        <field name="school_grade"
+                                               optional="hide"/>
+                                        <!--                                        <field name="paid_to_school"-->
+                                        <!--                                               optional="show"/>-->
+                                        <field name="request_claimed_amount"
+                                               optional="show"/>
+                                        <field name="eligibility_amount"
+                                               optional="hide"/>
+                                        <field name="request_approved_amount"
+                                               optional="show"/>
+                                        <field name="balance_amount"
+                                               optional="hide"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="note"
+                                       attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"/>
+                            </group>
+                        </page>
+                        <page string="Approver" name="approver">
+                            <group>
+                                <field name="read_only_user" invisible="1"/>
+                                <field name="approver_ids" attrs="{'readonly':[('read_only_user','=',True)]}"
+                                       mode="tree" force_save="1">
+                                    <tree editable="bottom" decoration-success="status=='approved'"
+                                          decoration-warning="status=='pending'"
+                                          decoration-danger="status=='refused'">
+                                        <field name="sequence" invisible="1" widget="handle"/>
+                                        <field name="sequence"/>
+                                        <field name="user_id" string="Approver" force_save="1"
+                                               attrs="{'readonly':[('status','!=','new')]}"/>
+                                        <field name="status"/>
+
+                                        <field name="approval_category" force_save="1" readonly="1"/>
+                                        <field name="is_hc_admin" force_save="1" readonly="1"/>
+                                        <field name="approval_date" force_save="1" readonly="1"/>
+                                        <field name="reject_reason" force_save="1" readonly="1"/>
+
+
+                                    </tree>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="sequence" readonly="1"/>
+                                                    <field name="user_id"
+                                                           options="{'no_create': True, 'no_edit': True,'no_open': True}"
+                                                           readonly="1"/>
+                                                    <field name="status" readonly="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="approval_category" force_save="1" readonly="1"/>
+                                                    <field name="reject_reason" readonly="1"/>
+                                                    <field name="request_id" readonly="1"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="education_request_kanban_view" model="ir.ui.view">
+        <field name="name">Education.Request.kanban</field>
+        <field name="model">education.request</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="employee_id"/>
+                <field name="employee_no"/>
+                <field name="claim_number"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div>
+                                <strong>Employee:</strong>
+                                <t t-esc="record.employee_id.value"/>
+                            </div>
+                            <div>
+                                <strong>Employee No:</strong>
+                                <t t-esc="record.employee_no.value"/>
+                            </div>
+                            <div>
+                                <strong>Request No:</strong>
+                                <t t-esc="record.claim_number.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- Menu action for the All Education Request-->
+    <record id="action_all_education_request_act_window" model="ir.actions.act_window">
+        <field name="name">All Education Request</field>
+        <field name="res_model">education.request</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new Education Request
+            </p>
+        </field>
+    </record>
+
+
+    <!--Child Menu action for the All Education Request-->
+    <menuitem id="child_menu_all_education_request"
+              name="All Education Request"
+              parent="approvals.approvals_menu_manager"
+              action="action_all_education_request_act_window"
+              sequence="24"/>
+
+
+    <!-- Menu action for the education Request-->
+    <record id="education_request_act_window" model="ir.actions.act_window">
+        <field name="name">My Education Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">education.request</field>
+        <field name="domain">[('request_owner_id','=',uid)]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new education request found
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu action for the education  Request  to Review-->
+    <record id="education_request_action_to_review" model="ir.actions.act_window">
+        <field name="name">Education Request to Review</field>
+        <field name="res_model">education.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('approver_ids.user_id', '=', uid), ('request_status', 'in',
+            ['pending','under_approval'])]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No new education request to review
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Sequences for travel request -->
+        <record id="seq_travel_request" model="ir.sequence">
+            <field name="name">Travel Request</field>
+            <field name="code">employee.travel.request</field>
+            <field name="prefix">TR</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <!-- Sequences for travel quotation -->
+        <record id="seq_travel_quotation" model="ir.sequence">
+            <field name="name">Travel Quotation</field>
+            <field name="code">travel.request.quotation</field>
+            <field name="prefix">TQ</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_auto_generate_for_travel" model="ir.sequence">
+            <field name="name">auto generate reference</field>
+            <field name="code">auto.generate.ref</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_perdiem_rule" model="ir.sequence">
+            <field name="name">Perdiem Rule</field>
+            <field name="code">travel.perdiem.rule</field>
+            <field name="prefix">PD</field>
+            <field name="padding">2</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

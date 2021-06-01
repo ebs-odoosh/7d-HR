@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+                <record model="ir.ui.view" id="view_schools_form">
+                    <field name="name">schools.form</field>
+                    <field name="model">schools</field>
+                    <field name="arch" type="xml">
+                        <form string="Schools">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+        <record id="view_schools_tree" model="ir.ui.view">
+            <field name="name">schools.tree</field>
+            <field name="model">schools</field>
+            <field name="arch" type="xml">
+                <tree string="Schools" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+<!--                School Grades view-->
+                <record model="ir.ui.view" id="view_school_grades_form">
+                    <field name="name">school.grades.form</field>
+                    <field name="model">school.grades</field>
+                    <field name="arch" type="xml">
+                        <form string="Schools">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+        <record id="view_school_grades_tree" model="ir.ui.view">
+            <field name="name">school.grades.tree</field>
+            <field name="model">school.grades</field>
+            <field name="arch" type="xml">
+                <tree string="Schools" editable="bottom">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+    <record id="school_grades_action" model="ir.actions.act_window">
+        <field name="name">School Grades</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.grades</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="schools_view_action" model="ir.actions.act_window">
+        <field name="name">Schools</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">schools</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Main Menu  for school-->
+    <menuitem id="main_menu_school"
+              name="School"
+
+              parent="hr_payroll.menu_hr_payroll_configuration"
+              sequence="81"/>
+<!--   groups="security_rules.group_strata_hc"-->
+    <menuitem id="menu_schools_view" name="Schools"
+              parent="main_menu_school" sequence="1"
+              action="schools_view_action"/>
+
+    <menuitem id="menu_school_grades_view" name="School Grades"
+              parent="main_menu_school" sequence="2"
+              action="school_grades_action"/>
+    </data>
+</odoo>

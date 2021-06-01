@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        &lt;!&ndash; paper format for the Child Education Request&ndash;&gt;-->
+        <!--        <record id="paper_format_child_education" model="report.paperformat">-->
+        <!--            <field name="name">Child Education Custom Paper Format</field>-->
+        <!--            <field name="default" eval="True"/>-->
+        <!--            <field name="format">A4</field>-->
+        <!--            <field name="page_height">0</field>-->
+        <!--            <field name="page_width">0</field>-->
+        <!--            <field name="orientation">Portrait</field>-->
+        <!--            <field name="margin_top">30</field>-->
+        <!--            <field name="margin_bottom">50</field>-->
+        <!--            <field name="margin_left">4</field>-->
+        <!--            <field name="margin_right">4</field>-->
+        <!--            <field name="header_line" eval="False"/>-->
+        <!--            <field name="header_spacing">21</field>-->
+        <!--            <field name="dpi">90</field>-->
+        <!--        </record>-->
+
+
+        <!-- Report action for the Child Education Request -->
+        <report
+                string="Print Report"
+                id="child_education_print"
+                model="education.request"
+                report_type="qweb-pdf"
+                name="child_education.report_child_education_request_document_template"
+                file="child_education.report_child_education_request_document_template"
+                print_report_name="'Child Education Report'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+        <report
+                string="Education Claim Details"
+                id="child_education_list_report"
+                model="education.request"
+                report_type="qweb-pdf"
+                name="child_education.report_child_education_list_request_document_template"
+                file="child_education.report_child_education_list_request_document_template"
+                print_report_name="'Child Education List Report'"
+                menu="False"
+                paperformat="res_company_custom.paper_format_custom"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,124 @@
+<odoo>
+    <data>
+        <record id="view_hr_expense_sheet_form_inherit_for_hr_expense_custom" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.form.inherit.expense.custom</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//form/header" position="inside">
+            <field name="user_status" invisible="1"/>
+        </xpath>
+
+
+        <xpath expr="//form/header//field[@name='state']" position="attributes">
+            <attribute name="statusbar_visible">draft,submit,under_approval,approve</attribute>
+        </xpath>
+
+        <xpath expr="//form/header//button[6]" position="attributes">
+            <attribute name="states"></attribute>
+            <attribute name="attrs">{'invisible':[('user_status','!=','pending')]}</attribute>
+
+        </xpath>
+        <xpath expr="//form/header//button[@name='reset_expense_sheets']" position="attributes">
+            <attribute name="invisible">True</attribute>
+        </xpath>
+
+        <xpath expr="//form/header//button[@name='approve_expense_sheets']" position="attributes">
+            <attribute name="states"></attribute>
+            <attribute name="groups"></attribute>
+            <attribute name="attrs">{'invisible':[('user_status','!=','pending')]}</attribute>
+        </xpath>
+
+        <xpath expr="//page[@name='other_info']" position="after">
+            <page string="Approver(s)" name="approvers">
+                <group>
+                    <field name="approver_ids" mode="tree">
+                        <tree editable="bottom" decoration-success="status=='approved'"
+                              decoration-warning="status=='pending'"
+                              decoration-danger="status=='refused'">
+                            <field name="sequence" invisible="1" widget="handle"/>
+                            <field name="sequence"/>
+                            <field name="user_id" string="Approver"
+                                   attrs="{'readonly':[('status','!=','new')]}"/>
+                            <field name="status"/>
+                        </tree>
+                    </field>
+                </group>
+            </page>
+        </xpath>
+<!--        <xpath expr="//group[@name='employee_details']" position="after">-->
+<!--            <group>-->
+<!--                <field name="expense_settings_id" force_save="1" required="1" readonly="1"/>-->
+<!--                &lt;!&ndash;                        <field name="is_travel_expense" readonly="1"/>&ndash;&gt;-->
+<!--                <field name="expense_type" force_save="1" required="1"-->
+<!--                       options="{'no_create': True, 'no_edit': True,'no_open': True}"-->
+<!--                       readonly="1"/>-->
+<!--                <field name="create_uid" readonly="1"/>-->
+<!--            </group>-->
+<!--        </xpath>-->
+
+
+        <xpath expr="//field[@name='expense_line_ids']//tree//field[@name='total_amount_company']"
+               position="attributes">
+            <attribute name="invisible">0</attribute>
+        </xpath>
+
+        <!-- Added by bhavesh jadav 21/05/2021 for change string-->
+          <xpath expr="//field[@name='expense_line_ids']//tree//field[@name='total_amount_company']"
+               position="attributes">
+            <attribute name="string">Total in AED</attribute>
+        </xpath>
+
+
+
+        <xpath expr="//form/header//button[@name='action_sheet_move_create']" position="attributes">
+            <attribute name="invisible">True</attribute>
+        </xpath>
+    </field>
+</record>
+
+
+<!-- Action for all Expense Reports only hc admin can see all reports -->
+        <record id="action_hr_expense_sheet_all" model="ir.actions.act_window">
+            <field name="name">All Expense Reports</field>
+            <field name="res_model">hr.expense.sheet</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <field name="domain">[]
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No expense reports
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu for all Expense Reports only hc admin can see all reports -->
+        <menuitem id="menu_hr_expense_sheet_all" name="All Expense Reports" sequence="2"
+                  parent="hr_expense.menu_hr_expense_report"
+
+                  action="action_hr_expense_sheet_all"/>
+<!--groups="security_rules.group_strata_hc"-->
+
+        <!-- override base Expense Reports to Approve Action-->
+        <record id="action_hr_expense_sheet_all_to_approve" model="ir.actions.act_window">
+            <field name="name">Expense Reports to Approve</field>
+            <field name="res_model">hr.expense.sheet</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <!--            <field name="search_view_id" ref="hr_expense_sheet_view_search"/>-->
+            <field name="domain">[('approver_ids.user_id', '=', uid), ('state', 'in',
+                ['submit','under_approval'])]
+            </field>
+            <!--            <field name="context">{'search_default_submitted': 1}</field>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No expense reports to approve
+                </p>
+            </field>
+        </record>
+
+        <!--        override base Expense Reports to Approve Menu-->
+        <menuitem id="hr_expense.menu_hr_expense_sheet_all_to_approve" name="To Approve" sequence="1"
+                  parent="hr_expense.menu_hr_expense_report"
+                  action="action_hr_expense_sheet_all_to_approve"/>
+    </data>
+</odoo>

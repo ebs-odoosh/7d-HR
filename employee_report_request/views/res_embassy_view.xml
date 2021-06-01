@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+
+        <!-- search view for the the embassy-->
+        <record id="res_embassy_view_search" model="ir.ui.view">
+            <field name="name">res.embassy.view.search</field>
+            <field name="model">res.embassy</field>
+            <field name="arch" type="xml">
+                <search string="Search Embassies">
+                    <field name="name"/>
+                    <field name="arabic_name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Tree view for the embassy-->
+        <record id="res_embassy_tree_view" model="ir.ui.view">
+            <field name="name">res.embassy.tree</field>
+            <field name="model">res.embassy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" optional="show"/>
+                    <field name="arabic_name" optional="show"/>
+                    <field name="country_id" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for the embassy-->
+        <record model="ir.ui.view" id="res_embassy_form_view">
+            <field name="name">res.embassy.form</field>
+            <field name="model">res.embassy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="arabic_name"/>
+                            </group>
+                            <group>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu Action for the embassy-->
+        <record id="res_embassy_act_window" model="ir.actions.act_window">
+            <field name="name">Embassies</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.embassy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Main Menu for the embassy-->
+        <menuitem id="menu_config_res_embassy"
+                  name="Embassies"
+                  action="res_embassy_act_window"
+                  parent="contacts.res_partner_menu_config"
+                  groups="security_rules.group_hc_employee"
+                  sequence="8"/>
+    </data>
+</odoo>

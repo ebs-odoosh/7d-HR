@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- paper format for the travel request ticket   -->
+        <record id="paper_format_travel_custom" model="report.paperformat">
+            <field name="name">Travel Request Ticket Custom Paper Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">50</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">21</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <!-- Report action for the travel request document -->
+        <report
+                string="Print Ticket Request"
+                id="travel_request_ticket_print"
+                model="employee.travel.request"
+                report_type="qweb-pdf"
+                name="employee_travel_management.report_travel_ticket_request_document_template"
+                file="employee_travel_management.report_travel_ticket_request_document_template"
+                print_report_name="'Travel Ticket Request'"
+                menu="False"
+                paperformat="employee_travel_management.paper_format_travel_custom"
+        />
+
+        <report
+                string="Print Ticket Request With Per Diem Cost"
+                id="travel_request_ticket_print_with_per_diem"
+                model="employee.travel.request"
+                report_type="qweb-pdf"
+                name="employee_travel_management.report_travel_ticket_request_document_template_with_cost"
+                file="employee_travel_management.report_travel_ticket_request_document_template_with_cost"
+                print_report_name="'Travel Ticket Request'"
+                menu="False"
+                paperformat="employee_travel_management.paper_format_travel_custom"
+        />
+    </data>
+</odoo>
