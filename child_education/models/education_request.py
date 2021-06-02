@@ -609,14 +609,14 @@ class EducationRequest(models.Model):
         attachment_ids.append((4, report_attachment.id))
 
         mails = self.env['mail.mail']
-        message = _("<p>Dear Fahad & Prajeesh,<br/><br/>Kindly find the attached education assistance request of "
-                    " %s %s , with Claim Number %s, to be processed.<br/>Regards,<br/>HC Team</p>") % (
-                      str(self.employee_id.name), str(self.employee_id.strata_id), str(self.claim_number))
+        message = _("<p>Dears,<br/><br/>Kindly find the attached education assistance request of "
+                    " %s  , with Claim Number %s, to be processed.<br/>Regards,<br/>HC Team</p>") % (
+                      str(self.employee_id.name), str(self.claim_number))
         mail_values = {
-            'email_from': '"HC ADMIN" <Mangulo@strata.ae>',
-            'email_to': '"Fahad" <FMOHAMED@STRATA.AE>,"Prajeesh" <PPREMAN@STRATA.AE>',
-            'email_cc': '"Mouza" <MJALSHAMSI@STRATA.AE>,"Klaithem" <KALSHERYANI@STRATA.AE>,"Shamsa" <SGALQUBAISI@STRATA.AE>',
-            'subject': 'Education Assistance - ' + str(self.employee_id.name) + ' - ' + str(self.employee_id.strata_id),
+            'email_from': '"HC ADMIN"',
+            'email_to': '"hr manager"<>',
+            'email_cc': '',
+            'subject': 'Education Assistance - ' + str(self.employee_id.name) + ' - ',
             'body_html': message,
             'notification': False,
             'attachment_ids': attachment_ids,

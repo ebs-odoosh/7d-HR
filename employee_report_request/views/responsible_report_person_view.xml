@@ -1,19 +1,19 @@
 <odoo>
     <data>
         <!-- Tree view for the responsible.report.person-->
-        <record id="responsible_report_person_tree_view" model="ir.ui.view">
-            <field name="name">responsible.report.person.tree</field>
-            <field name="model">responsible.report.person</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="person_name_eng" optional="show"/>
-                    <field name="person_position_eng" optional="show"/>
-                    <field name="person_name_arab" optional="show"/>
-                    <field name="person_position_arab" optional="show"/>
-                    <field name="company_id" optional="hide"/>
-                </tree>
-            </field>
-        </record>
+<!--        <record id="responsible_report_person_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">responsible.report.person.tree</field>-->
+<!--            <field name="model">responsible.report.person</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="person_name_eng" optional="show"/>-->
+<!--                    <field name="person_position_eng" optional="show"/>-->
+<!--                    <field name="person_name_arab" optional="show"/>-->
+<!--                    <field name="person_position_arab" optional="show"/>-->
+<!--                    <field name="company_id" optional="hide"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
         <!-- Form View for the responsible person-->
         <record model="ir.ui.view" id="responsible_report_person_form_view">
             <field name="name">responsible.report.person.form</field>
@@ -56,7 +56,6 @@
                   name="Letters Responsible Person"
                   action="responsible_person_act_window"
                   parent="approvals.approvals_menu_config"
-                  groups="security_rules.group_hc_employee"
                   sequence="11"/>
     </data>
 </odoo>

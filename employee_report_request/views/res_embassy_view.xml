@@ -15,17 +15,17 @@
         </record>
 
         <!-- Tree view for the embassy-->
-        <record id="res_embassy_tree_view" model="ir.ui.view">
-            <field name="name">res.embassy.tree</field>
-            <field name="model">res.embassy</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name" optional="show"/>
-                    <field name="arabic_name" optional="show"/>
-                    <field name="country_id" optional="show"/>
-                </tree>
-            </field>
-        </record>
+<!--        <record id="res_embassy_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">res.embassy.tree</field>-->
+<!--            <field name="model">res.embassy</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="arabic_name" optional="show"/>-->
+<!--                    <field name="country_id" optional="show"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- Form View for the embassy-->
         <record model="ir.ui.view" id="res_embassy_form_view">
@@ -62,7 +62,6 @@
                   name="Embassies"
                   action="res_embassy_act_window"
                   parent="contacts.res_partner_menu_config"
-                  groups="security_rules.group_hc_employee"
                   sequence="8"/>
     </data>
 </odoo>

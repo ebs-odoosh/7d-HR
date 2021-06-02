@@ -8,7 +8,7 @@ class EmployeeBankChanges(models.Model):
     _description = 'Employee Bank Account'
 
     employee_bank_change = fields.Many2one('hr.employee', string="Employee Name")
-    employee_number = fields.Char(related='employee_bank_change.strata_id', string="Employee Number")
+    # employee_number = fields.Char(related='employee_bank_change.x_company_id', string="Employee Number")
     department_id_e_bank = fields.Many2one(related='employee_bank_change.contract_id.department', string="Department")
     date_of_join_e_bank = fields.Date(related='employee_bank_change.contract_id.date_start', string="Date of joining")
     current_bank_name = fields.Many2one('res.bank', string='Current Bank Name')

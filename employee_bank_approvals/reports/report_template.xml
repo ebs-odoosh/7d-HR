@@ -53,7 +53,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Strata Id</th>
+                                        <th>Company Id</th>
                                         <td>
                                             <span t-field="doc.employee_number"/>
                                         </td>

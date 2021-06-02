@@ -155,12 +155,12 @@ class ImportChildEducation(models.Model):
                             'Children Lines/Terms Fees/Claimed Amount') else 0.0
                         paid_to = row.get('Children Lines/Terms Fees/Paid To')
 
-                        strata_id = self.env['hr.employee'].search([('strata_id', '=', employee_no)])
-                        if not strata_id:
+                        x_company_id = self.env['hr.employee'].search([('x_company_id', '=', employee_no)])
+                        if not x_company_id:
                             val = {
                                 'import_log_id': self.id,
                                 'line_no': int(line_no),
-                                'message': "Strata Id %s not found for any employee" % employee_no
+                                'message': "Company Id %s not found for any employee" % employee_no
                             }
                             self.env['import.child.education.log.line'].create(val)
                         else:
@@ -170,13 +170,13 @@ class ImportChildEducation(models.Model):
                                 [('name', '=', academic_year)], limit=1)
                             education_id = self.env['education.request'].search(
                                 [('claim_date', '=', claim_date), ('academic_year', '=', academic_year.id),
-                                 ('employee_id', '=', strata_id.id)], limit=1)
+                                 ('employee_id', '=', x_company_id.id)], limit=1)
                             if education_id:
                                 child_id = self.env['res.partner'].search(
-                                    [('name', '=', child_name), ('related_employee', '=', strata_id.id)], limit=1)
+                                    [('name', '=', child_name), ('related_employee', '=', x_company_id.id)], limit=1)
                                 request_line_id = self.env['education.request.line'].search(
                                     [('education_request_id', '=', education_id.id),
-                                     ('employee_id', '=', strata_id.id), ('child_id', '=', child_id.id)])
+                                     ('employee_id', '=', x_company_id.id), ('child_id', '=', child_id.id)])
                                 if request_line_id:
                                     fees_terms = self.env['education.terms.fees.line'].search(
                                         [('name', '=', terms_fees_name)])
@@ -222,7 +222,7 @@ class ImportChildEducation(models.Model):
                                                                    'education_request_id': education_id.id if education_id else False,
                                                                    'total_approved_amount': approved_amount or 0,
                                                                    'balance_amount': balance_amount or 0,
-                                                                   'employee_id': strata_id.id if strata_id else False,
+                                                                   'employee_id': x_company_id.id if x_company_id else False,
                                                                    # 'cheque_number': cheque_number or '',
                                                                    'attachment_ids': documents if documents else False,
                                                                    'terms_fees_line_ids': fees_terms if fees_terms else False, })
@@ -265,7 +265,7 @@ class ImportChildEducation(models.Model):
                                                               'paid_to': self.replace_paid_to(paid_to)}
                                             fees_terms = self.env['education.terms.fees.line'].create(terms_fees_val)
                                     child_id = self.env['res.partner'].search(
-                                        [('name', '=', child_name), ('related_employee', '=', strata_id.id)], limit=1)
+                                        [('name', '=', child_name), ('related_employee', '=', x_company_id.id)], limit=1)
                                     school = self.env['schools'].search([('name', '=', school)], limit=1)
                                     school_grade = self.env['school.grades'].search([('code', '=', school_grade)],
                                                                                     limit=1)
@@ -281,7 +281,7 @@ class ImportChildEducation(models.Model):
                                                         'education_request_id': education_id.id if education_id else False,
                                                         'total_approved_amount': approved_amount or 0,
                                                         'balance_amount': balance_amount or 0,
-                                                        'employee_id': strata_id.id if strata_id else False,
+                                                        'employee_id': x_company_id.id if x_company_id else False,
                                                         # 'cheque_number': cheque_number or '',
                                                         'attachment_ids': documents if documents else False,
                                                         'terms_fees_line_ids': fees_terms if fees_terms else False,
@@ -315,7 +315,7 @@ class ImportChildEducation(models.Model):
                                                       'paid_to': self.replace_paid_to(paid_to)}
                                     fees_terms = self.env['education.terms.fees.line'].create(terms_fees_val)
                                 child_id = self.env['res.partner'].search(
-                                    [('name', '=', child_name), ('related_employee', '=', strata_id.id)], limit=1)
+                                    [('name', '=', child_name), ('related_employee', '=', x_company_id.id)], limit=1)
                                 school = self.env['schools'].search([('name', '=', school)], limit=1)
                                 school_grade = self.env['school.grades'].search([('name', '=', school_grade)], limit=1)
                                 request_line_val = {'child_id': child_id.id if child_id else False,
@@ -329,24 +329,24 @@ class ImportChildEducation(models.Model):
                                                     'eligibility_amount': eligibility_amount or 0,
                                                     'total_approved_amount': approved_amount or 0,
                                                     'balance_amount': balance_amount or 0,
-                                                    'employee_id': strata_id.id if strata_id else False,
+                                                    'employee_id': x_company_id.id if x_company_id else False,
                                                     # 'cheque_number': cheque_number or '',
                                                     'attachment_ids': documents if documents else False,
                                                     'terms_fees_line_ids': fees_terms if fees_terms else False,
                                                     }
                                 request_line_id = self.env['education.request.line'].create(request_line_val)
-                                # academic_year = self.env['education.academic.year'].search(
-                                #     [('name', '=', academic_year)])
+                                academic_year = self.env['education.academic.year'].search(
+                                    [('name', '=', academic_year)])
                                 request_approval = self.env['res.users'].search([('name', '=', request_approval)],
                                                                                 limit=1)
                                 eligibility_rule = self.env['education.eligibility'].search(
                                     [('name', '=', eligibility_rule)], limit=1)
 
                                 education_val = {'request_lines': request_line_id.ids if request_line_id else False,
-                                                 'employee_id': strata_id.id if strata_id else False,
+                                                 'employee_id': x_company_id.id if x_company_id else False,
                                                  'employee_no': employee_no or '',
                                                  'academic_year': academic_year.id if academic_year else False,
-                                                 'request_owner_id': strata_id.user_id.id if strata_id else False,
+                                                 'request_owner_id': x_company_id.user_id.id if x_company_id else False,
                                                  'claim_date': claim_date or '',
                                                  'claim_number': claim_number or '',
                                                  'request_status': self.replace_status(request_status) or '',
@@ -354,7 +354,7 @@ class ImportChildEducation(models.Model):
                                                  'request_approver': request_approval.id if request_approval else False,
                                                  'is_hc_approved': True
                                                  }
-                                if strata_id[0]:
+                                if x_company_id[0]:
                                     e_rec = self.env['education.request'].sudo().create(education_val)
                                     if e_rec:
                                         approver = self.env['res.users'].search([('name', '=', request_approval.name)])
@@ -372,7 +372,7 @@ class ImportChildEducation(models.Model):
                                     log_val = {
                                         'import_log_id': self.id,
                                         'line_no': int(line_no),
-                                        'message': "Record Created with Strata id %s, Line no %d" % (
+                                        'message': "Record Created with Company id %s, Line no %d" % (
                                             employee_id, line_no)
                                     }
                                     self.env['import.child.education.log.line'].create(log_val)

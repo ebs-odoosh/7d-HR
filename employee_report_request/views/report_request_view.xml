@@ -19,22 +19,22 @@
         </record>
 
         <!-- Tree view for the report.request-->
-        <record id="view_report_request_tree" model="ir.ui.view">
-            <field name="name">report.request.tree</field>
-            <field name="model">report.request</field>
-            <field name="arch" type="xml">
-                <tree edit="false" delete="0">
-                    <field name="name" optional="show"/>
-                    <field name="reference" optional="show"/>
-                    <field name="employee_id" optional="show"/>
-                    <field name="request_owner_id" readonly="1" optional="show"/>
-                    <field name="letter_type" optional="show"/>
-                    <field name="letter_lang" optional="show"/>
-                    <field name="submit_date" optional="show"/>
-                    <field name="state" readonly="1" optional="show"/>
-                </tree>
-            </field>
-        </record>
+<!--        <record id="view_report_request_tree" model="ir.ui.view">-->
+<!--            <field name="name">report.request.tree</field>-->
+<!--            <field name="model">report.request</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree edit="false" delete="0">-->
+<!--                    <field name="name" optional="show"/>-->
+<!--                    <field name="reference" optional="show"/>-->
+<!--                    <field name="employee_id" optional="show"/>-->
+<!--                    <field name="request_owner_id" readonly="1" optional="show"/>-->
+<!--                    <field name="letter_type" optional="show"/>-->
+<!--                    <field name="letter_lang" optional="show"/>-->
+<!--                    <field name="submit_date" optional="show"/>-->
+<!--                    <field name="state" readonly="1" optional="show"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- Form view for the report.request-->
         <record model="ir.ui.view" id="report_request_form_view_">
@@ -136,6 +136,6 @@
                   name="All Letter Request"
                   parent="approvals.approvals_menu_manager"
                   action="report_request_all_act_window"
-                  sequence="22" groups="security_rules.group_strata_hc"/>
+                  sequence="22"/>
     </data>
 </odoo>

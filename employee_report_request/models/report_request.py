@@ -297,27 +297,25 @@ class ReportRequest(models.Model):
                 return responsible_person.person_signature or False
 
         # ------------- extra methods -------------
-    # def get_employee(self):
-    #     """
-    #     Author:Bhavesh Jadav TechUltra Solutions
-    #     Date:10/09/2020
-    #     Func:prepare list of tuple for the dynamic selection field for the employee
-    #     :return: list: for selection combinations with the employees id and the employee name
-    #     """
-    #     data = []
-    #     employees = []
-    #     employee_id = self.env.user.employee_id
-    #     if employee_id and self.env.user.has_group('security_rules.group_strata_employee'):
-    #         data.append((str(employee_id.id), str(employee_id.name)))
-    #         return data
-    #         # employees = list(set(self.get_child_of_employee(employee_id)))
-    #         # employees = employee_id.browse(employees)
-    #     elif self.env.user.has_group('security_rules.group_strata_hc'):
-    #         employees = self.env['hr.employee'].search([])
-    #     if employees:
-    #         for employee in employees:
-    #             data.append((str(employee.id), str(employee.name)))
-    #     return data
+    def get_employee(self):
+        """
+        Author:Bhavesh Jadav TechUltra Solutions
+        Date:10/09/2020
+        Func:prepare list of tuple for the dynamic selection field for the employee
+        :return: list: for selection combinations with the employees id and the employee name
+        """
+        data = []
+        employees = []
+        employee_id = self.env.user.employee_id
+        if employee_id and self.env.user.has_group('security_rules.group_strata_employee'):
+            data.append((str(employee_id.id), str(employee_id.name)))
+            return data
+            # employees = list(set(self.get_child_of_employee(employee_id)))
+            # employees = employee_id.browse(employees)
+        if employees:
+            for employee in employees:
+                data.append((str(employee.id), str(employee.name)))
+        return data
 
     # def get_child_of_employee(self, child_ids):
     #     """

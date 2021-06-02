@@ -27,24 +27,23 @@ class HrEmployee(models.Model):
             self.iban = ''
             return
 
-    # def name_get(self):
-    #     """
-    #     :Author:Nimesh Jadav TechUltra Solutions
-    #     :Date:24/11/2020
-    #     :Func:this method use for the add name with with strata id for approval request
-    #     :Return:list with name and strata id
-    #     """
-    #     result = []
-    #     for employee in self:
-    #         if self._context.get('active_model', False):
-    #             if self._context.get('active_model') == "approval.category" or self._context.get(
-    #                     'active_model') == "approval.request":
-    #                 if employee.name and employee.strata_id:
-    #                     result.append(
-    #                         (employee.id, _(" %s  -  %s") % (
-    #                             employee.sudo().name,
-    #                             employee.strata_id)
-    #                          ))
-    #         else:
-    #             result.append((employee.id, employee.sudo().name))
-    #     return result
+    def name_get(self):
+        """
+        :Author:Nimesh Jadav TechUltra Solutions
+        :Date:24/11/2020
+        :Func:this method use for the add name with with x_company_id id for approval request
+        :Return:list with name and company id
+        """
+        result = []
+        for employee in self:
+            if self._context.get('active_model', False):
+                if self._context.get('active_model') == "approval.category" or self._context.get(
+                        'active_model') == "approval.request":
+                    if employee.name:
+                        result.append(
+                            (employee.id, _(" %s  -  %s") % (
+                                employee.sudo().namex_company_id)
+                             ))
+            else:
+                result.append((employee.id, employee.sudo().name))
+        return result

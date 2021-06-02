@@ -143,16 +143,16 @@ class hr_exit_line(models.Model):
                                                                 limit=limit, order=order)
         return super().search_read(domain=domain, fields=fields, offset=offset, limit=limit, order=order)
 
-    def read(self, fields, load='_classic_read'):
-        view = False
-        current_user = self.env.user
-        for rec in self:
-            if current_user.has_group(
-                    'security_rules.group_strata_hc') or current_user.id == rec.responsible_user_id.id or current_user.id == rec.confirm_by_id.id:
-                view = True
-            if not view:
-                raise AccessError(_("You don't have access to view this page/record"))
-            return super(hr_exit_line, self).read(fields=fields, load=load)
+    # def read(self, fields, load='_classic_read'):
+    #     view = False
+    #     current_user = self.env.user
+    #     for rec in self:
+    #         # if current_user.has_group(
+    #         #         'security_rules.group_strata_hc') or current_user.id == rec.responsible_user_id.id or current_user.id == rec.confirm_by_id.id:
+    #         view = True
+    #         if not view:
+    #             raise AccessError(_("You don't have access to view this page/record"))
+    #         return super(hr_exit_line, self).read(fields=fields, load=load)
 
 
 class hr_exit(models.Model):

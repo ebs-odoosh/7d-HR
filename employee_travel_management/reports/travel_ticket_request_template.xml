@@ -65,7 +65,7 @@
                                     <tr>
                                         <th>Employee Number</th>
                                         <td>
-                                            <span t-field="doc.employee_id.strata_id"/>
+                                            <span t-field="doc.employee_id.x_company_id"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -321,7 +321,7 @@
                                     <tr>
                                         <th>Employee Number</th>
                                         <td>
-                                            <span t-field="doc.employee_id.strata_id"/>
+                                            <span t-field="doc.employee_id.x_company_id"/>
                                         </td>
                                     </tr>
                                     <tr>

@@ -11,7 +11,7 @@ class ApprovalRequest(models.Model):
     bank_changes_request = fields.One2many('employee.bank.change', inverse_name='bank_change_approval',
                                            string='Bank Change', required=False)
     employee_name = fields.Many2one('hr.employee', string="Employee Name")
-    employee_number = fields.Char(related='employee_name.strata_id', string="Strata Id")
+    # employee_number = fields.Char(related='employee_name.x_company_id', string="Company Id")
     department_id_e_bank = fields.Many2one(related='employee_name.department_id', string="Department")
     date_of_join_e_bank = fields.Date(related='employee_name.contract_id.date_start', string="Date of joining")
     current_bank_name = fields.Many2one('res.bank', string='Current Bank Name')
@@ -19,7 +19,7 @@ class ApprovalRequest(models.Model):
     current_account_number = fields.Char(string='Current Account Number', size=16)
     account_number = fields.Char(string='Account Number', size=16)
     iban = fields.Char(string='IBAN', size=23)
-    # effective_month_year = fields.Date(string='Effective Month/Year')
+    effective_month_year = fields.Date(string='Effective Month/Year')
     select_bank = fields.Many2one('res.bank', string='Select Bank')
     effective_month = fields.Selection(
         [('1', 'January'), ('2', 'February'), ('3', 'March'), ('4', 'April'), ('5', 'May'), ('6', 'June'),
@@ -31,13 +31,13 @@ class ApprovalRequest(models.Model):
         """
         :Author:Nimesh Jadav TechUltra Solutions
         :Date:27/11/2020
-        :Func:this method use for the add name with with strata id
-        :Return:list with name and strata id
+        :Func:this method use for the add name with with company id
+        :Return:list with name and company id
         """
         for employee in self:
             if employee.is_bank_changes_request == 'yes':
                 employee.name = str(employee.category_id.name) + " - " + str(
-                    employee.employee_name.name or '') + " - " + str(employee.employee_name.strata_id or '')
+                    employee.employee_name.name or '') + " - " + str(employee.employee_name.x_company_id or '')
 
     def action_approve(self, approver=None):
         res = super(ApprovalRequest, self).action_approve(approver=approver)
