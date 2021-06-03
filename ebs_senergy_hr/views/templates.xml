@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+        <template id="hr_applicant_assets_backend" name="hr_applicant assets backend" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss"
+                      href="/ebs_senergy_hr/static/src/css/bootstrap.css"/>
+            </xpath>
+        </template>
+        <template id="hr_jobs_senergy_index" inherit_id="website_hr_recruitment.index">
+            <xpath expr="//t[@t-call='website.layout']/div/div[1]" position="replace">
+                <div class="oe_structure">
+                    <section class="mb16 mt16">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center mb16">
+                                    <h2>Careers</h2>
+                                    <h3 class="text-muted">Join our team and be part of our mission</h3>
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    <p>
+                                        If you believe you have what it takes to be a part of our team, view our job
+                                        vacancies and apply online here:
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </xpath>
+        </template>
+        <template id="website_footer_senergy" inherit_id="website.footer_custom">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                    <section class="s_text_block pt16 pb8">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-lg-5">
+                                    <ul class="list-group">
+                                        <li>We hire fresh graduates as well as experienced mid-career professionals in
+                                            the industry.
+                                        </li>
+                                        <li>We are committed to hiring locally from the communities where we work.</li>
+                                        <li>
+                                            With operations in many countries in the Middle East and North Africa you
+                                            will
+                                            have the chance to travel, work and be exposed to many cultures and
+                                            challenges
+                                            which broaden your vision, enrich your knowledge and build your career on a
+                                            solid foundation.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-5">
+                                    <ul class="list-group">
+                                        <li>
+                                            We are an equal opportunity employer! Your gender race and background will
+                                            not
+                                            effect your chances to join us or to progress within our organization. The
+                                            only
+                                            thing you need is commitment, teamwork, dedication and belief in what we
+                                            stand
+                                            for!
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-2" id="connect">
+                                    <h5>Connect with us</h5>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/contactus">Contact us</a></li>
+                                        <li>
+                                            <i class="fa fa-phone"/>
+                                            <span class="o_force_ltr" t-field="res_company.phone"/>
+                                        </li>
+                                        <li style="display: inline-flex;">
+                                            <i class="fa fa-envelope"/>
+                                            <span t-field="res_company.email"
+                                                  style="padding-left: 5px;margin-top: -5px !important;"/>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        <a t-if="website.social_facebook" t-att-href="website.social_facebook"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-facebook-square"/></a>
+                                        <a t-if="website.social_twitter" t-att-href="website.social_twitter"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-twitter"/></a>
+                                        <a t-if="website.social_linkedin" t-att-href="website.social_linkedin"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-linkedin"/></a>
+                                        <a t-if="website.social_youtube" t-att-href="website.social_youtube"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-youtube-play"/></a>
+                                        <a t-if="website.social_github" t-att-href="website.social_github"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-github"/></a>
+                                        <a t-if="website.social_instagram" t-att-href="website.social_instagram"
+                                           class="btn btn-sm btn-link"><i class="fa fa-2x fa-instagram"/></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="view_department_tree_tree_inherit2" model="ir.ui.view">
+            <field name="name">hr.department.tree.inherit2</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_tree"/>
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="name_ar"/>
+                    <field name="type"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_department_tree_form_inherit2" model="ir.ui.view">
+            <field name="name">hr.department.form.inherit2</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="name_ar"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

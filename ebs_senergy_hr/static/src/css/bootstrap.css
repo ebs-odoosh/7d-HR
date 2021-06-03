@@ -1,0 +1,7 @@
+div[name='answer_ids'] .table-sm td {
+  padding: 0.75rem!important;
+}
+div[name='answer_ids'] .o_list_view .o_list_table .o_data_row:not(.o_selected_row) .o_list_many2one,
+div[name='answer_ids'] .o_list_view .o_list_table tbody > tr > td:not(.o_list_record_selector):not(.o_handle_cell) {
+    white-space: initial!important;
+}

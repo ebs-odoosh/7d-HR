@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report
+                id="hr_contract_custom.contract_job_offer"
+                model="hr.contract"
+                string="Job Offer / Contract"
+                report_type="qweb-pdf"
+                name="hr_contract_custom.job_offer_report"
+                file="hr_contract_custom.job_offer_report"
+                print_report_name="object.name"
+                attachment="(object.company_id.name)+' - '+(object.job_id.job_title.name if object.job_id.job_title else '')+'.pdf'"
+
+        />
+        <template inherit_id="hr_contract_custom.report_job_offer_document" id="report_job_offer_document_inherit">
+            <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+                <t t-call="web.external_layout" style="font-family: Lato;">
+                    <t t-if="o.state=='draft'">
+                        <div class="page">
+                            <div class="text-center" id="title">
+                                <h2>
+                                    <strong>Job Offer</strong>
+                                    <br/>
+                                    <strong>عرض عمل</strong>
+                                </h2>
+                            </div>
+                            <table class="table">
+                                <tr style="page-break-inside: avoid;">
+                                    <td width="50%">
+                                        <t>
+                                            <strong>Date: </strong>
+                                            <span t-esc="datetime.date.today()"/>
+                                        </t>
+                                        <br/>
+                                        <strong>
+                                            <t t-esc="o.applicant_id.surname_id.name"/>
+                                            <t t-esc="o.applicant_id.partner_name"/>
+                                        </strong>
+                                    </td>
+                                    <td dir="rtl" class="text-right" width="50%">
+                                        <t>
+                                            <strong> التاريخ:</strong>
+                                            <span t-esc="datetime.date.today()"/>
+                                        </t>
+                                        <br/>
+                                        <strong><t t-esc="o.applicant_id.surname_id.name"/>
+                                            <t t-esc="o.applicant_id.partner_name"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <span>
+                                            It's with pleasure to offer you the position of "<t
+                                                t-esc="o.applicant_id.job_id.job_title.name"/>" at <t
+                                                t-esc="o.company_id.name"/>, as per the following terms in accordance
+                                            with
+                                            our company’s policies:
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right">
+                                        <span>
+                                            يسر
+                                            <t t-esc="o.company_id.arabic_name"/>
+                                            أن تعرض عليكم وظيفة
+                                            "<t t-esc="o.applicant_id.job_id.job_title.arabic_name"/> " للشركة وفقا
+                                            للائحة
+                                            السياسات الداخلية للشركة وحسب التالي:
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;">
+                                            <li>
+                                                <span>Job Grade:</span>
+                                                <span t-esc="o.job_id.job_grade.name"/>
+                                            </li>
+                                            <li>
+                                                <span>Basic monthly salary:</span>
+                                                <span t-esc="round(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount,2)"/>
+                                                <span>KWD</span>
+                                            </li>
+                                            <li>
+                                                <span>Transportation Allowance:</span>
+                                                <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                                <span>KWD</span>
+                                            </li>
+                                            <li>
+                                                <span>Housing Allowance:</span>
+                                                <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                                <span>KWD</span>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td dir="rtl" class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;">
+                                            <li>
+                                                <span>الدرجة الوظيفية:</span>
+                                                <span t-esc="o.job_id.job_grade.name"/>
+                                            </li>
+                                            <li>
+                                                <span>الراتب الشهري الأساسي:</span>
+                                                <span t-esc="round(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount,2)"/>
+                                                <span>د.ك</span>
+                                            </li>
+                                            <li>
+                                                <span>بدل تنقلات:</span>
+                                                <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                                <span>د.ك</span>
+                                            </li>
+                                            <li>
+                                                <span>بدل السكن:</span>
+                                                <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                                <span>د.ك</span>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <strong>
+                                            In addition to the following benefits:
+                                        </strong>
+                                        <ol style="padding-left: 40px !important;" start="5">
+                                            <li>
+                                                <span>
+                                                    Annual leave
+                                                    <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'leaves' and x.state == 'active').value"/>
+                                                    Days.
+                                                </span>
+                                            </li>
+                                            <li>
+                                                Annual bonus:
+                                                <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'performance_bonus' and x.state == 'active').value"/>
+                                                of the total annual basic salary subject to the employee’s performance
+                                                and the company’s overall performance and profitability
+                                            </li>
+                                            <li>
+                                                Annual Air Ticket: For the Self only / Self &amp; Family
+                                            </li>
+                                            <li>
+                                                Medical insurance: For the Self only / Self &amp; Family
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td dir="rtl" class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <strong>
+                                            هذا مع التمتع بالمزايا التالية:
+                                        </strong>
+                                        <ol style="padding-right: 40px !important;" start="5">
+                                            <li>
+                                                <span>
+                                                    الإجازة سنوية
+                                                    <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'leaves' and x.state == 'active').value"/>
+                                                    يوم.
+                                                </span>
+                                            </li>
+                                            <li>
+                                                مكافأة سنوية:
+                                                <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'performance_bonus' and x.state == 'active').value"/>
+                                                من الراتب الأساسي السنوي ربطا بأداء الموظف ونتائج
+                                                الشركة والأرباح المحققة للشركة.
+                                            </li>
+                                            <li>
+                                                تذاكر سفر : للموظف فقط / الموظف والعائلة
+                                            </li>
+                                            <li>
+                                                تأمين صحي : للموظف فقط / الموظف والعائلة
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <strong>
+                                            To accept this offer, kindly sign and date this letter as indicated below.
+                                        </strong>
+                                    </td>
+                                    <td dir="rtl" class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <strong>لقبول هذا العرض، يرجى التوقيع في المكان المخصص أدناه.</strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td class="text-right">
+                                        <strong>Signature</strong>
+                                    </td>
+                                    <td>
+                                        <strong>التوقيع</strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <strong>Employee’s Agreement</strong>
+                                        <br/>
+                                        <span>I agree to commence duty on ………………………… corresponding to (date)
+                                            …………………</span>
+                                    </td>
+
+                                    <td dir="rtl" class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <strong dir="rtl" class="text-right">موافقة الموظف</strong>
+                                        <br/>
+                                        <span>
+                                            أوافق على مباشرة العمل يوم ……………………… الموافق ………………………
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <strong>Signature</strong>
+                                    </td>
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <strong>التوقيع</strong>
+                                    </td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td colspan="2" style="border-top:0;padding 0 0.75rem;">…………………………………</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="page">
+                            <table class="table table-bordered">
+                                <tr style="page-break-inside: avoid;">
+                                    <td width="50%" class="text-center">
+                                        <strong>
+                                            Employment Agreement
+                                        </strong>
+                                    </td>
+                                    <td dir="rtl" class="text-center" width="50%">
+                                        <strong>
+                                            عــقــدعــمل
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;">
+                                        <span>
+                                            This agreement is made on
+                                            <span t-esc="datetime.date.today()"/>
+                                            by and between:
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right" style="border-top:0;border-bottom:0;">
+                                        <span>
+                                            تمت هذه الاتفاقية في
+                                            <span t-esc="datetime.date.today()"/>
+                                            بين كلٍ من :
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;padding 0 0.75rem;">
+                                        <span>
+                                            <t t-esc="o.company_id.name"/> a corporation incorporated under the
+                                            laws of Kuwait and having its principal place of business at the state of
+                                            Kuwait, represented in this agreement by
+                                            <t t-if="o.company_id.id==2">Mr. Aiman Mohammed Bohendi</t>
+                                            <t t-if="o.company_id.id==4">Mr. Faisal AlSaleh</t>
+                                            the Authorized Signatory,
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span>(hereinafter referred to as the "Employer"); </span>
+                                        <br/>
+                                        <span>and</span>
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <t t-esc="o.applicant_id.surname_id.name"/>
+                                            <t t-esc="o.employee_id.name"/>, holding a Civil ID number
+                                        </span>
+                                        <br/>
+                                        <span>(Hereinafter referred to as the "Employee").</span>
+                                    </td>
+                                    <td dir="rtl" class="text-right" style="border-top:0;padding 0 0.75rem;">
+                                        <span>
+                                            صاحب العمل / <t t-esc="o.company_id.arabic_name"/>
+                                            المسجلة بموجب القوانين
+                                            المعمول بها في دولة الكويت ومقرها الرئيسي في دولة الكويت، ويمثلها في هذا
+                                            العقد السيد /
+                                            <t t-if="o.company_id.id==2">ايمن محمد بوهندي</t>
+                                            <t t-if="o.company_id.id==4">فيصل الصالح</t>
+                                            بصفته المفوض بالتوقيع عن الشركة.
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span>(يشار إليه بصاحب العمل)</span>
+                                        <br/>
+                                        <span>و</span>
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            السيد /
+                                            <t t-esc="o.employee_id.arabic_name"/>
+                                            يحمل بطاقة مدنية رقم
+                                        </span>
+                                        <br/>
+                                        <span>(يشار إليه بالموظف )</span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td class="text-center" style="border-top:0;padding 0 0.75rem;">
+                                        <strong>{Preface}</strong>
+                                    </td>
+                                    <td class="text-center" style="border-top:0;padding 0 0.75rem;">
+                                        <strong>[ تمهيـــد ]</strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            Whereas the Employer desires to obtain the benefit of the services of the
+                                            Employee, and the Employee desires to render such services on the terms and
+                                            conditions set forth, both parties agree to the following:
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            لما كان صاحب العمل يرغب في الاستفادة من خدمات وخبرات الموظف، وكان الموظف
+                                            يرغب في تقديم هذه الخدمات وفقاً للشروط المنصوص عليها في هذا العقد، لذا فقد
+                                            اتفقا على الأتي:-
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;">
+                                            <li><strong>Employment:</strong></li>
+                                        </ol>
+                                        <span>The Employee agrees that he will be faithfully, industriously, and to the
+                                            best of his skill, ability, experience and talents, perform all of the
+                                            duties required of his position. In carrying out these duties and
+                                            responsibilities, the Employee shall comply with all Employer policies,
+                                            procedures, rules and regulations, both written and oral, as are announced
+                                            by the Employer from time to time. It is also understood and agreed by the
+                                            Employee that his assignment, duties and responsibilities and reporting
+                                            arrangements may be changed by the Employer in its sole discretion without
+                                            causing termination of this agreement. </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;">
+                                            <li><strong>التوظيف :</strong></li>
+                                        </ol>
+                                        <span>يقر الموظف بأنه سيقوم بأداء جميع الالتزامات المطلوبة منه والمتعلقة بوظيفته
+                                            بالإخلاص والاجتهاد اللازم وبأعلى درجات المهارة والخبرة المطلوبة ، كما يلتزم
+                                            بهذه الواجبات والمسئوليات تجاه رب العمل وفقاً للوائح والقواعد سواء المكتوبة
+                                            أو الشفهية المعلنة من صاحب العمل من وقت لآخر، كما يوافق الموظف على إنجاز أية
+                                            أعمال أو واجبات أو مسئوليات أخرى تسند إليه ويتم إبلاغه بها من قبل صاحب العمل
+                                            وفق تقدير الأخير دون أن يؤدي ذلك إلى إنهاء العقد .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+
+                                        <ol style="padding-left: 40px !important;" start="2">
+                                            <li>
+                                                <strong>Position and Duties</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            The Employee undertakes to perform the duties and responsibilities set
+                                            forth in the enclosed job description, in addition to the duties and
+                                            responsibilities that may be assigned to him by the employer from time to
+                                            time.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+
+                                        <ol style="padding-right: 40px !important;" start="2">
+                                            <li><strong>الواجبات :</strong></li>
+                                        </ol>
+                                        <span>
+                                            يلتزم الموظف بأداء واجباته الوظيفية والمسئوليات المسندة إليه والمنصوص عليها
+                                            في الوصف الوظيفي المرفق، بالإضافة إلى الواجبات والمسئوليات التي قد تسند إليه
+                                            من صاحب العمل من وقت لآخر .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="3">
+                                            <li>
+                                                <strong>Compensation/Benefits</strong>
+                                                <ol style="padding-left: 40px !important;">
+                                                    <li>
+                                                        <strong>
+                                                            Wage:
+                                                        </strong>
+                                                        <span>
+                                                            The Employer shall pay the Employee the wage set forth in
+                                                            Annexure “A” enclosed herein.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Bonus:
+                                                        </strong>
+                                                        <span>
+                                                            The Employer shall pay the Employee a performance-based
+                                                            bonus according to the Employer’s Company Policy as such
+                                                            policy is in effect from time to time, which determines
+                                                            whether or not the eligibility criteria are due.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Reimbursement of Expenses:
+                                                        </strong>
+                                                        <span>
+                                                            The Employee shall be reimbursed for all reasonable and
+                                                            necessary expenses paid or incurred by him in the
+                                                            performance of his duties, assuming they have been
+                                                            authorized prior to being incurred and with the provision of
+                                                            appropriate receipts for such expenses.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Withholdings / Deductions:
+                                                        </strong>
+                                                        <span>
+                                                            All compensation paid to the Employee under this Agreement,
+                                                            including payment of salary and taxable benefits shall be
+                                                            subject to such withholdings/deductions as may be required
+                                                            by law or the company general practices.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            Benefits:
+                                                        </strong>
+                                                        <span>
+                                                            The Employer shall at its expense provide the Employee with
+                                                            the Employer’s standard employee benefits package (including
+                                                            health insurance, and other insurance coverage as required
+                                                            according to local labor law) and will be subject to
+                                                            Employer’s policy as such package and policy are in effect
+                                                            from time to time.
+                                                        </span>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="3">
+                                            <li>
+                                                <strong>التعويض والفوائد :</strong>
+                                                <ol style="padding-right: 40px !important;">
+                                                    <li>
+                                                        <strong>
+                                                            الأجر:
+                                                        </strong>
+                                                        <span> يلتزم صاحب العمل بأن يؤدي الأجر المنصوص عليه في الملحق
+                                                            "A"، والمرفق في هذا العقد.</span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            المكافأة:
+                                                        </strong>
+                                                        <span> يلتزم صاحب العمل بأن يؤدي للموظف مكافأة تحدد على أساس
+                                                            أداء الموظف وذلك وفقاً لسياسة الشركة التي تقرر معايير
+                                                            إستحقاق هذه المكافأة من عدمه.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            سداد المصروفات:
+                                                        </strong>
+                                                        <span>
+                                                            يلتزم صاحب العمل بسداد جميع النفقات والمصاريف المعقولة
+                                                            والضرورية التي يتكبدها الموظف والمرتبطة بتأدية عمله وواجباته
+                                                            ، وعلى فرض موافقة صاحب العمل عليها مسبقاً مع ضرورة تقديم
+                                                            الإيصالات التي تفيد سداد تلك المصاريف .
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            المبالغ المستقطعة والخصومات:
+                                                        </strong>
+                                                        <span>
+                                                            جميع التعويضات المدفوعة للموظف بموجب هذا الاتفاق بما في ذلك
+                                                            الرواتب والمنافع الخاضعة للضرائب ستكون خاضعة لإستقطاعات أو
+                                                            أية خصومات يقتضيها القانون أو السياسات العامة للشركة.
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <strong>
+                                                            المزايا:
+                                                        </strong>
+                                                        <span>
+                                                            يوفر صاحب العمل وعلى نفقته للموظف حزمة من المزايا (كمصاريف
+                                                            التأمين الصحي والتأمينات الأخرى) وفقاً لما يفرضه قانون العمل
+                                                            الكويتي ووفقاً للسياسة الداخلية للشركة التي تراجع وتعدل حسب
+                                                            ضرورة العمل من وقت لآخر .
+                                                        </span>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="4">
+                                            <li>
+                                                <strong>Working Hours</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            The normal working hours will be eight hours per day, six days a week. The
+                                            working week begins on Saturday and ends on Thursday. Friday will be
+                                            considered the rest day or weekend. Overtime will be paid according to local
+                                            labor law.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="4">
+                                            <li>
+                                                <strong>ساعات العمل:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            ساعات العمل ثماني ساعات يومياً، ستة أيام في الأسبوع، تبدأ من السبت حتي
+                                            الخميس، ويكون يوم الجمعة يوم عطلة نهاية الأسبوع وإذا تم العمل خلاله يدفع عنه
+                                            أجر إضافي وفقاً لقانون العمل الكويتي.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="5">
+                                            <li>
+                                                <strong>Probation Period</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            It is understood and agreed that the first 100 working days of employment
+                                            shall constitute a probationary period during which the Employer may, in its
+                                            absolute discretion, terminate the Employee’s employment, for any reason
+                                            without notice or cause.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="5">
+                                            <li>
+                                                <strong>فترة الاختبار:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان علي أن فترة الـ 100 يوم عمل الأولى من العقد هي فترة اختبار
+                                            ويجوز لصاحب العمل خلالها إنهاء خدمات الموظف بدون أي إنذار أو سبب محدد .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="6">
+                                            <li>
+                                                <strong>Employment Classification</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            The Employee will be a Full-Time Employee and shall not be entitled to
+                                            benefits from any other work except as specifically outlined herein.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="6">
+                                            <li>
+                                                <strong>تصنيف الوظيفة:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            يعمل الموظف لدى رب العمل بدوام كامل ولا يجوز أو يحق للموظف الإنتفاع بأي عمل
+                                            آخر بإستثناء ما ورد في هذا العقد .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="7">
+                                            <li>
+                                                <strong>Outside Business Activities</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            During his employment with the Employer, the Employee shall devote competent
+                                            energies, interests, and abilities to the performance of his duties under
+                                            this Agreement. During the term of this Agreement, the Employee shall not,
+                                            without the Employer’s prior written consent, render any services to others
+                                            for compensation or engage or participate, actively or passively, in any
+                                            other business activities that would interfere with the performance of his
+                                            duties hereunder or compete with the Employer’s business.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="7">
+                                            <li>
+                                                <strong>أنشطة الشركة الخارجية:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            يلتزم الموظف طوال مدة عمله لدى صاحب العمل بتكريس كل طاقته ومصالحه وقدراته
+                                            لخدمة أداء واجبات وظيفته المنصوص عليها بهذا العقد كما يحظر على الموظف - بدون
+                                            موافقة مسبقة من صاحب العمل - الإنخراط أو الإشتراك أو الاشتغال بعوض أو بدونه
+                                            وبشكل سلبي أو إيجابي في أي عمل أو نشاط لآخرين أو شركات منافسة وتتداخل مع
+                                            أداء واجباته الوظيفية أو تتنافي مع مصالح صاحب العمل
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="8">
+                                            <li>
+                                                <strong>Termination</strong>
+                                                <ol style="padding-left: 40px !important;">
+                                                    <li>
+                                                        The Employee may at any time terminate this Agreement and his
+                                                        employment by giving not less than 3 months written notice to
+                                                        the Employer.
+                                                    </li>
+                                                    <li>
+                                                        The Employer may terminate this Agreement and the Employee’s
+                                                        employment at any time, without notice or payment in lieu of
+                                                        notice, in case the employee breaches any of the terms of this
+                                                        contract or if any of the cases stipulated by the Labor Law are
+                                                        available that permit such termination.
+                                                    </li>
+                                                    <li>
+                                                        The Employer may terminate this Agreement and the Employee’s
+                                                        employment at any time by giving not less than 3 months written
+                                                        notice to the Employee.
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="8">
+                                            <li>
+                                                <strong>إنهاء العقد:</strong>
+                                                <ol style="padding-right: 40px !important;">
+                                                    <li>
+                                                        يحق للموظف إنهاء هذا العقد في أي وقت بشرط أن يخطر صاحب العمل
+                                                        بذلك قبل ثلاثة أشهر من تاريخ الإنهاء .
+                                                    </li>
+                                                    <li>
+                                                        يحق لصاحب العمل إنهاء هذا العقد في أي وقت وبدون إنذار وذلك في
+                                                        حال مخالفة الموظف لأي بند من بنود هذا العقد أو توافر حالة من
+                                                        الحالات التي نص عليها قانون العمل وتبيح ذلك الإنهاء له .
+                                                    </li>
+                                                    <li>
+                                                        يحق لصاحب العمل إنهاء هذا العقد في أي وقت بشرط أن يخطر الموظف
+                                                        بذلك قبل ثلاثة أشهر من تاريخ الإنهاء .
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="9">
+                                            <li>
+                                                <strong>Agreement Validity</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            This contract is for indefinite duration.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="9">
+                                            <li>
+                                                <strong>مدة العقد:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            هذا العقد غير محدد المدة .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="10">
+                                            <li>
+                                                <strong>Authorization to Work</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            Due to local regulations adopted in the Immigration Laws, the Employee will
+                                            need to be authorized to work in Kuwait.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="10">
+                                            <li>
+                                                <strong>الحصول علي إذن العمل:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            نظراً للوائح والقوانين المحلية المعتمدة لمسائل الهجرة يتعين على الموظف
+                                            الحصول على إذن بالعمل في الكويت .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="11">
+                                            <li>
+                                                <strong>Further Assurances</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            Each party shall perform any and all further acts and execute and deliver
+                                            any documents that are reasonably necessary to carry out the intent of this
+                                            Agreement.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="11">
+                                            <li>
+                                                <strong>ضمانات إضافية:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            يلتزم طرفى العقد بالقيام بجميع وكل ما يلزم لتنفيذ هذا العقد وتحقيق مقاصده .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="12">
+                                            <li>
+                                                <strong>Additional Documents</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            The Employee agrees to sign the Company’s Policy Handbook, Non-Disclosure
+                                            Agreement and Non-Compete Agreement as a condition of his employment.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="12">
+                                            <li>
+                                                <strong>مستندات اضافية:</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            بمجرد توقيع الموظف على هذا العقد فإن ذلك يعني قبوله والتزامه بلوائح وسياسة
+                                            العمل لدى صاحب العمل ويقوم بالتوقيع علي الشروط المتضمنة التزامه بعدم إفشاء
+                                            أسرار الشركة والمنافسة الغير مشروعة وذلك كشرط من شروط توظيفه.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="13">
+                                            <li>
+                                                <strong>Notices</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            All notices or other communications required or permitted by this Agreement
+                                            or by law shall be in writing and shall be deemed duly served and given when
+                                            delivered personally or by facsimile, air courier, certified mail (return
+                                            receipt requested), postage and fees prepaid, to the party at the address
+                                            indicated in the signature block or at such other address as a party may
+                                            request in writing.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="13">
+                                            <li>
+                                                <strong>الإنذار :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان على أن جميع الإخطارات أو الإنذارات المسموح بها وفق هذا الاتفاق
+                                            أو القانون يجب أن تكون كتابية ، وتسلم إلى الشخص المرسل له شخصياً أو عن طريق
+                                            الفاكس أو بالبريد المسجل أو الجوي (مع ضرورة وجود إيصال)، وذلك على العنوان
+                                            المشار إليه قرين كل طرف، أو أي عنوان آخر وفقا لرغبة الموظف كتابياً.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="14">
+                                            <li>
+                                                <strong>Governing Law</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            This Agreement shall be governed and interpreted in accordance with the laws
+                                            of the State of Kuwait.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="14">
+                                            <li>
+                                                <strong>القانون المطبق :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان على أن هذا العقد يخضع لقواعد القانون الكويتي.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="15">
+                                            <li>
+                                                <strong>Independent Legal Advice</strong>
+                                                <br/>
+                                                <br/>
+                                                <span>The Employee acknowledges that the Employer has provided the
+                                                    Employee with a reasonable opportunity to obtain independent legal
+                                                    advice with respect to this agreement, and that either:
+                                                </span>
+                                                <br/>
+                                                <br/>
+                                                <ol style="padding-right: 40px !important;">
+                                                    <li>The Employee has had such independent legal advice prior to
+                                                        executing this agreement, or; </li>
+                                                    <li>
+                                                        The Employee has willingly chosen not to obtain such advice and
+                                                        to execute this agreement without having obtained such advice.
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="15">
+                                            <li>
+                                                <strong>المشورة القانونية :</strong>
+                                                <br/>
+                                                <br/>
+                                                <span>
+                                                    يقر الموظف بأنه قد أُعطي الفرصة لأخذ المشورة القانونية فيما يتعلق
+                                                    ببنود هذا العقد كالأتي:
+                                                </span>
+                                                <br/>
+                                                <br/>
+                                                <ol style="padding-right: 40px !important;">
+                                                    <li>
+                                                        أُعطي الموظف الفرصة لأخذ المشورة القانونية قبل التوقيع على هذا
+                                                        العقد
+                                                    </li>
+                                                    <li>
+                                                        لم يقم الموظف بالحصول على المشورة القانونية برضاء منه ووافق
+                                                        التوقيع على هذا العقد .
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="16">
+                                            <li>
+                                                <strong>Entire Agreement</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            This Agreement sets forth the entire Agreement between the parties
+                                            pertaining to the subject matter hereof and supersedes all prior written
+                                            agreements and all prior or contemporaneous oral Agreements and
+                                            understandings, expressed or implied.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="16">
+                                            <li>
+                                                <strong>العقد الكامل :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان على أن هذا العقد يمثل كامل الاتفاق بين أطرافه وهو العقد الساري
+                                            ويحكم العلاقة بينهما، وأن أي اتفاق سابق عليه سواء كان مكتوب أو شفوي فهو لاغي
+                                            ولا يعتد به.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="17">
+                                            <li>
+                                                <strong>Written Modification and Waiver</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            The parties agree that no modification to this Agreement, nor any waiver of
+                                            any rights, shall be effective unless assented to in writing by either party
+                                            to be charged, and the waiver of any breach or default shall not constitute
+                                            a waiver of any other right or any subsequent breach or default.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="17">
+                                            <li>
+                                                <strong>تعديل العقد :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان على انه لا يجوز إدخال أي تعديل على شروط العقد أو التنازل عن أي
+                                            حقوق من الحقوق الواردة به إلا بموافقة الطرفين الكتابية على ذلك وأن عدم تفعيل
+                                            أي حق منصوص عليه في هذا العقد لا يشكل بأي حال من الاحوال تنازلاً عن هذا الحق
+                                            أو الحقوق الأخرى اللاحقة .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="18">
+                                            <li>
+                                                <strong>Assignment</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            This Agreement is personal in nature, and neither of the parties shall,
+                                            without the consent of the other, assign or transfer this Agreement or any
+                                            rights or obligations under this Agreement, except that the company may
+                                            assign or transfer this Agreement to a successor of the company’s business,
+                                            in the event of the transfer or sale of all or substantially all of the
+                                            assets of the company’s business, including, but not limited to, divisions,
+                                            branches, or projects, or to a subsidiary, provided that in the case of any
+                                            assignment or transfer under the terms of this Section, this Agreement shall
+                                            be binding on and inure to the benefit of the successor of the company’s
+                                            business, and the successor of The company business shall discharge and
+                                            perform all of the obligations of the company under this Agreement.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="18">
+                                            <li>
+                                                <strong>التنازل :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            هذا العقد مرتبط بأطرافه على نحو شخصي وعليه لا يجوز لأي من الطرفين التنازل عن
+                                            أي حقوق أو التزامات ناشئة عنه بدون موافقة الطرفين معاً، إلا أنه من المتفق
+                                            عليه أنه يحق لصاحب العمل نقل أو تحويل الإلتزامات الناشئة عن هذا العقد في حال
+                                            بيع أو نقل كل أو جزء من ملكيته للغيرأو لأية شركة تابعة له في الشركة أو في
+                                            القطاع أو الفرع أوالمشروع الذي يعمل به الموظف، في هذه الحالة يبقى هذا العقد
+                                            قائما بذات الشروط والإلتزامات التي تنتقل تلقائيا إلى صاحب العمل الذي يصبح
+                                            بدوره مسئولا وملزما بكل ما نص عليه هذا العقد.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-left: 40px !important;" start="19">
+                                            <li>
+                                                <strong>Severability</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            If any of the provisions of this Agreement are determined to be invalid,
+                                            illegal, or unenforceable, such provisions shall be modified to the minimum
+                                            extent necessary to make such provisions enforceable, and the remaining
+                                            provisions shall continue in full force and effect to the extent the
+                                            economic benefits conferred upon the parties by this Agreement remain
+                                            substantially unimpaired.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <ol style="padding-right: 40px !important;" start="19">
+                                            <li>
+                                                <strong>قابلية التجزئة :</strong>
+                                            </li>
+                                        </ol>
+                                        <span>
+                                            أتفق الطرفان على انه في حال ما قضي ببطلان أو عدم نفاذ أي بند من بنود هذا
+                                            العقد لمخالفته للقانون المعمول به فإن ذلك لا يؤدي إلى إبطال العقد أو البنود
+                                            الأخرى ويستمر في تنفيذه ، ويجب تعديل البند الباطل إلي الحد الأدنى اللازم
+                                            لجعله قانونياً وقابل للتنفيذ .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            This Agreement has been executed in two identical copies of which the
+                                            parties have taken one each.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            حرر هذا العقد من نسختين أصليتين بيد كل طرف نسخة للعمل بها عند اللزوم بعد
+                                            توقيعها أصوليا.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            IN WITNESS WHEREOF the Employer has caused this agreement to be executed and
+                                            the Employee has set his hand as of the date first above written.
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            إثباتاً لما تقدم فإن صاحب العمل يعين الموظف لديه وفقاً لأحكام هذا العقد من
+                                            تاريخ العقد المثبت أعلاه .
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            SIGNED, SEALED AND DELIVERED in the presence of:
+                                        </span>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <span>
+                                            تم توقيع هذا العقد وختمه وتسليمه بحضور كل من
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <t t-if="o.company_id.id==2">
+                                            <strong>1- Mr. Aiman Mohammed Bohendi</strong>
+                                        </t>
+                                        <t t-if="o.company_id.id==4">
+                                            <strong>1- Mr. Faisal AlSaleh</strong>
+                                        </t>
+                                        <br/>
+                                        <strong>
+                                            The Authorized Signatory
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Signature _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Date ______________________
+                                        </strong>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <t t-if="o.company_id.id==2">
+                                            <strong>1- السيد/ أيمن محمد بوهندي</strong>
+                                        </t>
+                                        <t t-if="o.company_id.id==4">
+                                            <strong>1- السيد/ فيصل الصالح</strong>
+                                        </t>
+                                        <br/>
+                                        <strong>
+                                            المفوض بالتوقيع
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            توقيعه _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            التاريخ ______________________
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <strong>2- </strong><strong t-esc="o.employee_id.name"/>
+                                        <br/>
+                                        <strong>
+                                            Employee
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Signature _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Date ______________________
+                                        </strong>
+                                    </td>
+                                    <td dir="rtl" class="text-right"
+                                        style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <strong>2- </strong><strong t-esc="o.employee_id.arabic_name"/>
+                                        <br/>
+                                        <strong>
+                                            المــوظف
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            توقيعه _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            التاريخ ______________________
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                            <h3>Annexure A</h3>
+                            <table class="table table-bordered">
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Position
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.job_id.job_title.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Grade
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.job_grade.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Rotation
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <!--                                        <t t-esc="o.job_grade.name"/>-->
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Total Monthly Salary
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.wage"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Basic Monthly Salary
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount,2)"/>
+                                        <span>KWD</span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Transportation Allowance
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'transportation_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                        <span>KWD</span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Housing
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(((1+(o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'percentage' and x.state == 'active').amount/100.0))*(o.related_compensation.filtered(lambda x: x.name.component_type == 'basic_pay' and x.state == 'active').amount)) + (o.related_compensation.filtered(lambda x: x.name.component_type == 'housing_allowance' and x.amount_type == 'amount' and x.state == 'active').amount),2)"/>
+                                        <span>KWD</span>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Round Trip Air Ticket
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.related_compensation.filtered(lambda x: x.name.code == 'AIRTICKET' and x.state == 'active').value"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Medical Insurance
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'health_insurance' and x.state == 'active').value"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Job Bonus
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.related_compensation.filtered(lambda x: x.name.component_type == 'performance_bonus' and x.state == 'active').value"/>
+                                    </td>
+                                </tr>
+                                <tr style="page-break-inside: avoid;">
+                                    <td>
+                                        <strong>
+                                            Expected Joining Date
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.applicant_id.availability"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr style="page-break-inside: avoid;">
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <t t-if="o.company_id.id==2">
+                                            <strong>1- Mr. Aiman Mohammed Bohendi</strong>
+                                        </t>
+                                        <t t-if="o.company_id.id==4">
+                                            <strong>1- Mr. Faisal AlSaleh</strong>
+                                        </t>
+                                        <br/>
+                                        <strong>
+                                            The Authorized Signatory
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Signature _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Date ______________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                    <td style="border-top:0;border-bottom:0;padding 0 0.75rem;">
+                                        <strong>2- </strong><strong t-esc="o.employee_id.name"/>
+                                        <br/>
+                                        <strong>
+                                            Employee
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Signature _____________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>
+                                            Date ______________________
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

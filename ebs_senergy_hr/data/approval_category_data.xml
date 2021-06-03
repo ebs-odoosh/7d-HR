@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="approval_category_data_man_power" model="approval.category">
+            <field name="name">Man Power</field>
+            <field name="image" type="base64" file="ebs_senergy_hr/static/src/img/man-user.svg"/>
+            <field name="has_related_employee_id">required</field>
+            <field name="is_requisition_request">yes</field>
+            <field name="has_vacancy_type">required</field>
+            <field name="has_job_title">required</field>
+            <field name="has_group">required</field>
+            <field name="has_department">required</field>
+            <field name="has_section">required</field>
+            <field name="has_subsection">no</field>
+            <field name="has_job_desc">required</field>
+            <field name="has_replacement_employee_id">required</field>
+            <field name="has_requisition_type">required</field>
+            <field name="has_cost_center">no</field>
+            <field name="approval_minimum">1</field>
+        </record>
+    </data>
+</odoo>

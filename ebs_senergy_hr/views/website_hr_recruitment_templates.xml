@@ -1,0 +1,1438 @@
+<odoo>
+    <data>
+
+        <template id="hr_jobs_apply" inherit_id="website_hr_recruitment.apply">
+            <xpath expr="//form" position="replace">
+                <form id="hr_recruitment_form" action="/website_form/" method="post" class="s_website_form"
+                      enctype="multipart/form-data" data-model_name="hr.applicant" data-success_page="/job-thank-you"
+                      hide-change-model="true">
+                    <t t-if="request.session.get('form_builder_model_model', '') == 'hr.applicant'">
+                        <t t-set="job" t-value="request.website._website_form_last_record().sudo().job_id"/>
+                        <t t-set="responsible" t-value="job and job.user_id.website_published and job.user_id "/>
+                    </t>
+                    <div class="form-group row pull-right">
+                        <div class="col-md-8 col-lg-7">
+                            <a href="#" role="button"
+                               class="btn btn-primary btn-lg o_website_form_send">Submit</a>
+                            <span id="o_website_form_result"></span>
+                        </div>
+                    </div>
+                    <div class="row s_col_no_bgcolor">
+                        <t t-set="menus"
+                           t-value="['Personal Details','Education and Training','Language Proficiency','Employment History','Questions','References','Availability','Attach CV']"/>
+
+                        <div class="col-md-12 col-lg-12 pb48">
+
+                            <div class="card bg-white">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                                        <li class="nav-item" t-foreach="menus" t-as="menu">
+                                            <a t-att-class="'nav-link active' if menu_index ==0 else 'nav-link'"
+                                               t-att-id="'nav_tabs_link_'+str(menu_index+1)"
+                                               data-toggle="tab"
+                                               t-att-href="'#nav_tabs_content_'+str(menu_index+1)"
+                                               role="tab"
+                                               t-att-aria-controls="'nav_tabs_content_'+str(menu_index+1)"
+                                               t-att-aria-selected="'true' if menu_index ==0 else 'false'">
+                                                <t t-esc="menu"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body tab-content">
+                                    <!--                        Personal Information-->
+                                    <div class="tab-pane fade show active"
+                                         id="nav_tabs_content_1"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_1">
+                                        <!--                        0- Surname-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="surnames">
+                                                    <span class="s_website_form_label_content">Surname</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="surnames" type="text"
+                                                           class="form-control s_website_form_input"
+                                                           name="surname_id" required="1"
+                                                           placeholder="Mr., Miss., Mrs., Dr."/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required"
+                                             data-type="char" data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <!--                        1-Name (As per passport/ID)-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment1">
+                                                    <span class="s_website_form_label_content">Name (As per passport /
+                                                        ID)</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment1" type="text"
+                                                           class="form-control s_website_form_input"
+                                                           name="partner_name" required="1"
+                                                           placeholder="Name (As per passport / ID)"/>
+                                                </div>
+
+                                                <!--                        2-Former name(s) / Maiden Name-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment3">
+                                                    <span class="s_website_form_label_content">Former name(s) / Maiden
+                                                        Name</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment3" type="text"
+                                                           class="form-control s_website_form_input"
+                                                           name="former_name" required=""
+                                                           placeholder="Former name(s) / Maiden Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Contact Information:</h3></div>
+                                        <!--                        3-Telephone No. (Country code)-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment4">
+                                                    <span class="s_website_form_label_content">Telephone No. (Country
+                                                        code)</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment4" type="tel"
+                                                           placeholder="Telephone No. (Country code)"
+                                                           class="form-control s_website_form_input"
+                                                           name="partner_phone" required=""/>
+                                                </div>
+                                                <!--                        4-Business No. (Country code)-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment4">
+                                                    <span class="s_website_form_label_content">Business No. (Country
+                                                        code)</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment4" type="tel"
+                                                           placeholder="Business No. (Country code)"
+                                                           class="form-control s_website_form_input"
+                                                           name="business_no" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        5-Mobile No-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment5">
+                                                    <span class="s_website_form_label_content">Mobile No</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment5" type="tel" placeholder="Mobile No"
+                                                           class="form-control s_website_form_input"
+                                                           name="partner_mobile" required=""/>
+                                                </div>
+                                                <!--                        6-email-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment6">
+                                                    <span class="s_website_form_label_content">Email</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment6" type="email" placeholder="Email"
+                                                           class="form-control s_website_form_input"
+                                                           name="email_from" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        7-address-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="Object"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment7">
+                                                    <span class="s_website_form_label_content">Address</span>
+                                                </label>
+                                                <div class="col-lg-5 col-sm ">
+                                                    <input id="recruitment7" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="street" required="" placeholder="Street"/>
+                                                </div>
+                                                <div class="col-lg-4 col-sm">
+                                                    <input id="recruitment7" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="street2" required="" placeholder="Street2"/>
+                                                </div>
+                                                <div style="width: 200px"></div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <input id="recruitment7" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="city" required="" placeholder="City"/>
+                                                </div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <select id="country_select" class="form-control" name="state_id"
+                                                            required="">
+                                                        <option value="">Select State ...</option>
+                                                        <t t-foreach="states or []" t-as="state">
+                                                            <option t-att-value="state.id"
+                                                                    t-att-data-code="state.code">
+                                                                <t t-esc="state.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <input id="recruitment7" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="zip" required="" placeholder="Zip"/>
+                                                </div>
+                                                <div class="col-lg-3 col-sm">
+                                                    <br/>
+                                                    <select id="country_select" class="form-control" name="country_id"
+                                                            required="">
+                                                        <option value="">Select Country ...</option>
+                                                        <t t-foreach="countries or []" t-as="country">
+                                                            <option t-att-value="country.id"
+                                                                    t-att-selected="country.code == 'KW'"
+                                                                    t-att-data-code="country.code">
+                                                                <t t-esc="country.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Official Papers
+                                            Information:</h3></div>
+
+                                        <!--                        8-Passport Number-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment8">
+                                                    <span class="s_website_form_label_content">Passport Number</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment8" class="form-control s_website_form_input"
+                                                           type="char" placeholder="Passport Number"
+                                                           name="passport_number"></input>
+                                                </div>
+
+                                                <!--                        9-Expiry Date-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="expiry_date">
+                                                    <span class="s_website_form_label_content">Expiry Date</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <div class="o_website_form_date input-group date"
+                                                         id="datepicker_expiry_date"
+                                                         data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                        <input type="text"
+                                                               class="form-control datetimepicker-input o_website_form_input"
+                                                               data-target="#datepicker_expiry_date"
+                                                               name="expiry_date" placeholder="Expiry Date"/>
+                                                        <div class="input-group-append"
+                                                             data-target="#datepicker_expiry_date"
+                                                             data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i
+                                                                    class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--                        10-National Identity Number (CPR)-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment10">
+                                                    <span class="s_website_form_label_content">National Identity Number
+                                                        (CPR)</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment10" class="form-control s_website_form_input"
+                                                           type="char" placeholder="National Identity Number (CPR)"
+                                                           name="nationality_id_no"></input>
+                                                </div>
+                                                <!--                        11-Nationality (Country)-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment10">
+                                                    <span class="s_website_form_label_content">Nationality
+                                                        (Country)</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="recruitment10" class="form-control"
+                                                            name="nationality"
+                                                            required="">
+                                                        <option value="">Select Nationality (Country) ...</option>
+                                                        <t t-foreach="countries or []" t-as="country">
+                                                            <option t-att-value="country.id"
+                                                                    t-att-selected="country.code == 'KW'"
+                                                                    t-att-data-code="country.code">
+                                                                <t t-esc="country.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--                        12-Birth Date-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="Date"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="date_of_birth">
+                                                    <span class="s_website_form_label_content">Date Of Birth</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <div class="o_website_form_date input-group date"
+                                                         id="datepicker_birth_date"
+                                                         data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                        <input type="text"
+                                                               class="form-control datetimepicker-input o_website_form_input"
+                                                               data-target="#datepicker_expiry_date"
+                                                               name="date_of_birth" placeholder="Date Of Birth"/>
+                                                        <div class="input-group-append"
+                                                             data-target="#datepicker_birth_date"
+                                                             data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i
+                                                                    class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--                        13-Place Of Birth-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment12">
+                                                    <span class="s_website_form_label_content">Place Of Birth</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="recruitment12" class="form-control"
+                                                            name="place_of_birth"
+                                                            required="">
+                                                        <option value="">Select Country</option>
+                                                        <t t-foreach="countries or []" t-as="country">
+                                                            <option t-att-value="country.id"
+                                                                    t-att-selected="country.code == 'KW'"
+                                                                    t-att-data-code="country.code">
+                                                                <t t-esc="country.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        14- Religions-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment14">
+                                                    <span class="s_website_form_label_content">Religions</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="recruitment14" class="form-control" name="religion"
+                                                            required="">
+                                                        <option value="">Select Religions</option>
+                                                        <t t-foreach="religions or []" t-as="religion_value">
+                                                            <option t-att-value="religion_value[0]"
+                                                                    t-att-data-code="religion_value[1]">
+                                                                <t t-esc="religion_value[1]"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+
+                                                </div>
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment14">
+                                                    <span class="s_website_form_label_content">Gender</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="gender_select" class="form-control" name="gender"
+                                                            required="">
+                                                        <option value="">Select Gender ...</option>
+                                                        <option value="male" selected="1">Male</option>
+                                                        <option value="female">Female</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Marital:</h3></div>
+
+                                        <!--                        15- Marital Status-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment15">
+                                                    <span class="s_website_form_label_content">Marital Status</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="recruitment15" class="form-control"
+                                                            name="marital_status"
+                                                            required="">
+                                                        <option value="">Select Marital Status</option>
+                                                        <t t-foreach="marital or []" t-as="marital_value">
+                                                            <option t-att-value="marital_value[0]"
+                                                                    t-att-selected="True if marital_value[0]=='single' else False"
+                                                                    t-att-data-code="marital_value[1]">
+                                                                <t t-esc="marital_value[1]"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+
+                                                </div>
+                                                <!--                        16-Spouse Name-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment16">
+                                                    <span class="s_website_form_label_content">Spouse Name</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment16" type="text" placeholder="Spouse Name"
+                                                           class="form-control s_website_form_input"
+                                                           name="spouse_name" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        17-Spouse's Employment Status-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment17">
+                                                    <span class="s_website_form_label_content">Spouse's Employment
+                                                        Status</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment17" type="text"
+                                                           placeholder="Spouse's Employment Status"
+                                                           class="form-control s_website_form_input"
+                                                           name="spouse_employment_status" required=""/>
+                                                </div>
+
+                                                <!--                        18-No. of Children-->
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment18">
+                                                    <span class="s_website_form_label_content">No. of Children</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment18" type="number"
+                                                           placeholder="No. of Children"
+                                                           class="form-control s_website_form_input"
+                                                           name="no_of_children" required=""/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Next Of Kin:</h3></div>
+
+                                        <!--                        19- Next Of Kin Name-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment19">
+                                                    <span class="s_website_form_label_content">Name</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment19" type="text" placeholder="Name"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_name" required=""/>
+                                                </div>
+                                                <!--                        21- Next Of Kin Relationship-->
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment21">
+                                                    <span class="s_website_form_label_content">RelationShip</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment21" type="text" placeholder="RelationShip"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_relationship" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--                        20- Next Of Kin address-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="next_of_kin_street">
+                                                    <span class="s_website_form_label_content">Address</span>
+                                                </label>
+                                                <div class="col-lg-5 col-sm ">
+                                                    <input id="next_of_kin_street" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_street" required="" placeholder="Street"/>
+                                                </div>
+                                                <div class="col-lg-4 col-sm">
+                                                    <input id="next_of_kin_street2" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_street2" required=""
+                                                           placeholder="Street2"/>
+                                                </div>
+                                                <div style="width: 200px"></div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <input id="next_of_kin_city" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_city" required="" placeholder="City"/>
+                                                </div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <select id="next_of_kin_state" class="form-control"
+                                                            name="next_of_kin_state_id"
+                                                            required="">
+                                                        <option value="">Select State ...</option>
+                                                        <t t-foreach="states or []" t-as="state">
+                                                            <option t-att-value="state.id"
+                                                                    t-att-data-code="state.code">
+                                                                <t t-esc="state.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2 col-sm">
+                                                    <br/>
+                                                    <input id="next_of_kin_zip" type="char"
+                                                           class="form-control s_website_form_input"
+                                                           name="next_of_kin_zip" required="" placeholder="Zip"/>
+                                                </div>
+                                                <div class="col-lg-3 col-sm">
+                                                    <br/>
+                                                    <select id="next_of_kin_country" class="form-control"
+                                                            name="next_of_kin_country_id"
+                                                            required="">
+                                                        <option value="">Select Country ...</option>
+                                                        <t t-foreach="countries or []" t-as="country">
+                                                            <option t-att-value="country.id"
+                                                                    t-att-selected="country.code == 'KW'"
+                                                                    t-att-data-code="country.code">
+                                                                <t t-esc="country.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Legal Beneficiary:</h3></div>
+                                        <p class="col-md-12 col-lg-12 col-12">** Legal Beneficiary refers to the legal
+                                            heir who you assign to receive any dues owed to you by the Company in the
+                                            event of a misfortune. This MUST necessarily be a blood relative.</p>
+                                        <h5 class="col-md-12 col-lg-12 col-12">First:</h5>
+                                        <!--                        22- Legal Beneficiary Name-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment22">
+                                                    <span class="s_website_form_label_content">Name</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment22" type="text" placeholder="Name"
+                                                           class="form-control s_website_form_input"
+                                                           name="legal_beneficiary_ids[0]['name']" required=""/>
+                                                </div>
+                                                <!--                        23- Legal Beneficiary Relation-->
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment23">
+                                                    <span class="s_website_form_label_content">Relation</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment23" type="text" placeholder="Relation"
+                                                           class="form-control s_website_form_input"
+                                                           name="legal_beneficiary_ids[0]['relationship']" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--                        24- Legal Beneficiary Relation-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment24">
+                                                    <span class="s_website_form_label_content">Details</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <textarea id="recruitment24" placeholder="Details"
+                                                              class="form-control s_website_form_input"
+                                                              name="legal_beneficiary_ids[0]['details']" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="col-md-12 col-lg-12 col-12">Second:</h5>
+                                        <!--                        25- Legal Beneficiary Name-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment25">
+                                                    <span class="s_website_form_label_content">Name</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment25" type="text" placeholder="Name"
+                                                           class="form-control s_website_form_input"
+                                                           name="legal_beneficiary_ids[1]['name']" required=""/>
+                                                </div>
+
+                                                <!--                        26- Legal Beneficiary Relation-->
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment26">
+                                                    <span class="s_website_form_label_content">Relation</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment26" type="text" placeholder="Relation"
+                                                           class="form-control s_website_form_input"
+                                                           name="legal_beneficiary_ids[1]['relationship']" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--                        27- Legal Beneficiary Relation-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px"
+                                                       for="recruitment27">
+                                                    <span class="s_website_form_label_content">Details</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <textarea id="recruitment27" placeholder="Details"
+                                                              class="form-control s_website_form_input"
+                                                              name="legal_beneficiary_ids[1]['details']" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--                        Education-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_2"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_2">
+                                        <t t-set="education" t-value="['School','University','Training']"></t>
+                                        <t t-foreach="education" t-as="edu_level">
+                                            <div class="col-md-12 col-lg-12 col-12">
+                                                <h3 t-if="edu_level=='School'">School:</h3>
+                                                <h3 t-if="edu_level=='University'">University:</h3>
+                                                <h3 t-if="edu_level=='Training'">Training:</h3>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'education_ids['+str(edu_level_index+1)+'][\'name\']'">
+                                                        <span class="s_website_form_label_content">Name</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'education_ids['+str(edu_level_index+1)+'][\'name\']'"
+                                                               type="text" placeholder="Name"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'education_ids['+str(edu_level_index+1)+'][\'name\']'"
+                                                               required=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--                       School From -to-->
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'education_ids['+str(edu_level_index+1)+'][\'from\']'">
+                                                        <span class="s_website_form_label_content">From</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <div class="o_website_form_date input-group date"
+                                                             t-att-id="'datepicker_edu_from_'+str(edu_level_index+1)"
+                                                             data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                            <input type="text"
+                                                                   class="form-control datetimepicker-input o_website_form_input"
+                                                                   t-att-data-target="'#datepicker_edu_from_'+str(edu_level_index+1)"
+                                                                   t-att-name="'education_ids['+str(edu_level_index+1)+'][\'from\']'"
+                                                                   placeholder="From"/>
+                                                            <div class="input-group-append"
+                                                                 t-att-data-target="'#datepicker_edu_from_'+str(edu_level_index+1)"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i
+                                                                        class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'education_ids['+str(edu_level_index+1)+'][\'to\']'">
+                                                        <span class="s_website_to_label_content">To</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <div class="o_website_form_date input-group date"
+                                                             t-att-id="'datepicker_edu_to_'+str(edu_level_index+1)"
+                                                             data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                            <input type="text" placeholder="To"
+                                                                   class="form-control datetimepicker-input o_website_form_input"
+                                                                   t-att-data-target="'#datepicker_edu_to_'+str(edu_level_index+1)"
+                                                                   t-att-name="'education_ids['+str(edu_level_index+1)+'][\'to\']'"/>
+                                                            <div class="input-group-append"
+                                                                 t-att-data-target="'#datepicker_edu_to_'+str(edu_level_index+1)"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i
+                                                                        class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+
+
+                                        <div class="col-md-12 col-lg-12 col-12"><h3>Courses:</h3></div>
+
+                                        <!--                        Courses-->
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <div class="col-sm">
+                                                    <textarea id="courses"
+                                                              class="form-control s_website_form_input"
+                                                              name="educational_background" required=""
+                                                              placeholder="Courses..."/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--                        Languages-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_3"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_3">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Language</th>
+                                                    <th>Reading</th>
+                                                    <th>Writing</th>
+                                                    <th>Spoken</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="['1','2','3','4']" t-as="language_row">
+                                                    <td>
+                                                        <select t-att-id="'language_select'+language_row"
+                                                                class="form-control"
+                                                                t-att-name="'language_ids['+language_row+'][\'name\']'"
+                                                                required="">
+                                                            <option value="">Select language ...</option>
+                                                            <t t-foreach="languages_values or []" t-as="language">
+                                                                <option t-att-value="language.id">
+                                                                    <t t-esc="language.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="language_levels" t-as="language_level">
+                                                            <div class="radio">
+                                                                <div class="form-check">
+                                                                    <input type="radio"
+                                                                           class="s_website_form_input form-check-input"
+                                                                           t-att-id="'lang'+language_row+'_reading_level_'+language_level[0]"
+                                                                           t-att-name="'language_ids['+language_row+'][\'reading\']'"
+                                                                           t-att-value="language_level[0]"
+                                                                           t-att-checked="True if language_level[0] == 'average' else False"
+                                                                           required="1">
+                                                                        <label class="form-check-label s_website_form_check_label"
+                                                                               t-att-for="'language_ids['+language_row+'][\'reading\']'">
+                                                                            <t t-esc="language_level[1]"/>
+                                                                        </label>
+                                                                    </input>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="language_levels" t-as="language_level">
+                                                            <div class="radio">
+                                                                <div class="form-check">
+                                                                    <input type="radio"
+                                                                           class="s_website_form_input form-check-input"
+                                                                           t-att-id="'lang'+language_row+'_writing_level_'+language_level[0]"
+                                                                           t-att-name="'language_ids['+language_row+'][\'writing\']'"
+                                                                           t-att-value="language_level[0]"
+                                                                           t-att-checked="True if language_level[0] == 'average' else False"
+                                                                           required="1">
+                                                                        <label class="form-check-label s_website_form_check_label"
+                                                                               t-att-for="'language_ids['+language_row+'][\'writing\']'">
+                                                                            <t t-esc="language_level[1]"/>
+                                                                        </label>
+                                                                    </input>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="language_levels" t-as="language_level">
+                                                            <div class="radio">
+                                                                <div class="form-check">
+                                                                    <input type="radio"
+                                                                           class="s_website_form_input form-check-input"
+                                                                           t-att-id="'lang'+language_row+'_spoken_level_'+language_level[0]"
+                                                                           t-att-name="'language_ids['+language_row+'][\'spoken\']'"
+                                                                           t-att-value="language_level[0]"
+                                                                           t-att-checked="True if language_level[0] == 'average' else False"
+                                                                           required="1">
+                                                                        <label class="form-check-label s_website_form_check_label"
+                                                                               t-att-for="'language_ids['+language_row+'][\'writing\']'">
+                                                                            <t t-esc="language_level[1]"/>
+                                                                        </label>
+                                                                    </input>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--                        Employment History-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_4"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_4">
+                                        <t t-foreach="['1','2','3']" t-as="employment_history">
+                                            <h3 t-if="employment_history=='1'">Present/Last Employer</h3>
+                                            <h3 t-if="employment_history in ('2','3')">Previous Employer</h3>
+                                            <!--                        Company name-->
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'employment_history_ids['+employment_history+'][\'company_name\']'">
+                                                        <span class="s_website_form_label_content">Name</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'employment_history_ids['+employment_history+'][\'company_name\']'"
+                                                               type="text" placeholder="Name"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'company_name\']'"
+                                                               required=""/>
+                                                    </div>
+
+                                                    <!--                       Type of job and Responsibilities-->
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'employment_history_ids['+employment_history+'][\'type_of_job\']'">
+                                                        <span class="s_website_form_label_content">Type of job and
+                                                            Responsibilities</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'employment_history_ids['+employment_history+'][\'type_of_job\']'"
+                                                               type="text"
+                                                               placeholder="Type of job and Responsibilities"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'type_of_job\']'"
+                                                               required=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--                       Company From -to-->
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <!--                        From-->
+                                                    <label class="col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'employment_history_ids['+employment_history+'][\'from\']'">
+                                                        <span class="s_website_form_label_content">From</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <div class="o_website_form_date input-group date"
+                                                             t-att-id="'datepicker_company_'+employment_history+'_from'"
+                                                             data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                            <input type="text" placeholder="From"
+                                                                   class="form-control datetimepicker-input o_website_form_input"
+                                                                   t-att-data-target="'#datepicker_company_'+employment_history+'_from'"
+                                                                   t-att-name="'employment_history_ids['+employment_history+'][\'from\']'"/>
+                                                            <div class="input-group-append"
+                                                                 t-att-data-target="'#datepicker_company_'+employment_history+'_from'"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i
+                                                                        class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <t t-if="employment_history in ('2','3')">
+                                                        <!--                        To-->
+                                                        <label class=" col-sm-auto s_website_form_label "
+                                                               style="width: 200px"
+                                                               t-att-for="'employment_history_ids['+employment_history+'][\'to\']'">
+                                                            <span class="s_website_form_label_content">To</span>
+                                                        </label>
+                                                        <div class="col-sm">
+                                                            <div class="o_website_form_date input-group date"
+                                                                 t-att-id="'datepicker_company_'+employment_history+'_to'"
+                                                                 data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                                <input type="text" placeholder="To"
+                                                                       class="form-control datetimepicker-input o_website_form_input"
+                                                                       t-att-data-target="'#datepicker_company_'+employment_history+'_to'"
+                                                                       t-att-name="'employment_history_ids['+employment_history+'][\'to\']'"/>
+                                                                <div class="input-group-append"
+                                                                     t-att-data-target="'#datepicker_company_'+employment_history+'_to'"
+                                                                     data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i
+                                                                            class="fa fa-calendar"></i></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+
+                                            <!--                       Reason for Leaving-->
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class=" col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'employment_history_ids['+employment_history+'][\'reason_for_leaving\']'">
+                                                        <span class="s_website_form_label_content">Reason for
+                                                            Leaving</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <textarea
+                                                                t-att-id="'employment_history_company_'+employment_history"
+                                                                class="form-control s_website_form_input"
+                                                                t-att-name="'employment_history_ids['+employment_history+'][\'reason_for_leaving\']'"
+                                                                required="" placeholder="Reason for Leaving..."/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--                        Company address-->
+                                            <div class="form-group col-12 s_website_form_field" data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'employment_history_ids['+employment_history+'][\'street\']'">
+                                                        <span class="s_website_form_label_content">Address</span>
+                                                    </label>
+                                                    <div class="col-lg-5 col-sm ">
+                                                        <input t-att-id="'company_address_'+employment_history"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'street\']'"
+                                                               required=""
+                                                               placeholder="Street"/>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm">
+                                                        <input t-att-id="'company_address_'+employment_history"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'street2\']'"
+                                                               required=""
+                                                               placeholder="Street2"/>
+                                                    </div>
+                                                    <div style="width: 200px"></div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <input t-att-id="'company_address_'+employment_history"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'city\']'"
+                                                               required=""
+                                                               placeholder="City"/>
+                                                    </div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <select t-att-id="'company_address_'+employment_history"
+                                                                class="form-control"
+                                                                t-att-name="'employment_history_ids['+employment_history+'][\'state_id\']'"
+                                                                required="">
+                                                            <option value="">Select State ...</option>
+                                                            <t t-foreach="states or []" t-as="state">
+                                                                <option t-att-value="state.id"
+                                                                        t-att-data-code="state.code">
+                                                                    <t t-esc="state.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <input t-att-id="'company_address_'+employment_history"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'employment_history_ids['+employment_history+'][\'zip\']'"
+                                                               required=""
+                                                               placeholder="Zip"/>
+                                                    </div>
+                                                    <div class="col-lg-3 col-sm">
+                                                        <br/>
+                                                        <select t-att-id="'company_address_'+employment_history"
+                                                                class="form-control"
+                                                                t-att-name="'employment_history_ids['+employment_history+'][\'country_id\']'"
+                                                                required="">
+                                                            <option value="">Select Country ...</option>
+                                                            <t t-foreach="countries or []" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.code == 'KW'"
+                                                                        t-att-data-code="country.code">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="searchSeparator mt8 mb8" t-if="employment_history in ('1','2')"/>
+                                        </t>
+                                        <hr class="searchSeparator mt8 mb8"/>
+                                        <h3>Employment Gap</h3>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label "
+                                                       style="width: 200px"
+                                                       for="employment_gap_date_from">
+                                                    <span class="s_website_form_label_content">From</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <div class="o_website_form_date input-group date"
+                                                         id="datepicker_gap_from"
+                                                         data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                        <input type="text" placeholder="From"
+                                                               class="form-control datetimepicker-input o_website_form_input"
+                                                               data-target="#datepicker_gap_from"
+                                                               name="employment_gap_date_from"/>
+                                                        <div class="input-group-append"
+                                                             data-target="#datepicker_gap_from"
+                                                             data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i
+                                                                    class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label class=" col-sm-auto s_website_form_label "
+                                                       style="width: 200px"
+                                                       for="gap_to">
+                                                    <span class="s_website_to_label_content">To</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <div class="o_website_form_date input-group date"
+                                                         id="datepicker_gap_to"
+                                                         data-target-input="nearest" data-date-format="Y-MM-DD">
+                                                        <input type="text" placeholder="To"
+                                                               class="form-control datetimepicker-input o_website_form_input"
+                                                               data-target="#datepicker_gap_to"
+                                                               name="employment_gap_date_to"/>
+                                                        <div class="input-group-append"
+                                                             data-target="#datepicker_gap_to"
+                                                             data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i
+                                                                    class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                             data-type="Char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class=" col-sm-auto s_website_form_label "
+                                                       style="width: 200px"
+                                                       for="employment_gap_reason">
+                                                    <span class="s_website_to_label_content">Reason</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <textarea id="gap_reason" placeholder="Reason"
+                                                              class="form-control s_website_form_input"
+                                                              name="employment_gap_reason" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--                        Questions-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_5"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_5">
+                                        <t t-foreach="questions" t-as="question">
+                                            <h5><t t-esc="str(question_index+1)+' - '+question.name"/></h5>
+                                            <div class="radio o_website_form_flex_item">
+                                                <label>
+                                                    <input
+                                                            type="radio"
+                                                            class="o_website_form_input"
+                                                            t-att-name="'answer_ids['+str(question.id)+'][\'yes_no\']'"
+                                                            value="yes"
+                                                    />
+                                                    <span>
+                                                        Yes
+                                                    </span>
+                                                </label>
+                                                <label>
+                                                    <input
+                                                            type="radio"
+                                                            class="o_website_form_input"
+                                                            t-att-name="'answer_ids['+str(question.id)+'][\'yes_no\']'"
+                                                            value="no"
+                                                            checked="1"
+                                                    />
+                                                    <span>
+                                                        No
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <textarea t-att-id="'q_'+str(question.id)+'details'"
+                                                      placeholder="Details..."
+                                                      class="form-control s_website_form_input"
+                                                      t-att-name="'answer_ids['+str(question.id)+'][\'details\']'"/>
+                                            <hr class="searchSeparator mt15 mb15"/>
+
+                                        </t>
+                                    </div>
+
+                                    <!--                        References-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_6"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_6">
+                                        <p>
+                                            Please provide the following information for 2 employment references. In
+                                            case of no previous work experience, please provide the names of
+                                            professional people (not relatives / Friends) who will give you a reference
+                                            and have known you for at least 2 years.
+                                        </p>
+                                        <t t-foreach="['1','2']" t-as="reference">
+                                            <!--                        Reference name-->
+                                            <div class="form-group col-12 s_website_form_field "
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'references_ids['+reference+'][\'name\']'">
+                                                        <span class="s_website_form_label_content">Name</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'reference_name_'+reference"
+                                                               type="text" placeholder="Name"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'name\']'"
+                                                               required=""/>
+                                                    </div>
+
+                                                    <!--                       Type of job and Responsibilities-->
+                                                    <label class=" col-sm-auto s_website_form_label "
+                                                           style="width: 200px"
+                                                           t-att-for="'references_ids['+reference+'][\'position\']'">
+                                                        <span class="s_website_form_label_content">Position Held</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'reference_position_'+reference" type="text"
+                                                               class="form-control s_website_form_input"
+                                                               placeholder="Position Held"
+                                                               t-att-name="'references_ids['+reference+'][\'position\']'"
+                                                               required=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                                Email & Phone-->
+                                            <div class="form-group col-12 s_website_form_field "
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'references_ids['+reference+'][\'email\']'">
+                                                        <span class="s_website_form_label_content">Email</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'reference_email_'+reference" type="email"
+                                                               class="form-control s_website_form_input"
+                                                               placeholder="Email"
+                                                               t-att-name="'references_ids['+reference+'][\'email\']'"
+                                                               required=""/>
+                                                    </div>
+
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'references_ids['+reference+'][\'phone\']'">
+                                                        <span class="s_website_form_label_content">Phone</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'reference_phone_'+reference" type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'phone\']'"
+                                                               required="" placeholder="Phone"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                                no_of_years_known-->
+                                            <div class="form-group col-12 s_website_form_field "
+                                                 data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'references_ids['+reference+'][\'no_of_years_known\']'">
+                                                        <span class="s_website_form_label_content">No. of years
+                                                            known</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input t-att-id="'reference_no_of_years_known_'+reference"
+                                                               type="number" placeholder="No. of years known"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'no_of_years_known\']'"
+                                                               required=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--                        Company address-->
+                                            <div class="form-group col-12 s_website_form_field" data-type="Char"
+                                                 data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px"
+                                                           t-att-for="'reference_address_'+reference">
+                                                        <span class="s_website_form_label_content">Address</span>
+                                                    </label>
+                                                    <div class="col-lg-5 col-sm ">
+                                                        <input t-att-id="'reference_address_'+reference"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'street\']'"
+                                                               required=""
+                                                               placeholder="Street"/>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm">
+                                                        <input t-att-id="'reference_address_'+reference"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'street2\']'"
+                                                               required=""
+                                                               placeholder="Street2"/>
+                                                    </div>
+                                                    <div style="width: 200px"></div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <input t-att-id="'reference_address_'+reference"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'city\']'"
+                                                               required=""
+                                                               placeholder="City"/>
+                                                    </div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <select t-att-id="'reference_address_'+reference"
+                                                                class="form-control"
+                                                                t-att-name="'references_ids['+reference+'][\'state_id\']'"
+                                                                required="">
+                                                            <option value="">Select State ...</option>
+                                                            <t t-foreach="states or []" t-as="state">
+                                                                <option t-att-value="state.id"
+                                                                        t-att-data-code="state.code">
+                                                                    <t t-esc="state.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-2 col-sm">
+                                                        <br/>
+                                                        <input t-att-id="'reference_address_'+reference"
+                                                               type="char"
+                                                               class="form-control s_website_form_input"
+                                                               t-att-name="'references_ids['+reference+'][\'zip\']'"
+                                                               required=""
+                                                               placeholder="Zip"/>
+                                                    </div>
+                                                    <div class="col-lg-3 col-sm">
+                                                        <br/>
+                                                        <select t-att-id="'reference_address_'+reference"
+                                                                class="form-control"
+                                                                t-att-name="'references_ids['+reference+'][\'country_id\']'"
+                                                                required="">
+                                                            <option value="">Select Country ...</option>
+                                                            <t t-foreach="countries or []" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.code == 'KW'"
+                                                                        t-att-data-code="country.code">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr class="searchSeparator mt15 mb15" t-if="reference=='1'"/>
+
+                                        </t>
+                                        <p>*As a part of routine employment process you may be required to furnish pay
+                                            slips/original certificates/reference letters as requested.
+                                        </p>
+                                    </div>
+                                    <!--                        Availability-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_7"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_7">
+                                        <!--                        Notice Period-->
+                                        <div class="form-group col-12 s_website_form_field" data-type="char"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       for="notice_period">
+                                                    <span class="s_website_form_label_content">Please state notice
+                                                        period required to give to your present
+                                                        employer</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="notice_period" type="number"
+                                                           class="form-control s_website_form_input"
+                                                           name="notice_period" required=""
+                                                           placeholder="Notice Period"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--                        Submit-->
+                                    <div class="tab-pane fade"
+                                         id="nav_tabs_content_8"
+                                         role="tabpanel"
+                                         aria-labelledby="nav_tabs_link_7">
+                                        <div class="form-group col-12 s_website_form_field s_website_form_custom"
+                                             data-type="binary"
+                                             data-name="Field">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment5">
+                                                    <span class="s_website_form_label_content">Resume</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment5" type="file"
+                                                           class="form-control s_website_form_input"
+                                                           name="Resume" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_dnone"
+                                             style="display:none;">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment6">
+                                                    <span class="s_website_form_label_content">Job</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment6" type="hidden"
+                                                           class="form-control s_website_form_input"
+                                                           name="job_id"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_dnone"
+                                             style="display:none;">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px"
+                                                       for="recruitment7">
+                                                    <span class="s_website_form_label_content">Department</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="recruitment7" type="hidden"
+                                                           class="form-control s_website_form_input"
+                                                           name="department_id"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </xpath>
+        </template>
+
+
+        <!--        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Online Apply Form">-->
+        <!--            <xpath expr="." position="inside">-->
+        <!--                <script type="text/javascript"-->
+        <!--                        src="/hr_recruitment_custom/static/src/js/website_apply_form.js"/>-->
+        <!--            </xpath>-->
+        <!--        </template>-->
+
+    </data>
+</odoo>

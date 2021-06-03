@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Applicants -->
+        <record model="ir.ui.view" id="hr_applicant_view_form">
+            <field name="name">Jobs - Recruitment Form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                <sheet position="replace">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_show_proposed_contracts" class="oe_stat_button" icon="fa-book"
+                                    type="object"
+                                    help="Proposed Contracts">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="proposed_contracts_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Offers</span>
+                                </div>
+                            </button>
+                            <button name="action_applications_email"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    type="object"
+                                    context="{'active_test': False}"
+                                    attrs="{'invisible': [('application_count', '=', 0)]}">
+                                <field name="application_count" widget="statinfo" string="Other Applications"/>
+                            </button>
+                            <button name="action_makeMeeting" class="oe_stat_button" icon="fa-calendar" type="object"
+                                    help="Schedule interview with this applicant">
+                                <field name="meeting_count" widget="statinfo" string="Meetings"/>
+                            </button>
+                            <button name="action_start_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-user"
+                                    type="object"
+                                    help="Answer related job question"
+                                    context="{'survey_id': survey_id}"
+                                    attrs="{'invisible':[('survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Start</span>
+                                    <span class="o_stat_text">Interview</span>
+                                </div>
+                            </button>
+                            <button name="action_print_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-print"
+                                    type="object"
+                                    help="Print interview report"
+                                    attrs="{'invisible':[('survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Print</span>
+                                    <span class="o_stat_text">Interview</span>
+                                </div>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Refused" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <field name="kanban_state" widget="kanban_state_selection"/>
+                        <field name="active" invisible="1"/>
+                        <field name="legend_normal" invisible="1"/>
+                        <field name="legend_blocked" invisible="1"/>
+                        <field name="legend_done" invisible="1"/>
+                        <field name="survey_id" invisible="1"/>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                            <label for="name" string="Post Applied For"/>
+                            <field name="job_id" nolabel="1"/>
+                            <br/>
+                            <label for="company_id" string="Company"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"
+                                   nolabel="1"/>
+                            <field name="active" invisible="1"/>
+                            <br/>
+                            <label for="emp_id" string="Employee"
+                                   attrs="{'invisible': [('emp_id', '=', False)]}"/>
+                            <field name="emp_id"
+                                   attrs="{'invisible': [('emp_id', '=', False)],'readonly': [('emp_id', '!=', False)]}"/>
+                            <field name="response_count" invisible="1"/>
+                        </div>
+                        <notebook>
+                            <page string="Personal Details">
+                                <group name="personal_details">
+                                    <group>
+                                        <field name="surname_id"/>
+                                        <label for="former_name" string="Former name(s) / Maiden Name"/>
+                                        <div class="o_row">
+                                            <field name="former_name"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <label for="partner_name" string="Name (As per passport/ID)"/>
+                                        <field name="partner_name" nolabel="1"/>
+                                    </group>
+
+                                </group>
+                                <group string="Contact Information">
+                                    <group>
+                                        <label string="Telephone No. (Country code)" for="partner_phone"/>
+                                        <div class="o_row">
+                                            <field name="partner_phone"/>
+                                        </div>
+                                        <label string="Mobile No." for="partner_mobile"/>
+                                        <div class="o_row">
+                                            <field name="partner_mobile"/>
+                                        </div>
+
+                                        <label for="street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="street" placeholder="Street..." class="o_address_street"/>
+                                            <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                            <field name="city" placeholder="City" class="o_address_city"/>
+                                            <field name="state_id" class="o_address_state" placeholder="State"
+                                                   options='{"no_open": True}'/>
+                                            <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                            <field name="country_id" placeholder="Country" class="o_address_country"
+                                                   options='{"no_open": True, "no_create": True}'/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <label string="Business No. (Country code)" for="business_no"/>
+                                        <div class="o_row">
+                                            <field name="business_no"/>
+                                        </div>
+                                        <label string="E-mail" for="email_from"/>
+                                        <div class="o_row">
+                                            <field name="email_from"/>
+                                        </div>
+                                    </group>
+                                </group>
+                                <group string="Official Papers Information">
+                                    <group>
+                                        <field name="passport_number"/>
+                                        <field name="nationality_id_no"/>
+                                        <field name="date_of_birth"/>
+                                        <label for="age" string="Age"/>
+                                        <div class="o_row">
+                                            <field name="age" nolabel="1"/>
+                                            <span>Year(s)</span>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="expiry_date"/>
+                                        <field name="nationality"/>
+                                        <field name="place_of_birth"/>
+                                        <field name="religion"/>
+                                        <field name="gender"/>
+                                    </group>
+                                </group>
+                                <group string="Marital">
+                                    <group>
+                                        <field name="marital_status"/>
+                                        <field name="spouse_employment_status"
+                                               attrs="{'invisible':[('marital_status', '=', 'single')]}"/>
+                                        <field name="related_children"
+                                               attrs="{'invisible':[('marital_status', '=', 'single')]}">
+                                            <form>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="gender"/>
+                                                    <field name="age"/>
+                                                </group>
+                                            </form>
+                                            <tree editable="bottom">
+                                                <field name="name"/>
+                                                <field name="gender"/>
+                                                <field name="age"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <group>
+                                        <field name="spouse_name"
+                                               attrs="{'invisible':[('marital_status', '=', 'single')]}"/>
+                                        <field name="no_of_children"
+                                               attrs="{'invisible':[('marital_status', '=', 'single')]}"/>
+                                    </group>
+                                </group>
+                                <group string="Next Of Kin">
+                                    <group>
+                                        <label for="next_of_kin_name" string="Name"/>
+                                        <div class="o_row">
+                                            <field name="next_of_kin_name"/>
+                                        </div>
+                                        <field name="next_of_kin_relationship"/>
+                                    </group>
+                                    <group>
+                                        <label for="next_of_kin_street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="next_of_kin_street" placeholder="Street..."
+                                                   class="o_address_street"/>
+                                            <field name="next_of_kin_street2" placeholder="Street 2..."
+                                                   class="o_address_street"/>
+                                            <field name="next_of_kin_city" placeholder="City" class="o_address_city"/>
+                                            <field name="next_of_kin_state_id" class="o_address_state"
+                                                   placeholder="State"
+                                                   options='{"no_open": True}'/>
+                                            <field name="next_of_kin_zip" placeholder="ZIP" class="o_address_zip"/>
+                                            <field name="next_of_kin_country_id" placeholder="Country"
+                                                   class="o_address_country"
+                                                   options='{"no_open": True, "no_create": True}'/>
+                                        </div>
+                                    </group>
+                                </group>
+                                <group string="Legal Beneficiary">
+                                    <group colspan="2">
+                                        <div class="text-danger o_row">** Legal Beneficiary refers to the legal heir who
+                                            you
+                                            assign to receive any
+                                            dues owed to you by the Company in the event of a misfortune. This MUST
+                                            necessarily be a blood relative. </div>
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="legal_beneficiary_ids" context="{'default_application_id':id}"
+                                               nolabel="1">
+                                            <form>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="relationship"/>
+                                                    <field name="details"/>
+                                                </group>
+                                            </form>
+                                            <tree editable="bottom">
+                                                <field name="name"/>
+                                                <field name="relationship"/>
+                                                <field name="details"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Education and Training">
+                                <group string="Education">
+                                    <field name="education_ids" context="{'default_application_id':id}" nolabel="1">
+                                        <form>
+                                            <group>
+                                                <field name="education_place_name"/>
+                                                <field name="type"/>
+                                                <field name="date_from"/>
+                                                <field name="date_to"/>
+                                            </group>
+                                        </form>
+                                        <tree editable="bottom">
+                                            <field name="education_place_name"/>
+                                            <field name="type"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Courses">
+                                    <field name="educational_background" nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Language Proficiency">
+                                <group>
+                                    <field name="language_ids" context="{'default_application_id':id}" nolabel="1">
+                                        <form>
+                                            <group>
+                                                <field name="language_id"/>
+                                                <field name="reading" widget="radio" options="{'horizontal': true}"/>
+                                                <field name="writing" widget="radio" options="{'horizontal': true}"/>
+                                                <field name="spoken" widget="radio" options="{'horizontal': true}"/>
+                                            </group>
+                                        </form>
+                                        <tree editable="bottom">
+                                            <field name="language_id"/>
+                                            <field name="reading" widget="radio" options="{'horizontal': true}"/>
+                                            <field name="writing" widget="radio" options="{'horizontal': true}"/>
+                                            <field name="spoken" widget="radio" options="{'horizontal': true}"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Employment History">
+                                <group>
+                                    <group>
+                                        <field name="total_years_of_exp"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="employment_history_ids"
+                                           nolabel="1" context="{'default_application_id':id}">
+                                        <tree>
+                                            <field name="company_name"/>
+                                            <field name="current_job"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                            <field name="years_of_exp" sum="Total Experience"/>
+                                            <field name="type_of_job"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Employment Gap">
+                                    <group colspan="2">
+                                        <field name="employment_gap"/>
+                                    </group>
+                                    <group attrs="{'required': [('employment_gap', '=', True)], 'invisible': [('employment_gap', '=', False)]}">
+                                        <label for="employment_gap_date_from" string="Date From"/>
+                                        <div class="o_row">
+                                            <field name="employment_gap_date_from" nolabel="1"/>
+
+                                        </div>
+                                    </group>
+                                    <group attrs="{'required': [('employment_gap', '=', True)], 'invisible': [('employment_gap', '=', False)]}">
+                                        <label for="employment_gap_date_to" string="Date To"/>
+                                        <div class="o_row">
+                                            <field name="employment_gap_date_to"/>
+                                        </div>
+                                    </group>
+                                    <group colspan="2"
+                                           attrs="{'required': [('employment_gap', '=', True)], 'invisible': [('employment_gap', '=', False)]}">
+                                        <label for="employment_gap_reason" string="Reason"/>
+                                        <div class="o_row">
+                                            <field name="employment_gap_reason"/>
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Questions">
+                                <group>
+                                    <field name="answer_ids"
+                                           nolabel="1" context="{'default_application_id':id}" widget="one2many">
+                                        <form delete="0" create="0">
+                                            <field name="question_id" readonly="1" force_save="1"/>
+                                            <field name="answer" widget="radio" options="{'horizontal': true}"/>
+                                            <field name="details"/>
+                                        </form>
+                                        <tree delete="0" create="0" editable="bottom">
+                                            <field name="question_id" readonly="1" force_save="1"/>
+                                            <field name="answer"/>
+                                            <field name="details"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="References">
+                                <group>
+                                    <group colspan="2"><div class="o_row">
+                                        Please provide the following information for 2 employment references. In case of
+                                        no previous work experience, please provide the names of professional people
+                                        (not relatives / Friends) who will give you a reference and have known you for
+                                        at least 2 years.
+                                    </div></group>
+
+                                    <field colspan="2" name="references_ids"
+                                           nolabel="1" context="{'default_application_id':id}">
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <label for="street" string="Address"/>
+                                                    <div class="o_address_format">
+                                                        <field name="street" placeholder="Street..."
+                                                               class="o_address_street"/>
+                                                        <field name="street2" placeholder="Street 2..."
+                                                               class="o_address_street"/>
+                                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                                        <field name="state_id" class="o_address_state"
+                                                               placeholder="State"
+                                                               options='{"no_open": True}'/>
+                                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                        <field name="country_id" placeholder="Country"
+                                                               class="o_address_country"
+                                                               options='{"no_open": True, "no_create": True}'/>
+                                                    </div>
+                                                </group>
+                                                <group>
+                                                    <field name="phone"/>
+                                                    <field name="email"/>
+                                                    <field name="previous_work_exp"/>
+                                                    <field name="no_of_years_known"
+                                                           attrs="{'required': [('previous_work_exp', '=', True)], 'invisible': [('previous_work_exp', '=', False)]}"/>
+                                                </group>
+                                            </group>
+                                        </form>
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="phone"/>
+                                            <field name="email"/>
+                                            <field name="no_of_years_known"/>
+                                        </tree>
+                                    </field>
+                                    <group colspan="2">
+                                        <div class="o_row">
+                                            *As a part of routine employment process you may be required to furnish pay
+                                            slips/original certificates/reference letters as requested.
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Availability">
+                                <group colspan="2">
+                                    <div>Please state notice period required to give to your present
+                                        employer</div>
+                                    <div class="o_row">
+                                        <field name="notice_period"/>
+                                    </div>
+                                </group>
+                                <group colspan="2">
+                                    <group string="Availability">
+                                        <field name="availability"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="surveys" string="Interviews"
+                                  attrs="{'invisible': [('response_count', '=', 0)]}">
+                                <field name="response_ids">
+                                    <tree edit="0" create="0" delete="0" options="{'no_create': True, 'no_open': True}">
+                                        <field name="response_id"/>
+                                        <field name="user_id"/>
+                                        <field name="related_survey" invisible="1"/>
+                                        <button name="action_start_survey"
+                                                class="oe_stat_button"
+                                                icon="fa-user"
+                                                type="object"
+                                                help="Answer related job question"
+                                                context="{'survey_id': related_survey}"
+                                                attrs="{'invisible':[('related_survey','=',False)]}">
+                                        </button>
+                                        <button name="action_print_survey"
+                                                class="oe_stat_button"
+                                                icon="fa-print"
+                                                type="object"
+                                                help="Print interview report"
+                                                attrs="{'invisible':[('related_survey','=',False)]}">
+                                        </button>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </sheet>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

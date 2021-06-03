@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id="candidate_interview_status_tree" model="ir.ui.view">
+            <field name="name">candidate_interview_status_tree</field>
+            <field name="model">hr.applicant.survey</field>
+            <field name="arch" type="xml">
+                <tree string="Candidate Interview Status" create="0" edit="0" delete="0">
+                    <field name="related_applicant" invisible="1"/>
+                    <field name="partner_name"/>
+                    <field name="job_id"/>
+                    <field name="user_id"/>
+                    <field name="done_date"/>
+                    <field name="done_time" widget="float_time"/>
+                    <field name="stage_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="candidate_interview_status_search" model="ir.ui.view">
+            <field name="name">candidate_interview_status_search</field>
+            <field name="model">hr.applicant.survey</field>
+            <field name="arch" type="xml">
+                <search string="Candidate Interview Status">
+                    <field name="partner_name"/>
+                    <field name="job_id"/>
+                    <separator/>
+                    <group string="Group By">
+                        <filter string="Applicant" name="group_by_related_applicant" domain="[]"
+                                context="{'group_by':'related_applicant'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_hr_candidate_interview_status" model="ir.actions.act_window">
+            <field name="name">Candidate Interview Status</field>
+            <field name="res_model">hr.applicant.survey</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_group_by_related_applicant': 1}</field>
+            <field name="domain">[('response_id', '!=', False), ('response_id.state', '=', 'done')]</field>
+            <field name="view_id" ref="candidate_interview_status_tree"/>
+            <field name="search_view_id" ref="candidate_interview_status_search"/>
+        </record>
+        <menuitem name="Candidate Interview Status" id="hr_candidate_interview_status"
+                  parent="hr.hr_menu_hr_reports"
+                  action="action_hr_candidate_interview_status"/>
+    </data>
+</odoo>

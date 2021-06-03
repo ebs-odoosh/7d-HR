@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="survey_job_interview_evaluation_form" model="survey.survey">
+            <field name="title">Job Interview Evaluation Form</field>
+            <field name="state">open</field>
+            <field name="access_mode">token</field>
+            <field name="users_can_go_back" eval="True"/>
+            <field name="category">hr_recruitment</field>
+            <field name="description" type="html">
+                <p>
+                    Please answer those questions about candidate.
+                </p>
+            </field>
+        </record>
+        <!--Q1 Company Name-->
+        <record id="survey_job_interview_evaluation_form_q1" model="survey.question">
+            <field name="title">Company Name</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">1</field>
+            <field name="question_type">simple_choice</field>
+            <field name="column_nb">6</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q1_a1" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q1"/>
+            <field name="sequence">1</field>
+            <field name="value">SENERGY Services</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q1_a2" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q1"/>
+            <field name="sequence">2</field>
+            <field name="value">ENOS</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q1_a3" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q1"/>
+            <field name="sequence">3</field>
+            <field name="value">EITS</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q1_a4" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q1"/>
+            <field name="sequence">4</field>
+            <field name="value">GIGT</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q1_a5" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q1"/>
+            <field name="sequence">5</field>
+            <field name="value">ETS</field>
+        </record>
+        <!--Q2 Interview Date-->
+        <record id="survey_job_interview_evaluation_form_q2" model="survey.question">
+            <field name="title">Interview Date</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">2</field>
+            <field name="question_type">date</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <!--Q3 Interviewer Name-->
+        <record id="survey_job_interview_evaluation_form_q3" model="survey.question">
+            <field name="title">Interviewer Name</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">3</field>
+            <field name="question_type">textbox</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Section Applicant Information-->
+        <record id="survey_job_interview_evaluation_form_p2" model="survey.question">
+            <field name="title">Applicant Information</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="is_page" eval="True"/>
+            <field name="sequence">4</field>
+            <field name="description" type="html">
+                <p>Please fill applicant information about you: what is his\her name, education, and experience.
+                    It will help us managing application.</p>
+            </field>
+        </record>
+        <!--Q5 Candidate Name -->
+        <record id="survey_job_interview_evaluation_form_q5" model="survey.question">
+            <field name="title">Candidate Name</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">5</field>
+            <field name="question_type">textbox</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q6 Date of Birth -->
+        <record id="survey_job_interview_evaluation_form_q6" model="survey.question">
+            <field name="title">Date of Birth</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">6</field>
+            <field name="question_type">date</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q7 Position Applied for -->
+        <record id="survey_job_interview_evaluation_form_q7" model="survey.question">
+            <field name="title">Position Applied for</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">7</field>
+            <field name="question_type">textbox</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q8 Years of Work Experience -->
+        <record id="survey_job_interview_evaluation_form_q8" model="survey.question">
+            <field name="title">Years of Work Experience</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">8</field>
+            <field name="question_type">numerical_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q9 Expected Salary -->
+        <record id="survey_job_interview_evaluation_form_q9" model="survey.question">
+            <field name="title">Expected Salary</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">9</field>
+            <field name="question_type">numerical_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q10 Expected Joining Date -->
+        <record id="survey_job_interview_evaluation_form_q10" model="survey.question">
+            <field name="title">Expected Joining Date</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">10</field>
+            <field name="question_type">date</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <!--Q11 Comments -->
+        <record id="survey_job_interview_evaluation_form_q11" model="survey.question">
+            <field name="title">Comments</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">11</field>
+            <field name="question_type">free_text</field>
+        </record>
+        <!--Q12 Comments -->
+        <record id="survey_job_interview_evaluation_form_q12" model="survey.question">
+            <field name="title">Hiring Recommendation</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">12</field>
+            <field name="question_type">simple_choice</field>
+            <field name="column_nb">3</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q12_a1" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q12"/>
+            <field name="sequence">1</field>
+            <field name="value">Hired</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q12_a2" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q12"/>
+            <field name="sequence">2</field>
+            <field name="value">Second Interview is Required</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q12_a3" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q12"/>
+            <field name="sequence">3</field>
+            <field name="value">Not Hired</field>
+        </record>
+
+        <!--Q13 Candidate Evaluation -->
+        <record id="survey_job_interview_evaluation_form_q13" model="survey.question">
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">13</field>
+            <field name="title">Candidate Evaluation</field>
+            <field name="question_type">matrix</field>
+            <field name="matrix_subtype">simple</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q12_col1" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">1</field>
+            <field name="value">Excellent</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_col2" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">2</field>
+            <field name="value">Good</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_col3" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">3</field>
+            <field name="value">Satisfactory</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_col4" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">4</field>
+            <field name="value">Fair</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_col5" model="survey.label">
+            <field name="question_id" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">5</field>
+            <field name="value">Poor</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row1" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">1</field>
+            <field name="value">Knowledge of Specific Job Skills</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row2" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">2</field>
+            <field name="value">Related Job Experience</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row3" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">3</field>
+            <field name="value">Related Education or Training</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row4" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">4</field>
+            <field name="value">Initiative</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row5" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">5</field>
+            <field name="value">Communication/Listening Skills</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row6" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">6</field>
+            <field name="value">Attitude</field>
+        </record>
+        <record id="survey_job_interview_evaluation_form_q13_row7" model="survey.label">
+            <field name="question_id_2" ref="survey_job_interview_evaluation_form_q13"/>
+            <field name="sequence">7</field>
+            <field name="value">Interest in Company/Position</field>
+        </record>
+
+        <!--Q14 Strengths -->
+        <record id="survey_job_interview_evaluation_form_q14" model="survey.question">
+            <field name="title">Strengths</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">14</field>
+            <field name="question_type">free_text</field>
+        </record>
+        <!--Q15 Weaknesses -->
+        <record id="survey_job_interview_evaluation_form_q15" model="survey.question">
+            <field name="title">Weaknesses</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">15</field>
+            <field name="question_type">free_text</field>
+        </record>
+        <!--Q16 Additional Comments -->
+        <record id="survey_job_interview_evaluation_form_q16" model="survey.question">
+            <field name="title">Additional Comments</field>
+            <field name="survey_id" ref="survey_job_interview_evaluation_form"/>
+            <field name="sequence">16</field>
+            <field name="question_type">free_text</field>
+        </record>
+
+    </data>
+</odoo>

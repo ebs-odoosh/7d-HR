@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record id="approval_request_view_form_inherit2" model="ir.ui.view">
+            <field name="name">approval.request.view.form.inherit2</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
+                <field name="replacement_employee_id" position="after">
+                    <field name="have_duties"
+                           attrs="{'invisible':[('requisition_type','!=','replace')], 'required': [('requisition_type','==','replace')]}"/>
+
+                    <field name="relocate_current_job_title"
+                           attrs="{'invisible':[('requisition_type','!=','reallocated')], 'required': [('requisition_type','==','reallocated')]}"/>
+
+                    <field name="current_pay_grade_rage"
+                           attrs="{'invisible':[('requisition_type','!=','reallocated')],
+                            'required': [('requisition_type','=','reallocated')]}"/>
+                    <field name="recommended_pay_grade_rage"
+                           attrs="{'invisible':[('requisition_type','!=','reallocated')],
+                            'required': [('requisition_type','=','reallocated')]}"/>
+                    <field name="pay_grade_rage"
+                           attrs="{'invisible':[('requisition_type','not in',('replace','new','non_budget'))],
+                            'required': [('requisition_type','in',('replace','new','non_budget'))]}"/>
+                    <field name="justify_non_budget_new_position"
+                           attrs="{'invisible':[('requisition_type','!=','non_budget')], 'required': [('requisition_type','==','non_budget')]}"/>
+
+                </field>
+                <field name="job_title" position="after">
+                    <field name="job_type"
+                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="military_status"
+                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="salary_type"
+                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="preferred_date"
+                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Special advertising/recruitment request"
+                          attrs="{'invisible':[('has_requisition_type','==','no')]}">
+                        <field name="special_adv"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

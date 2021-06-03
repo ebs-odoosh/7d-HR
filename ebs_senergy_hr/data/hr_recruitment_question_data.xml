@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_recruitment_question1" model="hr.recruitment.questions">
+            <field name="name">Have you ever been convicted of any criminal offences?</field>
+        </record>
+        <record id="hr_recruitment_question2" model="hr.recruitment.questions">
+            <field name="name">Have you ever worked in any capacity with Bahrain Financing Company?</field>
+        </record>
+        <record id="hr_recruitment_question3" model="hr.recruitment.questions">
+            <field name="name">Do you have any family members working for Bahrain Financing Company?</field>
+        </record>
+        <record id="hr_recruitment_question4" model="hr.recruitment.questions">
+            <field name="name">Do you have any family members working for competitors within the industry and
+                country? </field>
+        </record>
+        <record id="hr_recruitment_question5" model="hr.recruitment.questions">
+            <field name="name">Do you have any Shareholdings, securities etc. in excess of 5% of any company, and all
+                holdings, no matter what size in any foreign exchange company? (if company is not publicly
+                listed) </field>
+        </record>
+        <record id="hr_recruitment_question6" model="hr.recruitment.questions">
+            <field name="name">Do you have any External business interests or relationships with
+                customers/suppliers/direct competitors of BFC? </field>
+        </record>
+        <record id="hr_recruitment_question7" model="hr.recruitment.questions">
+            <field name="name">Have you ever held any Executive or non-executive directorships?</field>
+        </record>
+        <record id="hr_recruitment_question8" model="hr.recruitment.questions">
+            <field name="name">Are you currently receiving medical treatment, or suffering from any medical
+                condition? </field>
+        </record>
+        <record id="hr_recruitment_question9" model="hr.recruitment.questions">
+            <field name="name">Do you have a commercial registration in Bahrain or are you currently engaged in any
+                other business either as a proprietor, partner, officer, director, trustee, employee, agent or
+                otherwise? </field>
+        </record>
+    </data>
+</odoo>

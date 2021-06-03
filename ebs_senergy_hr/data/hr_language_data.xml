@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="lang_1" model="hr.recruitment.language.data">
+            <field name="name">English</field>
+        </record>
+        <record id="lang_2" model="hr.recruitment.language.data">
+            <field name="name">Mandarin Chinese</field>
+        </record>
+        <record id="lang_3" model="hr.recruitment.language.data">
+            <field name="name">Hindi</field>
+        </record>
+        <record id="lang_4" model="hr.recruitment.language.data">
+            <field name="name">Spanish</field>
+        </record>
+        <record id="lang_5" model="hr.recruitment.language.data">
+            <field name="name">French</field>
+        </record>
+        <record id="lang_6" model="hr.recruitment.language.data">
+            <field name="name">Arabic</field>
+        </record>
+        <record id="lang_7" model="hr.recruitment.language.data">
+            <field name="name">Bangla/Bengali</field>
+        </record>
+        <record id="lang_8" model="hr.recruitment.language.data">
+            <field name="name">Russian</field>
+        </record>
+        <record id="lang_9" model="hr.recruitment.language.data">
+            <field name="name">Portuguese</field>
+        </record>
+        <record id="lang_10" model="hr.recruitment.language.data">
+            <field name="name">Indonesian</field>
+        </record>
+        <record id="lang_11" model="hr.recruitment.language.data">
+            <field name="name">Urdu</field>
+        </record>
+        <record id="lang_12" model="hr.recruitment.language.data">
+            <field name="name">German</field>
+        </record>
+    </data>
+</odoo>
