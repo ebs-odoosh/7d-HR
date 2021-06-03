@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_recruitment_employment_history_form">
+            <field name="name">hr_recruitment_employment_history_form</field>
+            <field name="model">hr.recruitment.employment.history</field>
+            <field name="arch" type="xml">
+                <form string="Employment History">
+                    <group>
+                        <group>
+                            <field name="company_name"/>
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                       options='{"no_open": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="current_job"/>
+                            <field name="type_of_job"/>
+                            <field name="date_from"/>
+                            <field name="date_to"
+                                   attrs="{'required': [('current_job', '=', False)], 'invisible': [('current_job', '=', True)]}"/>
+                            <field name="years_of_exp"/>
+                            <field name="reason_for_leaving"
+                                   attrs="{'required': [('current_job', '=', False)], 'invisible': [('current_job', '=', True)]}"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
