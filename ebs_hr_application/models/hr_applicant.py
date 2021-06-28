@@ -120,6 +120,23 @@ class HRApplicant(models.Model):
                                help="The date at which the applicant will be available to start working",
                                default=fields.Date.context_today)
 
+    meeting_count = fields.Integer(compute='_compute_meeting_count', help='Meeting Count')
+    application_count = fields.Integer(compute='_compute_application_count', string="Application Count")
+
+    @api.depends('email_from')
+    def _compute_application_count(self):
+        application_data = self.env['hr.applicant'].with_context(active_test=False).read_group([
+            ('email_from', 'in', list(set(self.mapped('email_from'))))], ['email_from'], ['email_from'])
+        application_data_mapped = dict((data['email_from'], data['email_from_count']) for data in application_data)
+        applicants = self.filtered(lambda applicant: applicant.email_from)
+        for applicant in applicants:
+            applicant.application_count = application_data_mapped.get(applicant.email_from, 1) - 1
+        (self - applicants).application_count = False
+
+    def _compute_meeting_count(self):
+        for applicant in self:
+            applicant.meeting_count = self.env['calendar.event'].search_count([('applicant_id', '=', applicant.id)])
+
     @api.depends('response_ids')
     def _get_response_count(self):
         for record in self:

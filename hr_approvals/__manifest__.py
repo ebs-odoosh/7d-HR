@@ -20,7 +20,7 @@
     'version': '0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'security_groups','hr_core','hr_contract_custom','hr_employee_custom','mail'],
+    'depends': ['base', 'security_groups', 'hr_core', 'hr_contract_custom', 'hr_employee_custom', 'mail', 'approvals'],
 
     # always loaded
     'data': [

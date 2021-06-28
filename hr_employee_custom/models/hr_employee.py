@@ -94,7 +94,7 @@ class EmployeeEvent(models.Model):
         string='New Active Salary',
         required=False)
 
-    # related_requisition = fields.Many2one('approval.request', string='Related Requisition')
+    related_requisition = fields.Many2one('approval.request', string='Related Requisition')
 
     company_employee_id = fields.Char(string='Company Employee ID', required=False)
 

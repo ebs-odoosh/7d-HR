@@ -173,15 +173,15 @@ class DocumentsCustom(models.Model):
         else:
             raise ValidationError('Must add reject reason!')
 
-    @api.constrains('document_number')
-    def _check_document_number(self):
-        for rec in self:
-            if len(self.env['ir.attachment'].search(
-                    [('document_number', '=', rec.document_number),
-                     ('active', '=', True),
-                     ('id', '!=', rec.id)])) != 0 \
-                    and rec.document_number:
-                raise ValidationError(_("Document Number and Document Type Combination must be unique !"))
+    # @api.constrains('document_number')
+    # def _check_document_number(self):
+    #     for rec in self:
+    #         if len(self.env['ir.attachment'].search(
+    #                 [('document_number', '=', rec.document_number),
+    #                  ('active', '=', True),
+    #                  ('id', '!=', rec.id)])) != 0 \
+    #                 and rec.document_number:
+    #             raise ValidationError(_("Document Number and Document Type Combination must be unique !"))
 
     def name_get(self):
         result = []

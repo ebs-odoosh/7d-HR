@@ -92,11 +92,6 @@
             <field name="lang">${object.user_id.lang}</field>
             <field name="auto_delete" eval="True"/>
         </record>
-        <record id="ir_attachment_welcome_to_kuwait" model="ir.attachment">
-            <field name="type">binary</field>
-            <field name="datas" type="base64" file="ebs_senergy_hr/static/src/pdf/Welcome-to-Kuwait.pdf"/>
-            <field name="name">Welcome To Kuwait.pdf</field>
-        </record>
         <record id="welcome_email_letter_to_new_employee" model="mail.template">
             <field name="name">Welcome aboard</field>
             <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
@@ -104,7 +99,6 @@
                 ${object.work_email or object.department_id.manager_id.work_email}</field>
             <field name="subject">Welcome aboard</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="attachment_ids" eval="[(6, 0, [ref('ir_attachment_welcome_to_kuwait')])]"/>
             <field name="body_html" type="xml">
                 <table border="0" cellpadding="0" cellspacing="0"
                        style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td

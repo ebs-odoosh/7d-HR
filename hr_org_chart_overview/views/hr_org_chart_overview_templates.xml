@@ -12,20 +12,20 @@
             />
             <script
                 type="text/javascript"
-                src="/hr_org_chart_overview/static/src/lib/orgchart/html2canvas.min.js"
+                src="/hr_org_chart_overview/static/src/orgchart/html2canvas.min.js"
             />
             <script
                 type="text/javascript"
-                src="/hr_org_chart_overview/static/src/lib/orgchart/jspdf.min.js"
+                src="/hr_org_chart_overview/static/src/orgchart/jspdf.min.js"
             />
             <script
                 type="text/javascript"
-                src="/hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.js"
+                src="/hr_org_chart_overview/static/src/orgchart/jquery.orgchart.js"
             />
             <link
                 rel="stylesheet"
                 type="text/css"
-                href="/hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.css"
+                href="/hr_org_chart_overview/static/src/orgchart/jquery.orgchart.css"
             />
             <link
                 rel="stylesheet"

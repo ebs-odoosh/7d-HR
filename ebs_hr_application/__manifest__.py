@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "EBS Senergy HR",
+    'name': "ebs_hr_application",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -24,7 +24,8 @@
         'hr_approvals',
         'hr_document_custom',
         'hr_recruitment_custom',
-        'res_company_custom'
+        'res_company_custom',
+        'approvals'
     ],
 
     # always loaded
@@ -33,7 +34,6 @@
         'data/hr_applicant_config_data.xml',
         'data/hr_language_data.xml',
         'data/welcome_email_data.xml',
-        'data/job_interview_evaluation_form.xml',
         'data/hr_recruitment_question_data.xml',
         'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',

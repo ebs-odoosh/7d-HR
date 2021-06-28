@@ -51,6 +51,7 @@
 	 <menuitem
             id="sh_complain_management_menu"
             name="Complain Management"
+            web_icon="sh_emp_complain,static/description/icon.png"
             />
      <menuitem
             id="sh_emp_complain_configure_menu"

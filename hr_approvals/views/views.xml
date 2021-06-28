@@ -191,14 +191,14 @@
             </field>
         </record>
 
-<!--        <record id="open_reject_reason_action" model="ir.actions.act_window">-->
-<!--            <field name="name">Rejection Reason</field>-->
-<!--            <field name="res_model">approval.reject.reason</field>-->
-<!--            <field name="view_mode">form</field>-->
-<!--            <field name="view_id" ref="approval_rejection_form"/>-->
-<!--            <field name="target">new</field>-->
-<!--            <field name="context">{'default_approval_id' : active_id}</field>-->
-<!--        </record>-->
+        <record id="open_reject_reason_action" model="ir.actions.act_window">
+            <field name="name">Rejection Reason</field>
+            <field name="res_model">approval.reject.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="approval_rejection_form"/>
+            <field name="target">new</field>
+            <field name="context">{'default_approval_id' : active_id}</field>
+        </record>
         <record id="open_eligible_action" model="ir.actions.act_window">
             <field name="name">Set Eligible</field>
             <field name="res_model">approval.eligible</field>
@@ -207,456 +207,456 @@
             <field name="target">new</field>
 <!--            <field name="context">{'default_approval_id' : active_id}</field>-->
         </record>
-<!--        <record id="approval_request_view_form_inherit" model="ir.ui.view">-->
-<!--            <field name="name">approval.request.view.form</field>-->
-<!--            <field name="model">approval.request</field>-->
-<!--            <field name="inherit_id" ref="approvals.approval_request_view_form"/>-->
-<!--            <field name="arch" type="xml">-->
+        <record id="approval_request_view_form_inherit" model="ir.ui.view">
+            <field name="name">approval.request.view.form</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
 
-<!--                <xpath expr="//button[@name='action_refuse']" position="replace">-->
-<!--                    <button name="%(open_reject_reason_action)d" string="Refuse" type="action"-->
-<!--                            attrs="{'invisible':[('user_status','!=','pending')]}"/>-->
-<!--                    <button name="%(open_eligible_action)d" string="Set Eligible for Rehire and Replacement"-->
-<!--                            type="action"-->
-<!--                            attrs="{'invisible':['|', ('user_status','!=','pending'), ('is_termination_request','!=', 'yes')]}"/>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//button[@name='action_confirm']" position="replace">-->
-<!--                    <button name="action_confirm" string="Submit" type="object"-->
-<!--                            attrs="{'invisible':[('request_status','!=','new')]}" class="btn-primary oe_read_only"/>-->
-<!--                </xpath>-->
+                <xpath expr="//button[@name='action_refuse']" position="replace">
+                    <button name="%(open_reject_reason_action)d" string="Refuse" type="action"
+                            attrs="{'invisible':[('user_status','!=','pending')]}"/>
+                    <button name="%(open_eligible_action)d" string="Set Eligible for Rehire and Replacement"
+                            type="action"
+                            attrs="{'invisible':['|', ('user_status','!=','pending'), ('is_termination_request','!=', 'yes')]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="replace">
+                    <button name="action_confirm" string="Submit" type="object"
+                            attrs="{'invisible':[('request_status','!=','new')]}" class="btn-primary oe_read_only"/>
+                </xpath>
 
-<!--                <xpath expr="//field[@name='request_owner_id']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                    <attribute name="options">{'no_open': True}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='request_owner_id']" position="after">-->
-<!--                    <field name="direct_employee_id" options="{'no_create': True, 'no_open': True,'no_edit': True}"/>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='category_id']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                    <attribute name="options">{'no_open': True}</attribute>-->
-<!--                </xpath>-->
+                <xpath expr="//field[@name='request_owner_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="options">{'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='request_owner_id']" position="after">
+                    <field name="direct_employee_id" options="{'no_create': True, 'no_open': True,'no_edit': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="options">{'no_open': True}</attribute>
+                </xpath>
 
-<!--                <xpath expr="//field[@name='name']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                    <attribute name="force_save">1</attribute>-->
-<!--                </xpath>-->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
 
-<!--                <xpath expr="//button[@name='action_cancel']" position="attributes">-->
-<!--                    <attribute name="groups">security_groups.group_hc_employee</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//button[@name='action_withdraw']" position="attributes">-->
-<!--                    <attribute name="groups">security_groups.group_hc_employee</attribute>-->
-<!--                </xpath>-->
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">security_groups.group_hc_employee</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_withdraw']" position="attributes">
+                    <attribute name="groups">security_groups.group_hc_employee</attribute>
+                </xpath>
 
-<!--                <xpath expr="//page[@name='description']" position="replace">-->
-<!--                    <page string="Justification" name="description">-->
-<!--                        <field name="reason" required="1"-->
-<!--                               attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"-->
-<!--                               string="Justification"/>-->
-<!--                    </page>-->
-<!--                    <page string="Related Warnings" attrs="{'invisible':[('has_related_warnings','==','no')]}">-->
-<!--                        <field name="related_warnings" options="{'no_open': True}"-->
-<!--                               attrs="{'invisible':[('has_related_warnings','==','no')], 'required': [('has_related_warnings','==','required')]}"-->
-<!--                               readonly="1" force_save="1"/>-->
-<!--                    </page>-->
-<!--                </xpath>-->
+                <xpath expr="//page[@name='description']" position="replace">
+                    <page string="Justification" name="description">
+                        <field name="reason" required="1"
+                               attrs="{'readonly':[('request_status','in',['approved','refused','cancel'])]}"
+                               string="Justification"/>
+                    </page>
+                    <page string="Related Warnings" attrs="{'invisible':[('has_related_warnings','==','no')]}">
+                        <field name="related_warnings" options="{'no_open': True}"
+                               attrs="{'invisible':[('has_related_warnings','==','no')], 'required': [('has_related_warnings','==','required')]}"
+                               readonly="1" force_save="1"/>
+                    </page>
+                </xpath>
 
-<!--                <field name="partner_id" position="after">-->
-<!--                    <field name="read_only_approval" invisible="1"/>-->
-<!--                    <field name="is_requisition_request" invisible="1"/>-->
-<!--                    <field name="is_termination_request" invisible="1"/>-->
-<!--                    <field name="is_termination_extend_request" invisible="1"/>-->
-<!--                    <field name="is_internal_transfer_request" invisible="1"/>-->
-<!--                    <field name="can_create_job" invisible="1"/>-->
-<!--                    <field name="can_create_resign" invisible="1"/>-->
-<!--                    <field name="can_extend_resign" invisible="1"/>-->
-<!--                    <field name="can_create_transfer" invisible="1"/>-->
-<!--                    <field name="has_vacancy_type" invisible="1"/>-->
-<!--                    <field name="has_job_desc" invisible="1"/>-->
-<!--                    <field name="has_replacement_employee_id" invisible="1"/>-->
-<!--                    <field name="has_contract_type" invisible="1"/>-->
-<!--                    <field name="has_requisition_type" invisible="1"/>-->
-<!--                    <field name="has_job_title" invisible="1"/>-->
-<!--                    <field name="has_group" invisible="1"/>-->
-<!--                    <field name="has_department" invisible="1"/>-->
-<!--                    <field name="has_section" invisible="1"/>-->
-<!--                    <field name="has_subsection" invisible="1"/>-->
-<!--                    <field name="has_related_employee_id" invisible="1"/>-->
-<!--                    <field name="has_related_contract" invisible="1"/>-->
-<!--                    <field name="has_grade" invisible="1"/>-->
-<!--                    <field name="has_related_manager" invisible="1"/>-->
-<!--                    <field name="has_related_oc" invisible="1"/>-->
-<!--                    <field name="has_related_time_hired" invisible="1"/>-->
-<!--                    <field name="has_related_warnings" invisible="1"/>-->
-<!--                    <field name="has_notice_period" invisible="1"/>-->
-<!--                    <field name="has_job_position" invisible="1"/>-->
-<!--                    <field name="has_resignation_date" invisible="1"/>-->
-<!--                    <field name="has_cost_center" invisible="1"/>-->
-<!--                    <field name="has_personal_phone_no" invisible="1"/>-->
-<!--                    <field name="has_personal_email" invisible="1"/>-->
-<!--                    <field name="has_replacement_position" invisible="1"/>-->
-<!--                    <field name="has_resignation_reason" invisible="1"/>-->
-<!--                    <field name="has_resignation_extension_reason" invisible="1"/>-->
-<!--                    <field name="has_eligible_rehire" invisible="1"/>-->
-<!--                    <field name="has_eligible_rehire_comment" invisible="1"/>-->
-<!--                    <field name="can_see_eligible" invisible="1" />-->
-<!--                    <field name="can_see_eligible_not_stored" invisible="1"/>-->
-<!--                    <field name="has_employee_transferred" invisible="1"/>-->
-<!--                    <field name="has_company_employee_id" invisible="1"/>-->
-<!--                    <field name="has_transfer_type" invisible="1"/>-->
-<!--                    <field name="has_transfer_reason" invisible="1"/>-->
-<!--                    <field name="has_employee_type_source" invisible="1"/>-->
-<!--                    <field name="has_employee_type_destination" invisible="1"/>-->
-<!--                    <field name="has_cost_center_source" invisible="1"/>-->
-<!--                    <field name="has_cost_center_destination" invisible="1"/>-->
-<!--                    <field name="has_sap_source" invisible="1"/>-->
-<!--                    <field name="has_sap_destination" invisible="1"/>-->
-<!--                    <field name="has_3dx_source" invisible="1"/>-->
-<!--                    <field name="has_3dx_destination" invisible="1"/>-->
-<!--                    <field name="has_shared_folder_source" invisible="1"/>-->
-<!--                    <field name="has_shared_folder_destination" invisible="1"/>-->
-<!--                    <field name="has_shared_folder_status_source" invisible="1"/>-->
-<!--                    <field name="has_shared_folder_status_destination" invisible="1"/>-->
-<!--                    <field name="has_other_source" invisible="1"/>-->
-<!--                    <field name="has_other_destination" invisible="1"/>-->
-<!--                    <field name="has_job_title_source" invisible="1"/>-->
-<!--                    <field name="has_job_title_destination" invisible="1"/>-->
-<!--                    <field name="has_line_manager_source" invisible="1"/>-->
-<!--                    <field name="has_line_manager_destination" invisible="1"/>-->
-<!--                    <field name="has_group_source" invisible="1"/>-->
-<!--                    <field name="has_group_destination" invisible="1"/>-->
-<!--                    <field name="has_department_source" invisible="1"/>-->
-<!--                    <field name="has_department_destination" invisible="1"/>-->
-<!--                    <field name="has_section_source" invisible="1"/>-->
-<!--                    <field name="has_section_destination" invisible="1"/>-->
-<!--                    <field name="has_subsection_source" invisible="1"/>-->
-<!--                    <field name="has_subsection_destination" invisible="1"/>-->
-<!--                    <field name="has_job_grade_source" invisible="1"/>-->
-<!--                    <field name="has_job_grade_destination" invisible="1"/>-->
-<!--                    <field name="has_working_shift_source" invisible="1"/>-->
-<!--                    <field name="has_working_shift_destination" invisible="1"/>-->
-
-
-<!--                    <field name="vacancy_type"-->
-<!--                           attrs="{'invisible':[('has_vacancy_type','==','no')], 'required': [('has_vacancy_type','==','required')]}"/>-->
-<!--                    <field name="related_employee_id"-->
-<!--                           attrs="{'invisible':[('has_related_employee_id','==','no')], 'required': [('has_related_employee_id','==','required')]}"/>-->
-<!--                    <field name="related_resign_request" domain="[('state','=','active')]"-->
-<!--                           options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>-->
-<!--                    <field name="related_resign_date"-->
-<!--                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>-->
-<!--                    <field name="related_company_employee_id"-->
-<!--                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>-->
-<!--                    <field name="related_system_id"-->
-<!--                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>-->
-<!--                    <field name="related_employment_status"-->
-<!--                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>-->
-<!--                    <field name="extend_till"-->
-<!--                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>-->
-<!--                    <field name="related_contract"-->
-<!--                           attrs="{'invisible':[('has_related_contract','==','no')], 'required': [('has_related_contract','==','required')] ,'readonly':[('is_termination_request','=','yes')]}"/>-->
+                <field name="partner_id" position="after">
+                    <field name="read_only_approval" invisible="1"/>
+                    <field name="is_requisition_request" invisible="1"/>
+                    <field name="is_termination_request" invisible="1"/>
+                    <field name="is_termination_extend_request" invisible="1"/>
+                    <field name="is_internal_transfer_request" invisible="1"/>
+                    <field name="can_create_job" invisible="1"/>
+                    <field name="can_create_resign" invisible="1"/>
+                    <field name="can_extend_resign" invisible="1"/>
+                    <field name="can_create_transfer" invisible="1"/>
+                    <field name="has_vacancy_type" invisible="1"/>
+                    <field name="has_job_desc" invisible="1"/>
+                    <field name="has_replacement_employee_id" invisible="1"/>
+                    <field name="has_contract_type" invisible="1"/>
+                    <field name="has_requisition_type" invisible="1"/>
+                    <field name="has_job_title" invisible="1"/>
+                    <field name="has_group" invisible="1"/>
+                    <field name="has_department" invisible="1"/>
+                    <field name="has_section" invisible="1"/>
+                    <field name="has_subsection" invisible="1"/>
+                    <field name="has_related_employee_id" invisible="1"/>
+                    <field name="has_related_contract" invisible="1"/>
+                    <field name="has_grade" invisible="1"/>
+                    <field name="has_related_manager" invisible="1"/>
+                    <field name="has_related_oc" invisible="1"/>
+                    <field name="has_related_time_hired" invisible="1"/>
+                    <field name="has_related_warnings" invisible="1"/>
+                    <field name="has_notice_period" invisible="1"/>
+                    <field name="has_job_position" invisible="1"/>
+                    <field name="has_resignation_date" invisible="1"/>
+                    <field name="has_cost_center" invisible="1"/>
+                    <field name="has_personal_phone_no" invisible="1"/>
+                    <field name="has_personal_email" invisible="1"/>
+                    <field name="has_replacement_position" invisible="1"/>
+                    <field name="has_resignation_reason" invisible="1"/>
+                    <field name="has_resignation_extension_reason" invisible="1"/>
+                    <field name="has_eligible_rehire" invisible="1"/>
+                    <field name="has_eligible_rehire_comment" invisible="1"/>
+                    <field name="can_see_eligible" invisible="1" />
+                    <field name="can_see_eligible_not_stored" invisible="1"/>
+                    <field name="has_employee_transferred" invisible="1"/>
+                    <field name="has_company_employee_id" invisible="1"/>
+                    <field name="has_transfer_type" invisible="1"/>
+                    <field name="has_transfer_reason" invisible="1"/>
+                    <field name="has_employee_type_source" invisible="1"/>
+                    <field name="has_employee_type_destination" invisible="1"/>
+                    <field name="has_cost_center_source" invisible="1"/>
+                    <field name="has_cost_center_destination" invisible="1"/>
+                    <field name="has_sap_source" invisible="1"/>
+                    <field name="has_sap_destination" invisible="1"/>
+                    <field name="has_3dx_source" invisible="1"/>
+                    <field name="has_3dx_destination" invisible="1"/>
+                    <field name="has_shared_folder_source" invisible="1"/>
+                    <field name="has_shared_folder_destination" invisible="1"/>
+                    <field name="has_shared_folder_status_source" invisible="1"/>
+                    <field name="has_shared_folder_status_destination" invisible="1"/>
+                    <field name="has_other_source" invisible="1"/>
+                    <field name="has_other_destination" invisible="1"/>
+                    <field name="has_job_title_source" invisible="1"/>
+                    <field name="has_job_title_destination" invisible="1"/>
+                    <field name="has_line_manager_source" invisible="1"/>
+                    <field name="has_line_manager_destination" invisible="1"/>
+                    <field name="has_group_source" invisible="1"/>
+                    <field name="has_group_destination" invisible="1"/>
+                    <field name="has_department_source" invisible="1"/>
+                    <field name="has_department_destination" invisible="1"/>
+                    <field name="has_section_source" invisible="1"/>
+                    <field name="has_section_destination" invisible="1"/>
+                    <field name="has_subsection_source" invisible="1"/>
+                    <field name="has_subsection_destination" invisible="1"/>
+                    <field name="has_job_grade_source" invisible="1"/>
+                    <field name="has_job_grade_destination" invisible="1"/>
+                    <field name="has_working_shift_source" invisible="1"/>
+                    <field name="has_working_shift_destination" invisible="1"/>
 
 
-<!--                    <field name="create_date" string="Creation Date"/>-->
-<!--                    <field name="approval_date" string="Request Approval Date"/>-->
-
-<!--                    <field name="resignation_date"-->
-<!--                           attrs="{'invisible':[('has_resignation_date','==','no')], 'required': [('has_resignation_date','==','required')]}"/>-->
-<!--                    <field name="job_position" options="{'no_open': True}"-->
-<!--                           attrs="{'invisible':[('has_job_position','==','no')], 'required': [('has_job_position','==','required')] , 'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="job_title"-->
-<!--                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="grade" options="{'no_open': True}"-->
-<!--                           attrs="{'invisible':[('has_grade','==','no')], 'required': [('has_grade','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="related_manager" options="{'no_open': True}"-->
-<!--                           attrs="{'invisible':[('has_related_manager','==','no')], 'required': [('has_related_manager','==','required')]}"-->
-<!--                           readonly="1" force_save="1"/>-->
-<!--                    <field name="related_oc" options="{'no_open': True}"-->
-<!--                           attrs="{'invisible':[('has_related_oc','==','no')], 'required': [('has_related_oc','==','required')]}"-->
-<!--                           readonly="1" force_save="1"/>-->
-<!--                    <field name="related_time_hired" options="{'no_open': True}"-->
-<!--                           attrs="{'invisible':[('has_related_time_hired','==','no')], 'required': [('has_related_time_hired','==','required')]}"-->
-<!--                           readonly="1" force_save="1"/>-->
-
-
-<!--                    <field name="notice_period"-->
-<!--                           attrs="{'invisible':[('has_notice_period','==','no')], 'required': [('has_notice_period','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="group" context="{'default_type': 'BU'}"-->
-<!--                           attrs="{'invisible':[('has_group','==','no')], 'required': [('has_group','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="department" context="{'default_type': 'BD','default_parent_id':group}"-->
-<!--                           attrs="{'invisible':[('has_department','==','no')], 'required': [('has_department','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="section" context="{'default_type': 'BS','default_parent_id':department}"-->
-<!--                           attrs="{'invisible':[('has_section','==','no')], 'required': [('has_section','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="subsection" context="{'default_type': 'SS','default_parent_id':section}"-->
-<!--                           attrs="{'invisible':[('has_subsection','==','no')], 'required': [('has_subsection','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>-->
-<!--                    <field name="contract_type"-->
-<!--                           attrs="{'invisible':[('has_contract_type','==','no')], 'required': [('has_contract_type','==','required')]}"/>-->
-<!--                    <field name="requisition_type"-->
-<!--                           attrs="{'invisible':[('has_requisition_type','==','no')], 'required': [('has_requisition_type','==','required')]}"/>-->
-<!--                    <field name="replacement_employee_id"-->
-<!--                           attrs="{'invisible':['|',('has_replacement_employee_id','==','no'),('requisition_type','!=','replace')], 'required': [('has_replacement_employee_id','==','required'),('requisition_type','==','replace')]}"/>-->
-<!--                    <field name="cost_center"-->
-<!--                           attrs="{'invisible':[('has_cost_center','==','no')], 'required': [('has_cost_center','==','required')]}"/>-->
-<!--                    <field name="personal_phone_no"-->
-<!--                           attrs="{'invisible':[('has_personal_phone_no','==','no')], 'required': [('has_personal_phone_no','==','required')]}"/>-->
-<!--                    <field name="personal_email"-->
-<!--                           attrs="{'invisible':[('has_personal_email','==','no')], 'required': [('has_personal_email','==','required')]}"/>-->
-<!--                    <field name="replacement_position"-->
-<!--                           attrs="{'invisible':[('has_replacement_position','==','no')], 'required': [('has_replacement_position','==','required')]}"/>-->
-<!--                    <field name="resignation_reason" options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                           attrs="{'invisible':[('has_resignation_reason','==','no')], 'required': [('has_resignation_reason','==','required')]}"/>-->
-<!--                    &lt;!&ndash;                    <field name="resignation_extension_reason"&ndash;&gt;-->
-<!--                    &lt;!&ndash;                           attrs="{'invisible':[('has_resignation_extension_reason','==','no')], 'required': [('has_resignation_extension_reason','==','required')]}"/>&ndash;&gt;-->
-<!--                    <field name="resignation_extension_reason_text"-->
-<!--                           attrs="{'invisible':[('has_resignation_extension_reason','==','no')], 'required': [('has_resignation_extension_reason','==','required')]}"/>-->
-
-<!--                    &lt;!&ndash;                    internal transfer fields&ndash;&gt;-->
-<!--                    <field name="employee_transferred"-->
-<!--                           attrs="{'invisible':[('has_employee_transferred','==','no')], 'required': [('has_employee_transferred','==','required')]}"/>-->
-<!--                    <field name="company_employee_id" readonly="1" force_save="1"-->
-<!--                           attrs="{'invisible':[('has_company_employee_id','==','no')], 'required': [('has_company_employee_id','==','required')]}"/>-->
-<!--                    <field name="transfer_type"-->
-<!--                           attrs="{'invisible':[('has_transfer_type','==','no')], 'required': [('has_transfer_type','==','required')]}"/>-->
-<!--                    <field name="transfer_from_date"-->
-<!--                           attrs="{'invisible':[('has_employee_transferred','==','no')], 'required': [('has_transfer_type','==','required')]}"/>-->
-<!--                    <field name="transfer_to_date"-->
-<!--                           attrs="{'invisible':[('transfer_type','!=','temporary')], 'required': [('transfer_type','==','temporary')]}"/>-->
-<!--                    <field name="transfer_reason"-->
-<!--                           attrs="{'invisible':[('has_transfer_reason','==','no')], 'required': [('has_transfer_reason','==','required')]}"/>-->
+                    <field name="vacancy_type"
+                           attrs="{'invisible':[('has_vacancy_type','==','no')], 'required': [('has_vacancy_type','==','required')]}"/>
+                    <field name="related_employee_id"
+                           attrs="{'invisible':[('has_related_employee_id','==','no')], 'required': [('has_related_employee_id','==','required')]}"/>
+                    <field name="related_resign_request" domain="[('state','=','active')]"
+                           options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>
+                    <field name="related_resign_date"
+                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>
+                    <field name="related_company_employee_id"
+                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>
+                    <field name="related_system_id"
+                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>
+                    <field name="related_employment_status"
+                           attrs="{'invisible':[('is_termination_request','==','no')]}"/>
+                    <field name="extend_till"
+                           attrs="{'invisible':[('is_termination_extend_request','==','no')], 'required': [('is_termination_extend_request','==','yes')]}"/>
+                    <field name="related_contract"
+                           attrs="{'invisible':[('has_related_contract','==','no')], 'required': [('has_related_contract','==','required')] ,'readonly':[('is_termination_request','=','yes')]}"/>
 
 
-<!--                </field>-->
+                    <field name="create_date" string="Creation Date"/>
+                    <field name="approval_date" string="Request Approval Date"/>
 
-<!--                <xpath expr="//sheet/group" position="after">-->
-<!--                    <group attrs="{'invisible':[('is_internal_transfer_request','==','no')]}">-->
-<!--                        <group>-->
-<!--                            <h3 style="text-decoration: underline" colspan="2">Releasing Department</h3>-->
-<!--                            <h6 colspan="2">(To be filled by Releasing Head of Department)</h6>-->
-<!--                            <field name="employee_type_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_employee_type_source','==','no')], 'required': [('has_employee_type_source','==','required')]}"/>-->
-<!--                            <field name="cost_center_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_cost_center_source','==','no')], 'required': [('has_cost_center_source','==','required')]}"/>-->
-<!--                            <field name="job_title_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_job_title_source','==','no')], 'required': [('has_job_title_source','==','required')]}"/>-->
-<!--                            <field name="line_manager_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_line_manager_source','==','no')], 'required': [('has_line_manager_source','==','required')]}"/>-->
-<!--                            <field name="group_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_group_source','==','no')], 'required': [('has_group_source','==','required')]}"/>-->
-<!--                            <field name="department_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_department_source','==','no')], 'required': [('has_department_source','==','required')]}"/>-->
-<!--                            <field name="section_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_section_source','==','no')], 'required': [('has_section_source','==','required')]}"/>-->
-<!--                            <field name="subsection_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_subsection_source','==','no')], 'required': [('has_subsection_source','==','required')]}"/>-->
-<!--                            <field name="job_grade_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_job_grade_source','==','no')], 'required': [('has_job_grade_source','==','required')]}"/>-->
-<!--                            <field name="working_shift_source" readonly="1" force_save="1"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_working_shift_source','==','no')], 'required': [('has_working_shift_source','==','required')]}"/>-->
-<!--                        </group>-->
-<!--                        <group>-->
-<!--                            <h3 style="text-decoration: underline" colspan="2">Destination Department</h3>-->
-<!--                            <h6 colspan="2">(To be filled by Destination Head of Department)</h6>-->
-<!--                            <field name="employee_type_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_employee_type_destination','==','no')], 'required': [('has_employee_type_destination','==','required')]}"/>-->
-<!--                            <field name="cost_center_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_cost_center_destination','==','no')], 'required': [('has_cost_center_destination','==','required')]}"/>-->
-<!--                            <field name="job_title_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_job_title_destination','==','no')], 'required': [('has_job_title_destination','==','required')]}"/>-->
-<!--                            <field name="line_manager_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_line_manager_destination','==','no')], 'required': [('has_line_manager_destination','==','required')]}"/>-->
-
-<!--                            <field name="group_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_group_destination','==','no')], 'required': [('has_group_destination','==','required')]}"/>-->
-<!--                            <field name="department_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_department_destination','==','no')], 'required': [('has_department_destination','==','required')]}"/>-->
-<!--                            <field name="section_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_section_destination','==','no')], 'required': [('has_section_destination','==','required')]}"/>-->
-<!--                            <field name="subsection_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_subsection_destination','==','no')], 'required': [('has_subsection_destination','==','required')]}"/>-->
-<!--                            <field name="job_grade_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_job_grade_destination','==','no')], 'required': [('has_job_grade_destination','==','required')]}"/>-->
-<!--                            <field name="working_shift_destination"-->
-<!--                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"-->
-<!--                                   attrs="{'invisible':[('has_working_shift_destination','==','no')], 'required': [('has_working_shift_destination','==','required')]}"/>-->
-<!--                        </group>-->
-<!--                    </group>-->
-<!--                    &lt;!&ndash;                    <h3 style="" colspan="2">Accesses to be Filled by Current Designation</h3>&ndash;&gt;-->
-<!--                    <group attrs="{'invisible':[('is_internal_transfer_request','==','no')]}">-->
-<!--                        <h3 style="text-decoration: underline" colspan="2">IT Requirements</h3>-->
-<!--                        <group>-->
-<!--                            <h3 style="text-decoration: underline" colspan="2">Releasing Department</h3>-->
-<!--                            <h6 colspan="2">(To be filled by Releasing Head of Department)</h6>-->
-
-<!--                            <field name="sap_source"-->
-<!--                                   attrs="{'invisible':[('has_sap_source','==','no')], 'required': [('has_sap_source','==','required')]}"/>-->
-<!--                            <field name="f_3dx_source"-->
-<!--                                   attrs="{'invisible':[('has_3dx_source','==','no')], 'required': [('has_3dx_source','==','required')]}"/>-->
-<!--                            <field name="shared_folder_status_source"-->
-<!--                                   attrs="{'invisible':[('has_shared_folder_status_source','==','no')], 'required': [('has_shared_folder_status_source','==','required')]}"/>-->
-<!--                            <field name="shared_folder_source"-->
-<!--                                   attrs="{'invisible':[('has_shared_folder_source','==','no')], 'required': [('has_shared_folder_source','==','required')]}"/>-->
-<!--                            <field name="other_source"-->
-<!--                                   attrs="{'invisible':[('has_other_source','==','no')], 'required': [('has_other_source','==','required')]}"/>-->
-<!--                        </group>-->
-<!--                        <group>-->
-<!--                            <h3 style="text-decoration: underline" colspan="2">Destination Department</h3>-->
-<!--                            <h6 colspan="2">(To be filled by Destination Head of Department)</h6>-->
-
-<!--                            <field name="sap_destination"-->
-<!--                                   attrs="{'invisible':[('has_sap_destination','==','no')], 'required': [('has_sap_destination','==','required')]}"/>-->
-<!--                            <field name="f_3dx_destination"-->
-<!--                                   attrs="{'invisible':[('has_3dx_destination','==','no')], 'required': [('has_3dx_destination','==','required')]}"/>-->
-<!--                            <field name="shared_folder_status_destination"-->
-<!--                                   attrs="{'invisible':[('has_shared_folder_status_destination','==','no')], 'required': [('has_shared_folder_status_destination','==','required')]}"/>-->
-<!--                            <field name="shared_folder_destination"-->
-<!--                                   attrs="{'invisible':[('has_shared_folder_destination','==','no')], 'required': [('has_shared_folder_destination','==','required')]}"/>-->
-<!--                            <field name="other_destination"-->
-<!--                                   attrs="{'invisible':[('has_other_destination','==','no')], 'required': [('has_other_destination','==','required')]}"/>-->
-<!--                        </group>-->
-<!--                    </group>-->
-<!--                </xpath>-->
-
-<!--                <button name="action_confirm" position="after">-->
-<!--                    <field name="all_approved" invisible="1"/>-->
-<!--                    <field name="resignations" invisible="1"/>-->
-<!--                    <field name="jobs" invisible="1"/>-->
-<!--                    <field name="transfers" invisible="1"/>-->
-<!--                    <field name="resignations_ext" invisible="1"/>-->
-<!--                    <button name="create_job_position" string="Create Job Position" type="object"-->
-<!--                            attrs="{'invisible':['|','|',['can_create_job','==',False], ['all_approved','==',False], ['jobs','!=',[]]]}"-->
-<!--                            groups="hr_approvals.group_approval_category_manager_job_position"-->
-<!--                            class="btn-primary"/>-->
-<!--                    <button name="create_resignation" string="Create Resignation" type="object"-->
-<!--                            attrs="{'invisible':['|','|',['can_create_resign','==',False], ['all_approved','==',False], ['resignations','!=',[]]]}"-->
-<!--                            groups="hr_approvals.group_approval_category_manager_resignation"-->
-<!--                            class="btn-primary"/>-->
-<!--                    <button name="extend_resignation" string="Extend Resignation" type="object"-->
-<!--                            attrs="{'invisible':['|','|',['can_extend_resign','==',False], ['all_approved','==',False], ['resignations_ext','!=',[]]]}"-->
-<!--                            groups="hr_approvals.group_approval_category_manager_resignation"-->
-<!--                            class="btn-primary"/>-->
-<!--                    <button name="open_create_transfer_wizard" string="Create Transfer Events" type="object"-->
-<!--                            attrs="{'invisible':['|','|',['can_create_transfer','==',False], ['all_approved','==',False], ['transfers','!=',[]]]}"-->
-<!--                            groups="hr_approvals.group_approval_category_manager_transfer"-->
-<!--                            class="btn-primary"/>-->
-<!--                </button>-->
-
-<!--                <field name="approver_ids" position="replace">-->
-<!--                    <field name="read_only_user" invisible="1"/>-->
-<!--                    <field name="approver_ids" mode="tree,kanban" attrs="{'readonly':[('read_only_user','=',True)]}"-->
-<!--                           force_save="1">-->
-<!--                        <tree editable="bottom" decoration-success="status=='approved'"-->
-<!--                              decoration-warning="status=='pending'" decoration-danger="status=='refused'">-->
-<!--                            <field name="has_eligible_rehire" invisible="1"/>-->
-<!--                            <field name="has_eligible_rehire_comment" invisible="1"/>-->
-<!--                            <field name="is_termination_req" invisible="1"/>-->
-<!--                            <field name="sequence"/>-->
-<!--                            <field name="user_id" string="Approver" attrs="{'readonly':[('status','!=','new')]}"-->
-<!--                                   force_save="1"/>-->
-<!--                            <field name="approver_category" attrs="{'readonly':[('status','!=','new')]}"/>-->
-<!--                            <field name="approval_date"/>-->
-<!--                            <field name="status" readonly="0"/>-->
-<!--                            <field name="reject_reason" readonly="1" force_save="1"/>-->
-<!--                            <field name="replacement_position"-->
-<!--                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>-->
-<!--                            <field name="eligible_rehire_selection"-->
-<!--                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>-->
-<!--                            <field name="eligible_rehire_comment"-->
-<!--                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire_comment','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire_comment','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>-->
-<!--                        </tree>-->
-<!--                        <kanban class="o_kanban_mobile">-->
-<!--                            <field name="user_id"/>-->
-<!--                            <field name="status"/>-->
-<!--                            <templates>-->
-<!--                                <t t-name="kanban-box">-->
-<!--                                    <div class="oe_kanban_card oe_kanban_global_click">-->
-<!--                                        <div class="o_kanban_content">-->
-<!--                                            <t t-esc="record.user_id.value"/>-->
-<!--                                            <t t-if="record.status.raw_value">-->
-<!--                                                <t t-set="classname"-->
-<!--                                                   t-value="{'approved': 'badge-success', 'pending': 'badge-warning', 'refused': 'badge-danger'}[record.status.raw_value] || 'badge-light'"/>-->
-<!--                                                <span t-esc="record.status.raw_value"-->
-<!--                                                      t-attf-class="float-right badge-pill {{ classname }}"/>-->
-<!--                                            </t>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </t>-->
-<!--                            </templates>-->
-<!--                        </kanban>-->
-<!--                        <form create="0" edit="0" delete="0">-->
-<!--                            <group>-->
-<!--                                <field name="user_id" readonly="1"-->
-<!--                                       options="{'no_create': True, 'no_open': True,'no_edit': True}"/>-->
-<!--                            </group>-->
-<!--                        </form>-->
-<!--                    </field>-->
-<!--                </field>-->
+                    <field name="resignation_date"
+                           attrs="{'invisible':[('has_resignation_date','==','no')], 'required': [('has_resignation_date','==','required')]}"/>
+                    <field name="job_position" options="{'no_open': True}"
+                           attrs="{'invisible':[('has_job_position','==','no')], 'required': [('has_job_position','==','required')] , 'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="job_title"
+                           attrs="{'invisible':[('has_job_title','==','no')], 'required': [('has_job_title','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="grade" options="{'no_open': True}"
+                           attrs="{'invisible':[('has_grade','==','no')], 'required': [('has_grade','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="related_manager" options="{'no_open': True}"
+                           attrs="{'invisible':[('has_related_manager','==','no')], 'required': [('has_related_manager','==','required')]}"
+                           readonly="1" force_save="1"/>
+                    <field name="related_oc" options="{'no_open': True}"
+                           attrs="{'invisible':[('has_related_oc','==','no')], 'required': [('has_related_oc','==','required')]}"
+                           readonly="1" force_save="1"/>
+                    <field name="related_time_hired" options="{'no_open': True}"
+                           attrs="{'invisible':[('has_related_time_hired','==','no')], 'required': [('has_related_time_hired','==','required')]}"
+                           readonly="1" force_save="1"/>
 
 
-<!--                <page name="description" position="before">-->
-<!--                    <page name="job_description" string="Job Description"-->
-<!--                          attrs="{'invisible':[('has_job_desc','==','no')]}">-->
-<!--                        <field name="job_desc"-->
-<!--                               attrs="{'invisible':[('has_job_desc','==','no')], 'required': [('has_job_desc','==','required')]}"/>-->
+                    <field name="notice_period"
+                           attrs="{'invisible':[('has_notice_period','==','no')], 'required': [('has_notice_period','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="group" context="{'default_type': 'BU'}"
+                           attrs="{'invisible':[('has_group','==','no')], 'required': [('has_group','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="department" context="{'default_type': 'BD','default_parent_id':group}"
+                           attrs="{'invisible':[('has_department','==','no')], 'required': [('has_department','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="section" context="{'default_type': 'BS','default_parent_id':department}"
+                           attrs="{'invisible':[('has_section','==','no')], 'required': [('has_section','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="subsection" context="{'default_type': 'SS','default_parent_id':section}"
+                           attrs="{'invisible':[('has_subsection','==','no')], 'required': [('has_subsection','==','required')],'readonly':[('is_termination_request','=','yes')]}"/>
+                    <field name="contract_type"
+                           attrs="{'invisible':[('has_contract_type','==','no')], 'required': [('has_contract_type','==','required')]}"/>
+                    <field name="requisition_type"
+                           attrs="{'invisible':[('has_requisition_type','==','no')], 'required': [('has_requisition_type','==','required')]}"/>
+                    <field name="replacement_employee_id"
+                           attrs="{'invisible':['|',('has_replacement_employee_id','==','no'),('requisition_type','!=','replace')], 'required': [('has_replacement_employee_id','==','required'),('requisition_type','==','replace')]}"/>
+                    <field name="cost_center"
+                           attrs="{'invisible':[('has_cost_center','==','no')], 'required': [('has_cost_center','==','required')]}"/>
+                    <field name="personal_phone_no"
+                           attrs="{'invisible':[('has_personal_phone_no','==','no')], 'required': [('has_personal_phone_no','==','required')]}"/>
+                    <field name="personal_email"
+                           attrs="{'invisible':[('has_personal_email','==','no')], 'required': [('has_personal_email','==','required')]}"/>
+                    <field name="replacement_position"
+                           attrs="{'invisible':[('has_replacement_position','==','no')], 'required': [('has_replacement_position','==','required')]}"/>
+                    <field name="resignation_reason" options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                           attrs="{'invisible':[('has_resignation_reason','==','no')], 'required': [('has_resignation_reason','==','required')]}"/>
+                    <!--                    <field name="resignation_extension_reason"-->
+                    <!--                           attrs="{'invisible':[('has_resignation_extension_reason','==','no')], 'required': [('has_resignation_extension_reason','==','required')]}"/>-->
+                    <field name="resignation_extension_reason_text"
+                           attrs="{'invisible':[('has_resignation_extension_reason','==','no')], 'required': [('has_resignation_extension_reason','==','required')]}"/>
 
-<!--                    </page>-->
-<!--                </page>-->
-<!--            </field>-->
-<!--        </record>-->
+                    <!--                    internal transfer fields-->
+                    <field name="employee_transferred"
+                           attrs="{'invisible':[('has_employee_transferred','==','no')], 'required': [('has_employee_transferred','==','required')]}"/>
+                    <field name="company_employee_id" readonly="1" force_save="1"
+                           attrs="{'invisible':[('has_company_employee_id','==','no')], 'required': [('has_company_employee_id','==','required')]}"/>
+                    <field name="transfer_type"
+                           attrs="{'invisible':[('has_transfer_type','==','no')], 'required': [('has_transfer_type','==','required')]}"/>
+                    <field name="transfer_from_date"
+                           attrs="{'invisible':[('has_employee_transferred','==','no')], 'required': [('has_transfer_type','==','required')]}"/>
+                    <field name="transfer_to_date"
+                           attrs="{'invisible':[('transfer_type','!=','temporary')], 'required': [('transfer_type','==','temporary')]}"/>
+                    <field name="transfer_reason"
+                           attrs="{'invisible':[('has_transfer_reason','==','no')], 'required': [('has_transfer_reason','==','required')]}"/>
 
 
-<!--        <record id="view_hr_job_form_inherited_approval" model="ir.ui.view">-->
-<!--            <field name="name">hr.job.form.inherited.approval</field>-->
-<!--            <field name="model">hr.job</field>-->
-<!--            <field name="inherit_id" ref="hr.view_hr_job_form"/>-->
-<!--            <field name="arch" type="xml">-->
+                </field>
 
-<!--                <group position="after">-->
-<!--                    <group string="Requisition">-->
-<!--                        <field name="related_requisition"/>-->
-<!--                        <field name="requisition_job_title"/>-->
-<!--                        <field name="vacancy_type"/>-->
-<!--                        <field name="contract_type"/>-->
-<!--                        <field name="requisition_type"/>-->
-<!--                        <field name="replacement_employee_id"-->
-<!--                               attrs="{'invisible':[('requisition_type','!=','replace')]}"/>-->
+                <xpath expr="//sheet/group" position="after">
+                    <group attrs="{'invisible':[('is_internal_transfer_request','==','no')]}">
+                        <group>
+                            <h3 style="text-decoration: underline" colspan="2">Releasing Department</h3>
+                            <h6 colspan="2">(To be filled by Releasing Head of Department)</h6>
+                            <field name="employee_type_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_employee_type_source','==','no')], 'required': [('has_employee_type_source','==','required')]}"/>
+                            <field name="cost_center_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_cost_center_source','==','no')], 'required': [('has_cost_center_source','==','required')]}"/>
+                            <field name="job_title_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_job_title_source','==','no')], 'required': [('has_job_title_source','==','required')]}"/>
+                            <field name="line_manager_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_line_manager_source','==','no')], 'required': [('has_line_manager_source','==','required')]}"/>
+                            <field name="group_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_group_source','==','no')], 'required': [('has_group_source','==','required')]}"/>
+                            <field name="department_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_department_source','==','no')], 'required': [('has_department_source','==','required')]}"/>
+                            <field name="section_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_section_source','==','no')], 'required': [('has_section_source','==','required')]}"/>
+                            <field name="subsection_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_subsection_source','==','no')], 'required': [('has_subsection_source','==','required')]}"/>
+                            <field name="job_grade_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_job_grade_source','==','no')], 'required': [('has_job_grade_source','==','required')]}"/>
+                            <field name="working_shift_source" readonly="1" force_save="1"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_working_shift_source','==','no')], 'required': [('has_working_shift_source','==','required')]}"/>
+                        </group>
+                        <group>
+                            <h3 style="text-decoration: underline" colspan="2">Destination Department</h3>
+                            <h6 colspan="2">(To be filled by Destination Head of Department)</h6>
+                            <field name="employee_type_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_employee_type_destination','==','no')], 'required': [('has_employee_type_destination','==','required')]}"/>
+                            <field name="cost_center_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_cost_center_destination','==','no')], 'required': [('has_cost_center_destination','==','required')]}"/>
+                            <field name="job_title_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_job_title_destination','==','no')], 'required': [('has_job_title_destination','==','required')]}"/>
+                            <field name="line_manager_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_line_manager_destination','==','no')], 'required': [('has_line_manager_destination','==','required')]}"/>
 
-<!--                    </group>-->
-<!--                </group>-->
-<!--            </field>-->
-<!--        </record>-->
+                            <field name="group_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_group_destination','==','no')], 'required': [('has_group_destination','==','required')]}"/>
+                            <field name="department_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_department_destination','==','no')], 'required': [('has_department_destination','==','required')]}"/>
+                            <field name="section_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_section_destination','==','no')], 'required': [('has_section_destination','==','required')]}"/>
+                            <field name="subsection_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_subsection_destination','==','no')], 'required': [('has_subsection_destination','==','required')]}"/>
+                            <field name="job_grade_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_job_grade_destination','==','no')], 'required': [('has_job_grade_destination','==','required')]}"/>
+                            <field name="working_shift_destination"
+                                   options="{'no_create': True, 'no_open': True,'no_edit': True}"
+                                   attrs="{'invisible':[('has_working_shift_destination','==','no')], 'required': [('has_working_shift_destination','==','required')]}"/>
+                        </group>
+                    </group>
+                    <!--                    <h3 style="" colspan="2">Accesses to be Filled by Current Designation</h3>-->
+                    <group attrs="{'invisible':[('is_internal_transfer_request','==','no')]}">
+                        <h3 style="text-decoration: underline" colspan="2">IT Requirements</h3>
+                        <group>
+                            <h3 style="text-decoration: underline" colspan="2">Releasing Department</h3>
+                            <h6 colspan="2">(To be filled by Releasing Head of Department)</h6>
 
-<!--        <record model="ir.ui.view" id="approval_request_tree">-->
-<!--            <field name="name">approval_request_tree</field>-->
-<!--            <field name="model">approval.request</field>-->
-<!--            <field name="inherit_id" ref="approvals.approval_request_view_tree"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='request_status']" position="after">-->
-<!--                    <field name="create_date"/>-->
-<!--                    <field name="approval_date"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+                            <field name="sap_source"
+                                   attrs="{'invisible':[('has_sap_source','==','no')], 'required': [('has_sap_source','==','required')]}"/>
+                            <field name="f_3dx_source"
+                                   attrs="{'invisible':[('has_3dx_source','==','no')], 'required': [('has_3dx_source','==','required')]}"/>
+                            <field name="shared_folder_status_source"
+                                   attrs="{'invisible':[('has_shared_folder_status_source','==','no')], 'required': [('has_shared_folder_status_source','==','required')]}"/>
+                            <field name="shared_folder_source"
+                                   attrs="{'invisible':[('has_shared_folder_source','==','no')], 'required': [('has_shared_folder_source','==','required')]}"/>
+                            <field name="other_source"
+                                   attrs="{'invisible':[('has_other_source','==','no')], 'required': [('has_other_source','==','required')]}"/>
+                        </group>
+                        <group>
+                            <h3 style="text-decoration: underline" colspan="2">Destination Department</h3>
+                            <h6 colspan="2">(To be filled by Destination Head of Department)</h6>
+
+                            <field name="sap_destination"
+                                   attrs="{'invisible':[('has_sap_destination','==','no')], 'required': [('has_sap_destination','==','required')]}"/>
+                            <field name="f_3dx_destination"
+                                   attrs="{'invisible':[('has_3dx_destination','==','no')], 'required': [('has_3dx_destination','==','required')]}"/>
+                            <field name="shared_folder_status_destination"
+                                   attrs="{'invisible':[('has_shared_folder_status_destination','==','no')], 'required': [('has_shared_folder_status_destination','==','required')]}"/>
+                            <field name="shared_folder_destination"
+                                   attrs="{'invisible':[('has_shared_folder_destination','==','no')], 'required': [('has_shared_folder_destination','==','required')]}"/>
+                            <field name="other_destination"
+                                   attrs="{'invisible':[('has_other_destination','==','no')], 'required': [('has_other_destination','==','required')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <button name="action_confirm" position="after">
+                    <field name="all_approved" invisible="1"/>
+                    <field name="resignations" invisible="1"/>
+                    <field name="jobs" invisible="1"/>
+                    <field name="transfers" invisible="1"/>
+                    <field name="resignations_ext" invisible="1"/>
+                    <button name="create_job_position" string="Create Job Position" type="object"
+                            attrs="{'invisible':['|','|',['can_create_job','==',False], ['all_approved','==',False], ['jobs','!=',[]]]}"
+                            groups="hr_approvals.group_approval_category_manager_job_position"
+                            class="btn-primary"/>
+                    <button name="create_resignation" string="Create Resignation" type="object"
+                            attrs="{'invisible':['|','|',['can_create_resign','==',False], ['all_approved','==',False], ['resignations','!=',[]]]}"
+                            groups="hr_approvals.group_approval_category_manager_resignation"
+                            class="btn-primary"/>
+                    <button name="extend_resignation" string="Extend Resignation" type="object"
+                            attrs="{'invisible':['|','|',['can_extend_resign','==',False], ['all_approved','==',False], ['resignations_ext','!=',[]]]}"
+                            groups="hr_approvals.group_approval_category_manager_resignation"
+                            class="btn-primary"/>
+                    <button name="open_create_transfer_wizard" string="Create Transfer Events" type="object"
+                            attrs="{'invisible':['|','|',['can_create_transfer','==',False], ['all_approved','==',False], ['transfers','!=',[]]]}"
+                            groups="hr_approvals.group_approval_category_manager_transfer"
+                            class="btn-primary"/>
+                </button>
+
+                <field name="approver_ids" position="replace">
+                    <field name="read_only_user" invisible="1"/>
+                    <field name="approver_ids" mode="tree,kanban" attrs="{'readonly':[('read_only_user','=',True)]}"
+                           force_save="1">
+                        <tree editable="bottom" decoration-success="status=='approved'"
+                              decoration-warning="status=='pending'" decoration-danger="status=='refused'">
+                            <field name="has_eligible_rehire" invisible="1"/>
+                            <field name="has_eligible_rehire_comment" invisible="1"/>
+                            <field name="is_termination_req" invisible="1"/>
+                            <field name="sequence"/>
+                            <field name="user_id" string="Approver" attrs="{'readonly':[('status','!=','new')]}"
+                                   force_save="1"/>
+                            <field name="approver_category" attrs="{'readonly':[('status','!=','new')]}"/>
+                            <field name="approval_date"/>
+                            <field name="status" readonly="0"/>
+                            <field name="reject_reason" readonly="1" force_save="1"/>
+                            <field name="replacement_position"
+                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>
+                            <field name="eligible_rehire_selection"
+                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>
+                            <field name="eligible_rehire_comment"
+                                   attrs="{'column_invisible':['|',('parent.has_eligible_rehire_comment','==','no'),('parent.can_see_eligible_not_stored','=', False)], 'required': [('has_eligible_rehire_comment','==','required')], 'readonly': [('is_termination_req','==','no')]}"/>
+                        </tree>
+                        <kanban class="o_kanban_mobile">
+                            <field name="user_id"/>
+                            <field name="status"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="oe_kanban_card oe_kanban_global_click">
+                                        <div class="o_kanban_content">
+                                            <t t-esc="record.user_id.value"/>
+                                            <t t-if="record.status.raw_value">
+                                                <t t-set="classname"
+                                                   t-value="{'approved': 'badge-success', 'pending': 'badge-warning', 'refused': 'badge-danger'}[record.status.raw_value] || 'badge-light'"/>
+                                                <span t-esc="record.status.raw_value"
+                                                      t-attf-class="float-right badge-pill {{ classname }}"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form create="0" edit="0" delete="0">
+                            <group>
+                                <field name="user_id" readonly="1"
+                                       options="{'no_create': True, 'no_open': True,'no_edit': True}"/>
+                            </group>
+                        </form>
+                    </field>
+                </field>
+
+
+                <page name="description" position="before">
+                    <page name="job_description" string="Job Description"
+                          attrs="{'invisible':[('has_job_desc','==','no')]}">
+                        <field name="job_desc"
+                               attrs="{'invisible':[('has_job_desc','==','no')], 'required': [('has_job_desc','==','required')]}"/>
+
+                    </page>
+                </page>
+            </field>
+        </record>
+
+
+        <record id="view_hr_job_form_inherited_approval" model="ir.ui.view">
+            <field name="name">hr.job.form.inherited.approval</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+
+                <group position="after">
+                    <group string="Requisition">
+                        <field name="related_requisition"/>
+                        <field name="requisition_job_title"/>
+                        <field name="vacancy_type"/>
+                        <field name="contract_type"/>
+                        <field name="requisition_type"/>
+                        <field name="replacement_employee_id"
+                               attrs="{'invisible':[('requisition_type','!=','replace')]}"/>
+
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="approval_request_tree">
+            <field name="name">approval_request_tree</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='request_status']" position="after">
+                    <field name="create_date"/>
+                    <field name="approval_date"/>
+                </xpath>
+            </field>
+        </record>
 
 
         <record id="view_resign_form_inherit" model="ir.ui.view">

@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record id="approval_category_data_man_power" model="approval.category">
             <field name="name">Man Power</field>
-            <field name="image" type="base64" file="ebs_senergy_hr/static/src/img/man-user.svg"/>
+            <field name="image" type="base64" file="ebs_hr_application/static/src/img/man-user.svg"/>
             <field name="has_related_employee_id">required</field>
             <field name="is_requisition_request">yes</field>
             <field name="has_vacancy_type">required</field>

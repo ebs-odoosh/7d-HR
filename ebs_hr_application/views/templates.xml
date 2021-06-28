@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="hr_applicant_assets_backend" name="hr_applicant assets backend" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss"
+                      href="/ebs_hr_application/static/src/css/bootstrap.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

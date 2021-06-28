@@ -40,7 +40,7 @@
             <field name="search_view_id" ref="candidate_interview_status_search"/>
         </record>
         <menuitem name="Candidate Interview Status" id="hr_candidate_interview_status"
-                  parent="hr.hr_menu_hr_reports"
+                  parent="hr.menu_hr_root"
                   action="action_hr_candidate_interview_status"/>
     </data>
 </odoo>
