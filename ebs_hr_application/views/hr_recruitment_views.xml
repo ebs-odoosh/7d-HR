@@ -56,8 +56,8 @@
                                 </div>
                             </button>
                         </div>
-                        <widget name="web_ribbon" title="Refused" bg_color="bg-danger"
-                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <!--<widget name="web_ribbon" title="Refused" bg_color="bg-danger"-->
+                                <!--attrs="{'invisible': [('active', '=', True)]}"/>-->
                         <field name="kanban_state" widget="kanban_state_selection"/>
                         <field name="active" invisible="1"/>
                         <field name="legend_normal" invisible="1"/>

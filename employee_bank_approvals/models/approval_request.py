@@ -111,9 +111,9 @@ class ApprovalRequest(models.Model):
         Func: for apply dynamic domain
         :return: domain
         """
-        if self.env.user.employee_id:
-            self.employee_name = self.env.user.employee_id.id
-            return {'domain': {'employee_name': [('id', '=', self.env.user.employee_id.id)]}}
+        if self.env.user.employee_ids:
+            self.employee_name = self.env.user.employee_ids[0].id
+            return {'domain': {'employee_name': [('id', 'in', self.env.user.employee_ids.ids)]}}
         else:
             return {'domain': {'employee_name': [('id', 'in', [-1])]}}
 
