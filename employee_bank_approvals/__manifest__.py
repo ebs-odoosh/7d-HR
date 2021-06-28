@@ -26,7 +26,7 @@
              'views/employee_bank_approval_view.xml',
              'views/hr_employee_view.xml',
              'views/employee_bank_change.xml',
-             # 'security/ir.model.access.csv',
+             'security/ir.model.access.csv',
              'reports/report_template.xml',
              'reports/reports.xml',
              ],

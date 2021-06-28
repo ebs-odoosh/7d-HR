@@ -24,8 +24,7 @@
 
                 <!-- for Inactive Salary Components in contract view Added by Bhavesh Jadav 21/08/2020-->
                 <xpath expr="//form/sheet/notebook/page[@name='information']" position="after">
-                    <page string="Inactive Salary Components" name="inactive_salary_components"
-                    >
+                    <page string="Inactive Salary Components" name="inactive_salary_components">
 <!--                        <group name="inactive_compensation" string="Inactive Compensation">-->
 <!--                            <label for="related_compensation"/>-->
 <!--                            <br/>-->

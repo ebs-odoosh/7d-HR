@@ -200,7 +200,8 @@ class HRApplicant(models.Model):
                                   and applicant.department_id.company_id.phone or False,
                     'department_id': applicant.job_id.department_id.id,
                     'parent_id': applicant.job_id.default_manager.id,
-                    'job_id': applicant.job_id.id
+                    'job_id': applicant.job_id.id,
+                    'applicant_id': applicant.id
                 })
                 applicant.write({'emp_id': employee.id})
                 if running_contract:
