@@ -57,7 +57,7 @@ class ApprovalCategory(models.Model):
         for category in self:
             category.request_to_validate_count = requests_mapped_data.get(category.id, 0)
 
-    @api.model
+    # @api.model
     def create_request(self):
         self.ensure_one()
         return {
